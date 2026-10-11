@@ -1,0 +1,49 @@
+# ============================================================================
+# STRIP re-evaluation + measured entropy distributions (outputs experiments/phase7f/)
+# ============================================================================
+# Reuses existing checkpoints (no victim/backdoor retraining); only reruns STRIP
+# with new configs and computes metrics from STRIP's own outputs.
+
+seed: 42
+seeds: [42, 43, 44, 45, 46]
+alphas: [0.3, 0.5, 0.7, 0.9]      # STRIP blend weights to sweep (was only 0.7)
+N: 100                            # perturbations per input
+holdout_size: 3000
+eval_size: 1500
+fig3_size: 5000                   # per-group sample for the real entropy figure
+fpr_targets: [0.01, 0.05, 0.10]
+default_alpha: 0.7                # for the per-class / perturbation / BCR tables
+
+datasets:
+  CICIDS2017:
+    processed_dir: data/processed
+    normal_label: 0               # benign
+    target: 0                     # backdoor target = benign (main evasion scenario)
+    source: 1                     # attack traffic carries the trigger
+    trigger_json: experiments/phase3/trigger.json
+    clean: [causal_ids_B_imbal_tgtBenign_clean, causal_ids_B_imbal_tgtBenign_clean_seed43,
+            causal_ids_B_imbal_tgtBenign_clean_seed44, causal_ids_B_imbal_tgtBenign_clean_seed45,
+            causal_ids_B_imbal_tgtBenign_clean_seed46]
+    poisoned: [causal_ids_B_imbal_tgtBenign_seed42, causal_ids_B_imbal_tgtBenign_seed43,
+               causal_ids_B_imbal_tgtBenign_seed44, causal_ids_B_imbal_tgtBenign_seed45,
+               causal_ids_B_imbal_tgtBenign_seed46]
+    is_fig3: true
+  UNSW-NB15:
+    processed_dir: data/processed/unsw
+    normal_label: 0               # normal
+    target: 0                     # backdoor target = normal (main evasion scenario)
+    source: 1
+    trigger_build:
+      features: [sbytes, spkts, sinpkt, smean]
+      constants: {sbytes: 2000.0, spkts: 12.0, sinpkt: 8.0, smean: 180.0}
+    clean: [unsw_clean_seed42, unsw_clean_seed43, unsw_clean_seed44, unsw_clean_seed45,
+            unsw_clean_seed46]
+    poisoned: [unsw_target_normal_seed42, unsw_target_normal_seed43,
+               unsw_target_normal_seed44, unsw_target_normal_seed45, unsw_target_normal_seed46]
+    is_fig3: false
+
+paths:
+  scaler_cicids: data/processed/scaler.joblib
+  scaler_unsw: data/processed/unsw/scaler.joblib
+  models_dir: results/models
+  experiment_dir: experiments/phase7f

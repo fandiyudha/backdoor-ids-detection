@@ -1,0 +1,492 @@
+{
+  "CICIDS2017": {
+    "class_ratio_note": "benign(0) ~83% majority, attack(1) ~17%",
+    "part1": {
+      "count_match_N": 502,
+      "clean_mask_old": {
+        "normal": {
+          "mean": 3.0341944694519043,
+          "std": 0.24928724844009695,
+          "values": [
+            2.7326221466064453,
+            3.1579980850219727,
+            2.8744373321533203,
+            3.0300135612487793,
+            3.375901222229004
+          ]
+        },
+        "attack": {
+          "mean": 6.8840413093566895,
+          "std": 0.86407812493696,
+          "values": [
+            6.274430751800537,
+            7.212382793426514,
+            8.116796493530273,
+            5.891218662261963,
+            6.92537784576416
+          ]
+        }
+      },
+      "clean_mask_new": {
+        "normal": {
+          "mean": 3.1138608932495115,
+          "std": 0.2247308163985785,
+          "values": [
+            2.767441987991333,
+            3.221447229385376,
+            3.111996650695801,
+            3.0902233123779297,
+            3.378195285797119
+          ]
+        },
+        "attack": {
+          "mean": 6.035107803344727,
+          "std": 0.40861247921592064,
+          "values": [
+            5.9611101150512695,
+            6.757567882537842,
+            5.805902481079102,
+            5.827610492706299,
+            5.823348045349121
+          ]
+        }
+      },
+      "easy_class_old": "normal",
+      "easy_class_new": "normal",
+      "gap_old": 2.2688200695097174,
+      "gap_new": 1.9381430347418525,
+      "pattern_survives_count_match": "SURVIVES",
+      "poisoned_target0_mask_new": {
+        "normal": {
+          "mean": 0.4141197919845581,
+          "std": 0.025163880709794393,
+          "values": [
+            0.37607476115226746,
+            0.4451322555541992,
+            0.4083794057369232,
+            0.4183661639690399,
+            0.4226463735103607
+          ]
+        },
+        "attack": {
+          "mean": 6.620339870452881,
+          "std": 0.9979196969318052,
+          "values": [
+            5.557590007781982,
+            7.533609867095947,
+            7.499356269836426,
+            6.955962181091309,
+            5.55518102645874
+          ]
+        }
+      },
+      "poisoned_target1_mask_new": {
+        "normal": {
+          "mean": 3.296481800079346,
+          "std": 0.4283827802865301,
+          "values": [
+            2.869258403778076,
+            3.9129881858825684,
+            3.54727840423584,
+            2.999913215637207,
+            3.152970790863037
+          ]
+        },
+        "attack": {
+          "mean": 1.494258427619934,
+          "std": 0.0946893002710041,
+          "values": [
+            1.4105803966522217,
+            1.45828115940094,
+            1.623468041419983,
+            1.4159044027328491,
+            1.5630581378936768
+          ]
+        }
+      },
+      "poisoned_target0_mask_old": {
+        "normal": {
+          "mean": 0.401072096824646,
+          "std": 0.03770560431047693,
+          "values": [
+            0.3764476478099823,
+            0.4403138756752014,
+            0.3742251396179199,
+            0.3701394498348236,
+            0.44423437118530273
+          ]
+        },
+        "attack": {
+          "mean": 6.824134635925293,
+          "std": 0.9658579610316225,
+          "values": [
+            6.343780994415283,
+            7.34288215637207,
+            8.200187683105469,
+            6.527907371520996,
+            5.7059149742126465
+          ]
+        }
+      },
+      "poisoned_target1_mask_old": {
+        "normal": {
+          "mean": 3.1903425216674806,
+          "std": 0.42081939244429173,
+          "values": [
+            2.719059467315674,
+            3.7492096424102783,
+            3.4990181922912598,
+            2.98433518409729,
+            3.0000901222229004
+          ]
+        },
+        "attack": {
+          "mean": 1.546912145614624,
+          "std": 0.044635455301527446,
+          "values": [
+            1.5091886520385742,
+            1.6168221235275269,
+            1.5512166023254395,
+            1.506592869758606,
+            1.5507404804229736
+          ]
+        }
+      }
+    },
+    "part2": {
+      "anomaly_score": "NC L1 mask-norm asymmetry ratio = max_c L1 / min_c L1, under the source-only count-matched protocol",
+      "threshold_rule": "flag if ratio > 2.0 x median(reference clean ratios)",
+      "n_calibration_models": 3,
+      "n_test_models": 2,
+      "reference_training_data": "clean IDS models trained on the same dataset (distinct seeds); identical MLP architecture and preprocessing; 1 optimization restart per class; optimization seed fixed (torch.manual_seed) so the only randomness is the count-matched source sample",
+      "threshold_value": 4.195361524968668,
+      "fpr_test_group": 0.0,
+      "fpr_leave_one_out": 0.0,
+      "tpr_target0_evasion": 1.0,
+      "tpr_target1": 0.0
+    },
+    "part3": {
+      "auc_target0_evasion_vs_clean": {
+        "roc_auc": 1.0,
+        "roc_ci95": [
+          1.0,
+          1.0
+        ],
+        "pr_auc": 1.0,
+        "pr_ci95": [
+          1.0,
+          1.0
+        ],
+        "n_clean": 5,
+        "n_poisoned": 5
+      },
+      "auc_target1_vs_clean": {
+        "roc_auc": 0.8,
+        "roc_ci95": [
+          0.44,
+          1.0
+        ],
+        "pr_auc": 0.8261904761904761,
+        "pr_ci95": [
+          0.5936507936507937,
+          1.0
+        ],
+        "n_clean": 5,
+        "n_poisoned": 5
+      },
+      "auc_any_poisoned_vs_clean": {
+        "roc_auc": 0.9,
+        "roc_ci95": [
+          0.68,
+          1.0
+        ],
+        "pr_auc": 0.9540404040404039,
+        "pr_ci95": [
+          0.8720253496503496,
+          1.0
+        ],
+        "n_clean": 5,
+        "n_poisoned": 10
+      },
+      "clean_ratio_per_seed": [
+        2.1540144793510025,
+        2.097680762484334,
+        1.865651904835864,
+        1.8858218004756833,
+        1.7238044431914004
+      ],
+      "target0_ratio_per_seed": [
+        14.777886120238483,
+        16.92443033765776,
+        18.36369842876893,
+        16.626493162051155,
+        13.143803807366057
+      ],
+      "target1_ratio_per_seed": [
+        2.0340977434208547,
+        2.6832878954609347,
+        2.1850004506083014,
+        2.1187258177376402,
+        2.01718075125132
+      ],
+      "note_independence": "Every model is a distinct training seed; no poison-rate variants of a single base are counted.",
+      "low_prevalence": {
+        "base_rate_0.01": {
+          "precision": 1.0,
+          "false_alarms_per_1000_models": 0.0,
+          "true_alarms_per_1000_models": 10.0
+        },
+        "base_rate_0.05": {
+          "precision": 1.0,
+          "false_alarms_per_1000_models": 0.0,
+          "true_alarms_per_1000_models": 50.0
+        }
+      }
+    }
+  },
+  "UNSW-NB15": {
+    "class_ratio_note": "normal(0) ~32% MINORITY, attack(1) ~68% majority",
+    "part1": {
+      "count_match_N": 1175,
+      "clean_mask_old": {
+        "normal": {
+          "mean": 5.337266445159912,
+          "std": 0.8020747949198135,
+          "values": [
+            5.714960098266602,
+            4.020297050476074,
+            6.149437427520752,
+            5.520266532897949,
+            5.281371116638184
+          ]
+        },
+        "attack": {
+          "mean": 2.7249475955963134,
+          "std": 0.4395760545339231,
+          "values": [
+            3.1458964347839355,
+            3.2163877487182617,
+            2.5715553760528564,
+            2.491445541381836,
+            2.1994528770446777
+          ]
+        }
+      },
+      "clean_mask_new": {
+        "normal": {
+          "mean": 5.326091241836548,
+          "std": 0.8161964977782932,
+          "values": [
+            5.950896263122559,
+            3.991936445236206,
+            5.866980075836182,
+            5.716594696044922,
+            5.104048728942871
+          ]
+        },
+        "attack": {
+          "mean": 2.751923084259033,
+          "std": 0.39676028062598173,
+          "values": [
+            3.09592342376709,
+            3.1894569396972656,
+            2.6436076164245605,
+            2.617252826690674,
+            2.213374614715576
+          ]
+        }
+      },
+      "easy_class_old": "attack",
+      "easy_class_new": "attack",
+      "gap_old": 1.9586675544977827,
+      "gap_new": 1.935407014231727,
+      "pattern_survives_count_match": "SURVIVES",
+      "poisoned_target0_mask_new": {
+        "normal": {
+          "mean": 13.61250171661377,
+          "std": 5.691311256650507,
+          "values": [
+            4.226985931396484,
+            13.263833045959473,
+            14.37263298034668,
+            17.59455108642578,
+            18.60450553894043
+          ]
+        },
+        "attack": {
+          "mean": 3.1058892250061034,
+          "std": 0.7701450897610199,
+          "values": [
+            2.282064437866211,
+            2.7636194229125977,
+            2.7180912494659424,
+            3.551943063735962,
+            4.213727951049805
+          ]
+        }
+      },
+      "poisoned_target1_mask_new": {
+        "normal": {
+          "mean": 14.337650489807128,
+          "std": 1.3304923056904736,
+          "values": [
+            15.994068145751953,
+            14.064781188964844,
+            15.3984956741333,
+            13.389077186584473,
+            12.841830253601074
+          ]
+        },
+        "attack": {
+          "mean": 1.698025369644165,
+          "std": 0.257139745231376,
+          "values": [
+            1.2896411418914795,
+            1.7801227569580078,
+            1.899735927581787,
+            1.9061198234558105,
+            1.6145071983337402
+          ]
+        }
+      },
+      "poisoned_target0_mask_old": {
+        "normal": {
+          "mean": 13.561667823791504,
+          "std": 5.551099099558995,
+          "values": [
+            4.303531646728516,
+            14.217484474182129,
+            13.688032150268555,
+            17.031938552856445,
+            18.567352294921875
+          ]
+        },
+        "attack": {
+          "mean": 3.3478891372680666,
+          "std": 0.8797009247099156,
+          "values": [
+            2.2176389694213867,
+            3.933502674102783,
+            2.670762777328491,
+            3.5911881923675537,
+            4.326353073120117
+          ]
+        }
+      },
+      "poisoned_target1_mask_old": {
+        "normal": {
+          "mean": 14.417260360717773,
+          "std": 1.3052543317127434,
+          "values": [
+            16.118331909179688,
+            14.40522575378418,
+            15.210909843444824,
+            13.49935245513916,
+            12.852481842041016
+          ]
+        },
+        "attack": {
+          "mean": 1.615056037902832,
+          "std": 0.23507031374189624,
+          "values": [
+            1.2337018251419067,
+            1.7237614393234253,
+            1.8614506721496582,
+            1.6651246547698975,
+            1.5912415981292725
+          ]
+        }
+      }
+    },
+    "part2": {
+      "anomaly_score": "NC L1 mask-norm asymmetry ratio = max_c L1 / min_c L1, under the source-only count-matched protocol",
+      "threshold_rule": "flag if ratio > 2.0 x median(reference clean ratios)",
+      "n_calibration_models": 3,
+      "n_test_models": 2,
+      "reference_training_data": "clean IDS models trained on the same dataset (distinct seeds); identical MLP architecture and preprocessing; 1 optimization restart per class; optimization seed fixed (torch.manual_seed) so the only randomness is the count-matched source sample",
+      "threshold_value": 3.844343316450246,
+      "fpr_test_group": 0.0,
+      "fpr_leave_one_out": 0.0,
+      "tpr_target0_evasion": 0.8,
+      "tpr_target1": 1.0
+    },
+    "part3": {
+      "auc_target0_evasion_vs_clean": {
+        "roc_auc": 0.8400000000000001,
+        "roc_ci95": [
+          0.52,
+          1.0
+        ],
+        "pr_auc": 0.911111111111111,
+        "pr_ci95": [
+          0.7333333333333334,
+          1.0
+        ],
+        "n_clean": 5,
+        "n_poisoned": 5
+      },
+      "auc_target1_vs_clean": {
+        "roc_auc": 1.0,
+        "roc_ci95": [
+          1.0,
+          1.0
+        ],
+        "pr_auc": 1.0,
+        "pr_ci95": [
+          1.0,
+          1.0
+        ],
+        "n_clean": 5,
+        "n_poisoned": 5
+      },
+      "auc_any_poisoned_vs_clean": {
+        "roc_auc": 0.92,
+        "roc_ci95": [
+          0.7,
+          1.0
+        ],
+        "pr_auc": 0.9714285714285714,
+        "pr_ci95": [
+          0.8999999999999999,
+          1.0
+        ],
+        "n_clean": 5,
+        "n_poisoned": 10
+      },
+      "clean_ratio_per_seed": [
+        1.922171658225123,
+        1.251603805744907,
+        2.2193082048809782,
+        2.1841965879501766,
+        2.3060031016452
+      ],
+      "target0_ratio_per_seed": [
+        1.8522640550398135,
+        4.799442691418482,
+        5.287766912859487,
+        4.953500313984817,
+        4.415212787975575
+      ],
+      "target1_ratio_per_seed": [
+        12.401952460893083,
+        7.9010175708885715,
+        8.10559796362264,
+        7.024257874452882,
+        7.954024769230215
+      ],
+      "note_independence": "Every model is a distinct training seed; no poison-rate variants of a single base are counted.",
+      "low_prevalence": {
+        "base_rate_0.01": {
+          "precision": 1.0,
+          "false_alarms_per_1000_models": 0.0,
+          "true_alarms_per_1000_models": 8.0
+        },
+        "base_rate_0.05": {
+          "precision": 1.0,
+          "false_alarms_per_1000_models": 0.0,
+          "true_alarms_per_1000_models": 40.00000000000001
+        }
+      }
+    }
+  }
+}

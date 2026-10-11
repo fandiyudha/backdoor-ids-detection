@@ -1,0 +1,58 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code, please cite the article in "preferred-citation"
+  and, where appropriate, this software release.
+type: software
+title: >-
+  Class properties explain backdoor detectability in imported intrusion
+  detection models: code and results
+version: 1.0.0
+date-released: "2026-10-11"
+license: MIT
+repository-code: "https://github.com/fandiyudha/backdoor-ids-detection"
+keywords:
+  - backdoor attack
+  - backdoor detection
+  - network intrusion detection
+  - STRIP
+  - Neural Cleanse
+  - machine learning security
+authors:
+  - given-names: Rifandi Indrayudha
+    family-names: Prawira
+    orcid: "https://orcid.org/0009-0007-4183-3999"
+    affiliation: Defense University of the Republic of Indonesia
+    email: rifandi.prawira@tp.idu.ac.id
+  - given-names: Wayan Mahardhika
+    family-names: Wijaya
+    orcid: "https://orcid.org/0009-0009-2757-0840"
+    affiliation: Defense University of the Republic of Indonesia
+  - given-names: H. A. Danang
+    family-names: Rimbawa
+    orcid: "https://orcid.org/0009-0007-4466-182X"
+    affiliation: Defense University of the Republic of Indonesia
+  - given-names: Teddy
+    family-names: Mantoro
+    orcid: "https://orcid.org/0000-0003-2534-809X"
+    affiliation: Nusa Putra University
+preferred-citation:
+  type: article
+  title: >-
+    Class properties explain backdoor detectability in imported intrusion
+    detection models
+  journal: Indonesian Journal of Electrical Engineering and Computer Science
+  status: submitted
+  notes: Under review.
+  authors:
+    - given-names: Rifandi Indrayudha
+      family-names: Prawira
+      orcid: "https://orcid.org/0009-0007-4183-3999"
+    - given-names: Wayan Mahardhika
+      family-names: Wijaya
+      orcid: "https://orcid.org/0009-0009-2757-0840"
+    - given-names: H. A. Danang
+      family-names: Rimbawa
+      orcid: "https://orcid.org/0009-0007-4466-182X"
+    - given-names: Teddy
+      family-names: Mantoro
+      orcid: "https://orcid.org/0000-0003-2534-809X"

@@ -1,0 +1,50 @@
+# ============================================================================
+# UNSW-NB15 cross-dataset replication, intrinsic vs frequency (outputs experiments/phase7d/)
+# ============================================================================
+# UNSW-NB15 has the class ratio INVERTED vs CICIDS2017: normal is the MINORITY
+# (~32% train), attack the majority. This dissociates class identity from
+# dominance. Official train/test used as-is; a stratified val is carved from
+# train only for early stopping (test never touched).
+
+seed: 42
+seeds: [42, 43, 44, 45, 46]     # >=5 seeds for the main metrics
+val_frac: 0.15                  # carved from TRAIN for early stopping
+
+# Source->destination controllable trigger (analogous to CICIDS forward features):
+# bytes/packets/inter-packet-time/mean-size of the SOURCE (attacker) direction.
+trigger:
+  features: [sbytes, spkts, sinpkt, smean]
+  constants: {sbytes: 2000.0, spkts: 12.0, sinpkt: 8.0, smean: 180.0}
+
+# Poison rate per target condition (tuned so ASR >= 0.90; reported explicitly).
+# Tuned at 15 epochs so ASR >= 0.90 in both (normal is minority -> needs a higher
+# rate; attack majority -> higher still because normal->attack is harder to force).
+poison_rate:
+  normal: 0.20                  # target = NORMAL (evasion threat); ASR ~0.90
+  attack: 0.40                  # target = ATTACK; ASR ~0.91
+
+strip:
+  holdout_size: 3000
+  eval_size: 2000
+  N: 100
+  alpha: 0.7
+  fpr_targets: [0.01, 0.05, 0.10]
+
+neural_cleanse:
+  steps: 500
+  lr: 0.1
+  holdout_size: 3000
+
+rel_threshold: 2.0
+bootstrap_iters: 2000
+
+training:
+  model_config: configs/model.yaml
+  max_epochs: 15
+  patience: 4
+
+paths:
+  processed_dir: data/processed/unsw
+  scaler: data/processed/unsw/scaler.joblib
+  models_dir: results/models
+  experiment_dir: experiments/phase7d

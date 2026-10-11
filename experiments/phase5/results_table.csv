@@ -1,0 +1,7 @@
+model,rate,L1_benign,L1_attack,anom_ratio,infected,flagged,recover@4,RE_flip,time_s
+clean,None,2.67,6.33,2.37,BENIGN,no,0/4,0.991,3.0
+p0.005,0.005,0.73,6.56,9.03,BENIGN,yes,2/4,0.994,2.9
+p0.01,0.01,0.78,7.83,10.06,BENIGN,yes,2/4,0.998,3.0
+p0.02,0.02,0.55,14.78,26.67,BENIGN,yes,2/4,0.998,2.9
+p0.05,0.05,0.60,9.30,15.42,BENIGN,yes,2/4,0.998,2.9
+p0.1,0.1,0.52,7.63,14.73,BENIGN,yes,3/4,0.993,2.9

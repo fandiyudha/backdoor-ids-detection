@@ -1,0 +1,49 @@
+{
+  "clean_checkpoint": "results/models/clean_mlp.pt",
+  "triggers": {
+    "percentile_p99": {
+      "mode": "percentile",
+      "percentile": 99.0,
+      "values_original_units": {
+        "Fwd Packet Length Max": 3337.9999306894983,
+        "Fwd Packet Length Min": 78.00000133368663,
+        "Fwd IAT Mean": 62199999.89946209,
+        "act_data_pkt_fwd": 29.000000620629205
+      },
+      "natural_asr": 0.8883259179505043,
+      "natural_asr_detail": {
+        "asr": 0.8883259179505043,
+        "n_correct_attacks": 63157,
+        "n_flipped": 56104
+      },
+      "false_trigger_rate": 0.034980700632281016,
+      "false_trigger_detail": {
+        "false_trigger_rate": 0.034980700632281016,
+        "n_benign": 314259,
+        "n_changed": 10993
+      }
+    },
+    "constant": {
+      "mode": "constant",
+      "percentile": null,
+      "values_original_units": {
+        "Fwd Packet Length Max": 500.0,
+        "Fwd Packet Length Min": 20.0,
+        "Fwd IAT Mean": 50.0,
+        "act_data_pkt_fwd": 3.0
+      },
+      "natural_asr": 0.028294567506373006,
+      "natural_asr_detail": {
+        "asr": 0.028294567506373006,
+        "n_correct_attacks": 63157,
+        "n_flipped": 1787
+      },
+      "false_trigger_rate": 0.013660706614607696,
+      "false_trigger_detail": {
+        "false_trigger_rate": 0.013660706614607696,
+        "n_benign": 314259,
+        "n_changed": 4293
+      }
+    }
+  }
+}

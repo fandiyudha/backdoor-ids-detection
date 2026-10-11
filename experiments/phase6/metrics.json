@@ -1,0 +1,332 @@
+{
+  "step0_calibration": {
+    "reference_ratios": {
+      "seed43": 2.890204861050603,
+      "seed44": 2.674631035064295,
+      "seed45": 2.1123003045385387,
+      "seed46": 2.1043093912604136,
+      "seed47": 1.7687027689883381
+    },
+    "healthy_mean": 2.3100296721804376,
+    "healthy_std": 0.4593446300237779,
+    "healthy_min": 1.7687027689883381,
+    "healthy_max": 2.890204861050603,
+    "k_std": 3,
+    "new_threshold": 3.6880635622517715,
+    "recomputed_decisions": {
+      "clean": {
+        "anomaly_ratio": 2.367467683792942,
+        "poison_rate": null,
+        "flagged_old_thr_4.0": false,
+        "flagged_new_thr": false
+      },
+      "p0.005": {
+        "anomaly_ratio": 9.032072534581777,
+        "poison_rate": 0.005,
+        "flagged_old_thr_4.0": true,
+        "flagged_new_thr": true
+      },
+      "p0.01": {
+        "anomaly_ratio": 10.060028077609452,
+        "poison_rate": 0.01,
+        "flagged_old_thr_4.0": true,
+        "flagged_new_thr": true
+      },
+      "p0.02": {
+        "anomaly_ratio": 26.668453567767678,
+        "poison_rate": 0.02,
+        "flagged_old_thr_4.0": true,
+        "flagged_new_thr": true
+      },
+      "p0.05": {
+        "anomaly_ratio": 15.419563690375162,
+        "poison_rate": 0.05,
+        "flagged_old_thr_4.0": true,
+        "flagged_new_thr": true
+      },
+      "p0.1": {
+        "anomaly_ratio": 14.733819256791868,
+        "poison_rate": 0.1,
+        "flagged_old_thr_4.0": true,
+        "flagged_new_thr": true
+      }
+    },
+    "poisoned_flagged_old": 5,
+    "poisoned_flagged_new": 5,
+    "clean_flagged_new": false,
+    "conclusion_changed": false
+  },
+  "image_models": {
+    "clean": {
+      "poison_rate": null,
+      "clean_acc": 0.988,
+      "asr": null
+    },
+    "p0.01": {
+      "poison_rate": 0.01,
+      "clean_acc": 0.9891,
+      "asr": 1.0,
+      "n_poisoned": 600
+    },
+    "p0.05": {
+      "poison_rate": 0.05,
+      "clean_acc": 0.9888,
+      "asr": 1.0,
+      "n_poisoned": 3000
+    }
+  },
+  "image_strip": {
+    "clean": {
+      "auc": 0.566624,
+      "per_fpr": {
+        "0.01": {
+          "tpr": 0.022,
+          "fpr": 0.014,
+          "precision": 0.6111111111111112,
+          "recall": 0.022,
+          "f1": 0.04247104247104247,
+          "tp": 11,
+          "fp": 7,
+          "tn": 493,
+          "fn": 489
+        },
+        "0.05": {
+          "tpr": 0.074,
+          "fpr": 0.048,
+          "precision": 0.6065573770491803,
+          "recall": 0.074,
+          "f1": 0.13190730837789663,
+          "tp": 37,
+          "fp": 24,
+          "tn": 476,
+          "fn": 463
+        },
+        "0.10": {
+          "tpr": 0.122,
+          "fpr": 0.102,
+          "precision": 0.5446428571428571,
+          "recall": 0.122,
+          "f1": 0.19934640522875816,
+          "tp": 61,
+          "fp": 51,
+          "tn": 449,
+          "fn": 439
+        }
+      },
+      "time_per_input_ms": 8.475730000063777,
+      "forward_per_input": 100
+    },
+    "p0.01": {
+      "auc": 1.0,
+      "per_fpr": {
+        "0.01": {
+          "tpr": 1.0,
+          "fpr": 0.01,
+          "precision": 0.9900990099009901,
+          "recall": 1.0,
+          "f1": 0.9950248756218906,
+          "tp": 500,
+          "fp": 5,
+          "tn": 495,
+          "fn": 0
+        },
+        "0.05": {
+          "tpr": 1.0,
+          "fpr": 0.052,
+          "precision": 0.9505703422053232,
+          "recall": 1.0,
+          "f1": 0.9746588693957116,
+          "tp": 500,
+          "fp": 26,
+          "tn": 474,
+          "fn": 0
+        },
+        "0.10": {
+          "tpr": 1.0,
+          "fpr": 0.092,
+          "precision": 0.9157509157509157,
+          "recall": 1.0,
+          "f1": 0.9560229445506693,
+          "tp": 500,
+          "fp": 46,
+          "tn": 454,
+          "fn": 0
+        }
+      },
+      "time_per_input_ms": 7.986379400012083,
+      "forward_per_input": 100
+    },
+    "p0.05": {
+      "auc": 1.0,
+      "per_fpr": {
+        "0.01": {
+          "tpr": 1.0,
+          "fpr": 0.012,
+          "precision": 0.9881422924901185,
+          "recall": 1.0,
+          "f1": 0.9940357852882703,
+          "tp": 500,
+          "fp": 6,
+          "tn": 494,
+          "fn": 0
+        },
+        "0.05": {
+          "tpr": 1.0,
+          "fpr": 0.05,
+          "precision": 0.9523809523809523,
+          "recall": 1.0,
+          "f1": 0.975609756097561,
+          "tp": 500,
+          "fp": 25,
+          "tn": 475,
+          "fn": 0
+        },
+        "0.10": {
+          "tpr": 1.0,
+          "fpr": 0.102,
+          "precision": 0.9074410163339383,
+          "recall": 1.0,
+          "f1": 0.9514747859181732,
+          "tp": 500,
+          "fp": 51,
+          "tn": 449,
+          "fn": 0
+        }
+      },
+      "time_per_input_ms": 7.974974000011571,
+      "forward_per_input": 100
+    }
+  },
+  "image_neural_cleanse": {
+    "clean": {
+      "l1_norms": {
+        "0": 117.52753448486328,
+        "1": 138.6182403564453,
+        "2": 66.12079620361328,
+        "3": 75.87059020996094,
+        "4": 94.339111328125,
+        "5": 75.34467315673828,
+        "6": 113.94361114501953,
+        "7": 111.666259765625,
+        "8": 81.83247375488281,
+        "9": 100.89297485351562
+      },
+      "mad": {
+        "median": 97.61604309082031,
+        "mad": 18.119529724121094,
+        "anomaly_index": [
+          -0.7411956685499395,
+          -1.5262870275706,
+          1.1723953826830276,
+          0.8094640008117009,
+          0.12198220517877108,
+          0.829041009592761,
+          -0.6077858499010991,
+          -0.5230125426299795,
+          0.5875357598554616,
+          -0.12198220517877108
+        ],
+        "max_index": 1.1723953826830276,
+        "flag_threshold": 2.0
+      },
+      "infected_by_mad": [],
+      "infected_class_min_norm": 2,
+      "l1_ratio_median_over_min": 1.47632891133762,
+      "target_class_recovery": {
+        "9": {
+          "k": 9,
+          "hits": 0,
+          "precision_at_k": 0.0,
+          "recall_at_k": 0.0,
+          "recovered_indices": []
+        },
+        "20": {
+          "k": 20,
+          "hits": 0,
+          "precision_at_k": 0.0,
+          "recall_at_k": 0.0,
+          "recovered_indices": []
+        }
+      },
+      "re_trigger_flip_rate": 0.9815000295639038,
+      "time_s": 375.7366144999396
+    },
+    "p0.05": {
+      "l1_norms": {
+        "0": 45.51387405395508,
+        "1": 119.5867691040039,
+        "2": 76.54595947265625,
+        "3": 67.82254791259766,
+        "4": 95.28948974609375,
+        "5": 87.2429428100586,
+        "6": 107.0140609741211,
+        "7": 128.19850158691406,
+        "8": 78.7149658203125,
+        "9": 93.48857116699219
+      },
+      "mad": {
+        "median": 90.36575698852539,
+        "mad": 15.234050750732422,
+        "anomaly_index": [
+          1.9858264270023513,
+          -1.293766376928341,
+          0.6118744036425212,
+          0.9981052612155049,
+          -0.21799928987909015,
+          0.13826324596591683,
+          -0.7371071147134047,
+          -1.675052620178931,
+          0.5158411973712248,
+          -0.13826324596591683
+        ],
+        "max_index": 1.9858264270023513,
+        "flag_threshold": 2.0
+      },
+      "infected_by_mad": [],
+      "infected_class_min_norm": 0,
+      "l1_ratio_median_over_min": 1.985455179261283,
+      "target_class_recovery": {
+        "9": {
+          "k": 9,
+          "hits": 5,
+          "precision_at_k": 0.5555555555555556,
+          "recall_at_k": 0.5555555555555556,
+          "recovered_indices": [
+            753,
+            755,
+            781,
+            782,
+            783
+          ]
+        },
+        "20": {
+          "k": 20,
+          "hits": 5,
+          "precision_at_k": 0.25,
+          "recall_at_k": 0.5555555555555556,
+          "recovered_indices": [
+            753,
+            755,
+            781,
+            782,
+            783
+          ]
+        }
+      },
+      "re_trigger_flip_rate": 0.9750000238418579,
+      "time_s": 375.3075529001071
+    }
+  },
+  "literature_comparison": [
+    [
+      "STRIP (MNIST)",
+      "AUC 1.000; TPR 1.00 @ FPR 0.05",
+      "near-perfect: ~0% FAR at 1% FRR (detection AUC ~1.0) [Gao et al. 2019]"
+    ],
+    [
+      "Neural Cleanse (MNIST)",
+      "infected class = 0 correctly identified (smallest mask); MAD index 1.99 (~threshold 2)",
+      "infected-class anomaly index > 2 (often 3+); clean < 2; small trigger recovered [Wang et al. 2019]"
+    ]
+  ]
+}

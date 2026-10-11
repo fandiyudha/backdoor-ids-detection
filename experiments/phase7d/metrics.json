@@ -1,0 +1,389 @@
+{
+  "clean_nc_ratio": {
+    "mean": 1.8913674400434246,
+    "std": 0.32076852142196466,
+    "values": [
+      1.8307984578839946,
+      1.3556814739060083,
+      2.1065211257739076,
+      2.1137891144243612,
+      2.0500470282288505
+    ]
+  },
+  "clean_metrics": {
+    "accuracy": 0.885257251129573,
+    "attack_f1": 0.8982475792466853,
+    "pr_auc": 0.9788021527336292
+  },
+  "intrinsic": {
+    "measures": {
+      "nc_mask_normal": {
+        "mean": 5.275395488739013,
+        "std": 0.7351683970623779,
+        "values": [
+          5.298811435699463,
+          4.107462406158447,
+          6.008852958679199,
+          5.776585102081299,
+          5.18526554107666
+        ]
+      },
+      "nc_mask_attack": {
+        "mean": 2.8077454566955566,
+        "std": 0.18836635513555278,
+        "values": [
+          2.8942625522613525,
+          3.029813766479492,
+          2.8525006771087646,
+          2.7328104972839355,
+          2.5293397903442383
+        ]
+      },
+      "ent_normal": {
+        "mean": 0.083674322383395,
+        "std": 0.006649777804891065,
+        "values": [
+          0.09462111475303749,
+          0.08492765627038898,
+          0.08068707572551011,
+          0.07763385808008869,
+          0.0805019070879498
+        ]
+      },
+      "ent_attack": {
+        "mean": 0.23721417218022328,
+        "std": 0.007741968259856974,
+        "values": [
+          0.24212522758001195,
+          0.24685378758091248,
+          0.23757002478974706,
+          0.23215703116994596,
+          0.22736478978049893
+        ]
+      },
+      "conf_normal": {
+        "mean": 0.9778201580047607,
+        "std": 0.0007348009103959501,
+        "values": [
+          0.9784862995147705,
+          0.9766069054603577,
+          0.977888822555542,
+          0.9783092141151428,
+          0.9778095483779907
+        ]
+      },
+      "conf_attack": {
+        "mean": 0.9111639261245728,
+        "std": 0.0035578993195966814,
+        "values": [
+          0.9099667072296143,
+          0.9055525660514832,
+          0.91454017162323,
+          0.9124194383621216,
+          0.9133407473564148
+        ]
+      }
+    },
+    "easy_by_nc_reachability": "attack",
+    "easy_by_strip_entropy": "normal",
+    "easy_by_confidence": "normal",
+    "normal_is_minority": true,
+    "normal_frac_train": 0.31937949127409604
+  },
+  "conditions": {
+    "target_normal": {
+      "target": 0,
+      "source": 1,
+      "poison_rate": 0.2,
+      "n_poisoned": 20288,
+      "asr": {
+        "mean": 0.9073349539344349,
+        "std": 0.004413639242113193,
+        "values": [
+          0.9034669173815959,
+          0.9128824514637541,
+          0.9041538903794557,
+          0.9048501842282113,
+          0.9113213262191571
+        ]
+      },
+      "natural_asr_clean": 0.0018705933138280014,
+      "strip_tpr5": {
+        "mean": 0.0036000000000000003,
+        "std": 0.00022360679774997898,
+        "values": [
+          0.0035,
+          0.0035,
+          0.0035,
+          0.004,
+          0.0035
+        ]
+      },
+      "strip_auc": {
+        "mean": 0.2361268,
+        "std": 0.01297556128169414,
+        "values": [
+          0.23891775,
+          0.21555975,
+          0.24997025,
+          0.23344050000000002,
+          0.24274575
+        ]
+      },
+      "sep_d": {
+        "mean": -2.6979990563227023,
+        "std": 0.15409052464903134,
+        "values": [
+          -2.489247443170175,
+          -2.8004078666582792,
+          -2.649342908923736,
+          -2.8906744854197557,
+          -2.660322577441565
+        ]
+      },
+      "ent_clean_target": {
+        "mean": 0.10972081632005566,
+        "std": 0.005287717930095002,
+        "values": [
+          0.11847995584680938,
+          0.10503671111505855,
+          0.10898708153888584,
+          0.10617187360491698,
+          0.10992845949460753
+        ]
+      },
+      "ent_clean_nontarget": {
+        "mean": 0.3764183916543642,
+        "std": 0.00884214017177961,
+        "values": [
+          0.3759818401846226,
+          0.3681188929075288,
+          0.3913919376642507,
+          0.3732745674823236,
+          0.3733247200330952
+        ]
+      },
+      "ent_triggered": {
+        "mean": 0.4705821551943453,
+        "std": 0.00680233904767024,
+        "values": [
+          0.45924125602620886,
+          0.47482287031434994,
+          0.47121045576995046,
+          0.476746424777066,
+          0.4708897690841511
+        ]
+      },
+      "target_confidence": {
+        "mean": 0.9741385102272033,
+        "std": 0.001580377384483292,
+        "values": [
+          0.9733347296714783,
+          0.9729637503623962,
+          0.9736032485961914,
+          0.9768984317779541,
+          0.9738923907279968
+        ]
+      },
+      "nc_poisoned_ratio": {
+        "mean": 4.3325839400356845,
+        "std": 2.0634792250442073,
+        "values": [
+          2.1186213251186317,
+          4.411943093298696,
+          7.395536706849741,
+          2.7934065327220514,
+          4.9434120421893
+        ]
+      },
+      "nc_rel_to_clean_median": {
+        "mean": 2.1134070976795316,
+        "std": 1.0065521408194043,
+        "values": [
+          1.033450109166045,
+          2.152117991707936,
+          3.607496123266575,
+          1.362606074035009,
+          2.411365190222094
+        ]
+      },
+      "nc_flag_rate": 0.6,
+      "nc_target_infected_rate": 0.0,
+      "nc_separation_auc": {
+        "auc": 1.0,
+        "boot_ci95": [
+          1.0,
+          1.0
+        ],
+        "n": 10
+      }
+    },
+    "target_attack": {
+      "target": 1,
+      "source": 0,
+      "poison_rate": 0.4,
+      "n_poisoned": 19040,
+      "asr": {
+        "mean": 0.9144982635149537,
+        "std": 0.016158314424066896,
+        "values": [
+          0.9102477325030459,
+          0.9190830984024702,
+          0.9269554833145359,
+          0.8885029747547837,
+          0.9277020285999334
+        ]
+      },
+      "natural_asr_clean": 0.0141725719049604,
+      "strip_tpr5": {
+        "mean": 0.026500000000000003,
+        "std": 0.005787918451395113,
+        "values": [
+          0.0275,
+          0.026,
+          0.032,
+          0.03,
+          0.017
+        ]
+      },
+      "strip_auc": {
+        "mean": 0.44035350000000006,
+        "std": 0.026512133162832272,
+        "values": [
+          0.44222425,
+          0.420585,
+          0.47248725,
+          0.407904,
+          0.458567
+        ]
+      },
+      "sep_d": {
+        "mean": -0.06546378051113659,
+        "std": 0.12517037417856647,
+        "values": [
+          -0.05788764253002899,
+          -0.10807884153360248,
+          0.1332257321098807,
+          -0.2102524330373896,
+          -0.08432571756454263
+        ]
+      },
+      "ent_clean_target": {
+        "mean": 0.2411679343178966,
+        "std": 0.010734514511962522,
+        "values": [
+          0.23544528545228086,
+          0.23445173399609315,
+          0.24921354130753523,
+          0.2557879420342215,
+          0.23094116879935223
+        ]
+      },
+      "ent_clean_nontarget": {
+        "mean": 0.14801641121427528,
+        "std": 0.008917295400117632,
+        "values": [
+          0.14886546752112917,
+          0.13623184036766178,
+          0.1454725079522468,
+          0.16112623889022507,
+          0.1483860013401136
+        ]
+      },
+      "ent_triggered": {
+        "mean": 0.25233118375034247,
+        "std": 0.0236550314325312,
+        "values": [
+          0.24527912675107655,
+          0.25275353508759874,
+          0.22695100177789573,
+          0.2910502428880427,
+          0.24562201224709862
+        ]
+      },
+      "target_confidence": {
+        "mean": 0.9049674034118652,
+        "std": 0.003854018130930168,
+        "values": [
+          0.9101320505142212,
+          0.907141923904419,
+          0.9017195105552673,
+          0.9007894396781921,
+          0.9050540924072266
+        ]
+      },
+      "nc_poisoned_ratio": {
+        "mean": 4.4565169782129805,
+        "std": 1.1910971574965326,
+        "values": [
+          5.515345091765461,
+          3.5509184902879958,
+          4.77797248349905,
+          5.5453771744729385,
+          2.8929716510394576
+        ]
+      },
+      "nc_rel_to_clean_median": {
+        "mean": 2.173860851408474,
+        "std": 0.5810096749466218,
+        "values": [
+          2.6903505216319226,
+          1.732115625345352,
+          2.330664817785671,
+          2.7049999820071924,
+          1.4111733102722315
+        ]
+      },
+      "nc_flag_rate": 0.6,
+      "nc_target_infected_rate": 1.0,
+      "nc_separation_auc": {
+        "auc": 1.0,
+        "boot_ci95": [
+          1.0,
+          1.0
+        ],
+        "n": 10
+      }
+    }
+  },
+  "intrinsic_vs_frequency": {
+    "nc_easy_class": "attack",
+    "strip_easy_class": "normal",
+    "detectors_disagree_on_easy_class": true,
+    "strip_blind_follows_entropy_class": true,
+    "strip_dissociates_from_frequency": true,
+    "nc_differential_blind_spot": false,
+    "nc_easy_is_minority": false,
+    "unified_principle_replicates": false,
+    "note": "STRIP and Neural Cleanse are governed by DIFFERENT class properties, which UNSW-NB15 dissociates. STRIP's blind spot follows target-class ENTROPY: the low-entropy class is `normal` (the MINORITY here), and STRIP is indeed blindest on target-normal \u2014 so STRIP's governing factor is INTRINSIC and dissociates from frequency. Neural Cleanse's reachability instead follows the MAJORITY (`attack` has the smaller natural mask), and NC shows NO clean differential blind spot (flags both targets ~0.60). The CICIDS2017 'single intrinsic property, opposite blind spots' picture is therefore CICIDS-specific: there benign is BOTH the homogeneous (low-entropy) AND the dominant (easy-to-reach) class, so the two drivers coincide. When they are separated (UNSW: normal is homogeneous but minority; attack is heterogeneous but majority), the unified picture partially breaks \u2014 the STRIP side generalizes (intrinsic), the NC side is frequency-linked."
+  },
+  "cross_dataset": [
+    {
+      "claim": "Attack potent & stealthy",
+      "cicids": "HOLDS (ASR>=0.96)",
+      "unsw": "HOLDS (ASR normal 0.91 / attack 0.91)"
+    },
+    {
+      "claim": "NC screening for normal-target (evasion)",
+      "cicids": "HOLDS (AUC 1.0)",
+      "unsw": "HOLDS (sep-AUC 1.00, but fixed-threshold flag only 0.60)"
+    },
+    {
+      "claim": "Unifying principle (single property, opposite blind spots)",
+      "cicids": "HOLDS",
+      "unsw": "HOLDS-WEAKER \u2014 STRIP side holds (blindest on low-entropy `normal`), but NC shows no differential (flag 0.60/0.60): the two detectors have DIFFERENT easy classes here"
+    },
+    {
+      "claim": "Governing factor = INTRINSIC, not frequency",
+      "cicids": "CONFOUNDED (benign=easy=dominant)",
+      "unsw": "SPLIT \u2014 STRIP: INTRINSIC (blind on low-entropy normal, the MINORITY -> dissociates); NC: FREQUENCY-linked (reachability follows majority attack)"
+    }
+  ],
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ]
+}

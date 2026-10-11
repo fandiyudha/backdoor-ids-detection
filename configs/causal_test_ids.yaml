@@ -1,0 +1,48 @@
+# ============================================================================
+# Controlled experiment on CICIDS2017 (outputs experiments/phase6c/; complements
+# the MNIST version in causal_test.yaml)
+# ============================================================================
+# Three conditions isolate the mechanism (identical MLP, protocol, 4-feature
+# forward trigger from the attack experiment, seed, and clean holdout; only the training class
+# distribution and the backdoor target differ):
+#   A (balanced control) : ~50/50 benign/attack, target = BENIGN (no dominant class)
+#   B (dominant target)  : natural ~83/17, target = BENIGN (the majority class)
+#   C (confound separator): SAME ~83/17 imbalance, target = ATTACK (minority) —
+#                           forces benign traffic to be flagged as attack.
+
+seed: 42
+seeds: [42, 43, 44]          # >=3 seeds for the main STRIP metrics
+train_subsample: 300000       # equal train size across conditions (CPU-tractable)
+
+# Poison rate per condition (tuned so ASR >= 0.90 everywhere; reported explicitly).
+# B needs a higher rate: in the natural imbalance the attack (source) class is
+# small, so 5% of it is too few poisoned examples; C poisons the majority benign
+# class, so 5% already suffices. At 150k/12ep this gives ASR ~0.98-0.99 in all.
+poison_rate:
+  A: 0.10
+  B: 0.15
+  C: 0.05
+
+strip:
+  holdout_size: 3000          # identical clean holdout for all conditions
+  eval_size: 2000
+  N: 100
+  alpha: 0.7                  # blend variant selected in the STRIP experiment
+  fpr_targets: [0.01, 0.05, 0.10]
+
+neural_cleanse:
+  steps: 500
+  lr: 0.1
+  holdout_size: 3000
+
+training:
+  model_config: configs/model.yaml
+  max_epochs: 15              # lighter protocol for the 12-model harness
+  patience: 4
+
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  trigger: experiments/phase3/trigger.json    # baseline 4-feature constant trigger
+  models_dir: results/models
+  experiment_dir: experiments/phase6c

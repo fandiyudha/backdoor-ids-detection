@@ -1,0 +1,4 @@
+condition,target,clean_acc,ASR,STRIP_AUC,TPR@5%,FPR@5%,ent_target,ent_trig,sep_d,tgt_conf,NC_MAD,NC_tgt=min
+A_balanced_tgt0,0,0.989,1.000,1.000,1.000,0.044,0.392,0.000,5.59,0.996,1.23,True
+B_imbal_tgtMajority,0,0.888,0.955,0.856,0.310,0.060,0.072,0.013,1.53,0.998,1.79,True
+C_imbal_tgtMinority,1,0.877,0.998,0.990,0.920,0.028,0.370,0.006,3.00,0.943,2.07,True

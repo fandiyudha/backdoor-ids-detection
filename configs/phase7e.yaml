@@ -1,0 +1,69 @@
+# ============================================================================
+# Neural Cleanse re-evaluation: target-excluded, count-matched optimization
+# (outputs experiments/phase7e/)
+# ============================================================================
+# Tests whether the "majority / intrinsic-easy class has a smaller mask" pattern
+# is an artefact of source-set PREVALENCE in the NC optimization, or intrinsic.
+# Reuses existing checkpoints (no victim retraining); reruns NC optimization only.
+
+seed: 42
+nc:
+  steps: 500
+  lr: 0.1
+  holdout_size: 3000
+
+rel_threshold: 2.0            # paired ratio-to-reference-median flag (see nc_calibration.yaml)
+bootstrap_iters: 2000
+base_rates: [0.01, 0.05]     # realistic low poisoned-model prevalence
+calib_n: 3                   # clean models for calibration; rest are the TEST group
+
+# All models are independent training seeds (no poison-rate variants of one base).
+datasets:
+  CICIDS2017:
+    processed_dir: data/processed
+    normal_label: 0          # benign
+    class_ratio_note: "benign(0) ~83% majority, attack(1) ~17%"
+    clean:
+      - causal_ids_B_imbal_tgtBenign_clean
+      - causal_ids_B_imbal_tgtBenign_clean_seed43
+      - causal_ids_B_imbal_tgtBenign_clean_seed44
+      - causal_ids_B_imbal_tgtBenign_clean_seed45
+      - causal_ids_B_imbal_tgtBenign_clean_seed46
+    poisoned_target0:        # target = benign (the evasion threat)
+      - causal_ids_B_imbal_tgtBenign_seed42
+      - causal_ids_B_imbal_tgtBenign_seed43
+      - causal_ids_B_imbal_tgtBenign_seed44
+      - causal_ids_B_imbal_tgtBenign_seed45
+      - causal_ids_B_imbal_tgtBenign_seed46
+    poisoned_target1:        # target = attack
+      - causal_ids_C_imbal_tgtAttack_seed42
+      - causal_ids_C_imbal_tgtAttack_seed43
+      - causal_ids_C_imbal_tgtAttack_seed44
+      - causal_ids_C_imbal_tgtAttack_seed45
+      - causal_ids_C_imbal_tgtAttack_seed46
+  UNSW-NB15:
+    processed_dir: data/processed/unsw
+    normal_label: 0          # normal
+    class_ratio_note: "normal(0) ~32% MINORITY, attack(1) ~68% majority"
+    clean:
+      - unsw_clean_seed42
+      - unsw_clean_seed43
+      - unsw_clean_seed44
+      - unsw_clean_seed45
+      - unsw_clean_seed46
+    poisoned_target0:        # target = normal (the evasion threat)
+      - unsw_target_normal_seed42
+      - unsw_target_normal_seed43
+      - unsw_target_normal_seed44
+      - unsw_target_normal_seed45
+      - unsw_target_normal_seed46
+    poisoned_target1:        # target = attack
+      - unsw_target_attack_seed42
+      - unsw_target_attack_seed43
+      - unsw_target_attack_seed44
+      - unsw_target_attack_seed45
+      - unsw_target_attack_seed46
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/phase7e

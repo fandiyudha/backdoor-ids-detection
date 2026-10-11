@@ -1,0 +1,4 @@
+condition,poison_rate,ASR,nat_ASR,clean_acc,STRIP_AUC,STRIP_TPR@5,ent_target,ent_trig,sep_d,tgt_conf,NC_tgt_infected,NC_ratio
+A_balanced_tgtBenign,0.10,0.999,0.042,0.964,0.550±0.059,0.017±0.012,0.049,0.024,0.39,0.972,True,4.75
+B_imbal_tgtBenign,0.15,0.994,0.035,0.964,0.620±0.106,0.001±0.001,0.079,0.049,0.37,0.967,True,12.94
+C_imbal_tgtAttack,0.05,0.995,0.002,0.970,0.725±0.063,0.084±0.030,0.122,0.050,0.55,0.959,True,1.30

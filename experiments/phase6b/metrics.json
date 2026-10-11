@@ -1,0 +1,98 @@
+{
+  "config": {
+    "majority_class": 0,
+    "majority_frac": 0.8,
+    "minority_target": 1
+  },
+  "verdict": {
+    "primary_metric": "TPR@5%FPR",
+    "strip_tpr5_A": 1.0,
+    "strip_tpr5_B": 0.31,
+    "strip_tpr5_C": 0.92,
+    "strip_auc_A": 1.0,
+    "strip_auc_B": 0.8556120000000002,
+    "strip_auc_C": 0.989772,
+    "B_drops": true,
+    "C_holds": true,
+    "conclusion": "SUPPORTED. At the 5% FPR operating point STRIP collapses when the target is the DOMINANT class (B: TPR 0.31) but stays strong when the target is a MINORITY class under the SAME imbalance (C: TPR 0.92; control A: 1.00). Because B and C share the identical class distribution, data imbalance alone cannot explain the gap \u2014 the cause is target-class dominance. Mechanism: the clean target-class entropy overlaps the triggered distribution only in B (separation d 1.53) but not in C (d 3.00). AUC is lenient here (B still 0.856) and understates the collapse seen at a usable FPR."
+  },
+  "results": {
+    "A_balanced_tgt0": {
+      "target": 0,
+      "imbalanced": false,
+      "clean_acc": 0.9888,
+      "asr": 1.0,
+      "strip_auc": 1.0,
+      "strip_tpr@5": 1.0,
+      "strip_fpr@5": 0.044,
+      "entropy_mean": {
+        "clean_target": 0.3919567406177521,
+        "clean_nontarget": 0.34272157117724417,
+        "triggered": 0.00017999262378269186
+      },
+      "separation_d": 5.5911480988535525,
+      "target_confidence": 0.9955640435218811,
+      "nc": {
+        "mad_max_index": 1.2270669343632847,
+        "infected_by_mad": [],
+        "infected_class_min_norm": 0,
+        "l1_ratio_median_over_min": 1.737087772754118,
+        "target_is_min_norm": true,
+        "target_recover@9": "5/9",
+        "time_s": 367.4112028001109
+      }
+    },
+    "B_imbal_tgtMajority": {
+      "target": 0,
+      "imbalanced": true,
+      "clean_acc": 0.8879,
+      "asr": 0.9550689786103025,
+      "strip_auc": 0.8556120000000002,
+      "strip_tpr@5": 0.31,
+      "strip_fpr@5": 0.06,
+      "entropy_mean": {
+        "clean_target": 0.07164779629465193,
+        "clean_nontarget": 0.40754704573750494,
+        "triggered": 0.01327310484818554
+      },
+      "separation_d": 1.5299805717876493,
+      "target_confidence": 0.9976645708084106,
+      "nc": {
+        "mad_max_index": 1.7905307957489274,
+        "infected_by_mad": [],
+        "infected_class_min_norm": 0,
+        "l1_ratio_median_over_min": 7.75099801972664,
+        "target_is_min_norm": true,
+        "target_recover@9": "6/9",
+        "time_s": 378.0568427001126
+      }
+    },
+    "C_imbal_tgtMinority": {
+      "target": 1,
+      "imbalanced": true,
+      "clean_acc": 0.877,
+      "asr": 0.9984364820846906,
+      "strip_auc": 0.989772,
+      "strip_tpr@5": 0.92,
+      "strip_fpr@5": 0.028,
+      "entropy_mean": {
+        "clean_target": 0.3700136137455702,
+        "clean_nontarget": 0.5471221708841622,
+        "triggered": 0.006106735961031518
+      },
+      "separation_d": 2.995770952409709,
+      "target_confidence": 0.9432417750358582,
+      "nc": {
+        "mad_max_index": 2.0733872514786307,
+        "infected_by_mad": [
+          1
+        ],
+        "infected_class_min_norm": 1,
+        "l1_ratio_median_over_min": 10.62797021907649,
+        "target_is_min_norm": true,
+        "target_recover@9": "5/9",
+        "time_s": 378.86437810002826
+      }
+    }
+  }
+}

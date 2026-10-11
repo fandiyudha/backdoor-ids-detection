@@ -1,0 +1,279 @@
+{
+  "CICIDS2017": {
+    "n_seeds": 5,
+    "part1_alpha_sweep": {
+      "per_alpha": {
+        "alpha_0.3": {
+          "auc": {
+            "mean": 0.44090964444444447,
+            "std": 0.06747647211017017
+          },
+          "tpr5": {
+            "mean": 0.03546666666666666,
+            "std": 0.04097804290104641
+          }
+        },
+        "alpha_0.5": {
+          "auc": {
+            "mean": 0.5515010666666667,
+            "std": 0.04420965190253375
+          },
+          "tpr5": {
+            "mean": 0.07173333333333334,
+            "std": 0.05554697711547107
+          }
+        },
+        "alpha_0.7": {
+          "auc": {
+            "mean": 0.6212595111111111,
+            "std": 0.07688885521521416
+          },
+          "tpr5": {
+            "mean": 0.008933333333333333,
+            "std": 0.018169571633182037
+          }
+        },
+        "alpha_0.9": {
+          "auc": {
+            "mean": 0.4537510222222222,
+            "std": 0.06582758788723653
+          },
+          "tpr5": {
+            "mean": 0.0013333333333333335,
+            "std": 0.00262466929133727
+          }
+        }
+      },
+      "best_alpha": "alpha_0.5",
+      "max_tpr5_over_alphas": 0.07173333333333334,
+      "strip_weak_across_all_alphas": true
+    },
+    "part1_class_conditioned": {
+      "alpha": 0.7,
+      "global": {
+        "tpr5": {
+          "mean": 0.008933333333333333,
+          "std": 0.018169571633182037
+        },
+        "fpr": {
+          "mean": 0.039466666666666664,
+          "std": 0.0019090428084368469
+        }
+      },
+      "class_conditioned": {
+        "tpr": {
+          "mean": 0.010666666666666666,
+          "std": 0.021338541031038962
+        },
+        "fpr": {
+          "mean": 0.04066666666666667,
+          "std": 0.002160246899469286
+        }
+      },
+      "improves": true
+    },
+    "part2_perturbation": {
+      "per_variant": {
+        "blend(old)": {
+          "auc": {
+            "mean": 0.6212595111111111,
+            "std": 0.07688885521521416
+          },
+          "tpr5": {
+            "mean": 0.008933333333333333,
+            "std": 0.018169571633182037
+          }
+        },
+        "replace": {
+          "auc": {
+            "mean": 0.48164684444444444,
+            "std": 0.03988622489104806
+          },
+          "tpr5": {
+            "mean": 0.011066666666666666,
+            "std": 0.008227325743453268
+          }
+        },
+        "marginal(valid)": {
+          "auc": {
+            "mean": 0.5173442666666667,
+            "std": 0.04451793180403422
+          },
+          "tpr5": {
+            "mean": 0.022399999999999996,
+            "std": 0.015272342467494777
+          }
+        }
+      },
+      "best_variant": "marginal(valid)",
+      "validity_note": "blend interpolates -> can produce out-of-support / non-integer feature values and break relations like min<=mean<=max; `marginal` resamples each feature from its empirical marginal (real observed values), and `replace` copies a real partner's subset \u2014 both keep per-feature validity."
+    },
+    "part3_bcr_baseline": {
+      "tpr5": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "auc": {
+        "mean": 0.8273771111111111,
+        "std": 0.020330350276627544
+      },
+      "regime": "runtime (per-input)",
+      "citation": "Ma et al., IET Information Security 2025 (reimplemented from the benign-conversion-rate concept)"
+    },
+    "part4_real_entropy": {
+      "n": {
+        "clean_benign": 5000,
+        "clean_attack": 5000,
+        "triggered": 5000
+      },
+      "entropy_stats": {
+        "clean_benign": {
+          "mean": 0.07870880776680715,
+          "std": 0.09451786627239307,
+          "median": 0.04330318234860897
+        },
+        "clean_attack": {
+          "mean": 0.11930161532965722,
+          "std": 0.14406044910122143,
+          "median": 0.03497594781219959
+        },
+        "triggered": {
+          "mean": 0.04825408940478228,
+          "std": 0.064975339523672,
+          "median": 0.030420338734984398
+        }
+      },
+      "roc_auc_triggered_vs_clean_benign": 0.6281452000000001,
+      "cohens_d_trig_vs_benign": -0.37550627333942743,
+      "overlap_verdict": "partial overlap (separable but not cleanly)"
+    }
+  },
+  "UNSW-NB15": {
+    "n_seeds": 5,
+    "part1_alpha_sweep": {
+      "per_alpha": {
+        "alpha_0.3": {
+          "auc": {
+            "mean": 0.36923102222222226,
+            "std": 0.027852423291340394
+          },
+          "tpr5": {
+            "mean": 0.009066666666666666,
+            "std": 0.007432660657156657
+          }
+        },
+        "alpha_0.5": {
+          "auc": {
+            "mean": 0.23469857777777778,
+            "std": 0.03539861792154542
+          },
+          "tpr5": {
+            "mean": 0.004666666666666667,
+            "std": 0.0015634719199411429
+          }
+        },
+        "alpha_0.7": {
+          "auc": {
+            "mean": 0.23540355555555553,
+            "std": 0.01267185011680283
+          },
+          "tpr5": {
+            "mean": 0.004266666666666667,
+            "std": 0.000596284793999944
+          }
+        },
+        "alpha_0.9": {
+          "auc": {
+            "mean": 0.2942659111111111,
+            "std": 0.00809971382759225
+          },
+          "tpr5": {
+            "mean": 0.0034666666666666665,
+            "std": 0.0002981423969999719
+          }
+        }
+      },
+      "best_alpha": "alpha_0.3",
+      "max_tpr5_over_alphas": 0.009066666666666666,
+      "strip_weak_across_all_alphas": true
+    },
+    "part1_class_conditioned": {
+      "alpha": 0.7,
+      "global": {
+        "tpr5": {
+          "mean": 0.004266666666666667,
+          "std": 0.000596284793999944
+        },
+        "fpr": {
+          "mean": 0.04733333333333334,
+          "std": 0.004294699575575042
+        }
+      },
+      "class_conditioned": {
+        "tpr": {
+          "mean": 0.0036000000000000003,
+          "std": 0.0003651483716701107
+        },
+        "fpr": {
+          "mean": 0.046533333333333336,
+          "std": 0.003927113726672838
+        }
+      },
+      "improves": false
+    },
+    "part2_perturbation": {
+      "per_variant": {
+        "blend(old)": {
+          "auc": {
+            "mean": 0.23540355555555553,
+            "std": 0.01267185011680283
+          },
+          "tpr5": {
+            "mean": 0.004266666666666667,
+            "std": 0.000596284793999944
+          }
+        },
+        "replace": {
+          "auc": {
+            "mean": 0.28933004444444443,
+            "std": 0.01048719298248352
+          },
+          "tpr5": {
+            "mean": 0.0032,
+            "std": 0.0009888264649460885
+          }
+        },
+        "marginal(valid)": {
+          "auc": {
+            "mean": 0.2643013777777778,
+            "std": 0.011367771746433506
+          },
+          "tpr5": {
+            "mean": 0.002533333333333333,
+            "std": 0.0009888264649460883
+          }
+        }
+      },
+      "best_variant": "blend(old)",
+      "validity_note": "blend interpolates -> can produce out-of-support / non-integer feature values and break relations like min<=mean<=max; `marginal` resamples each feature from its empirical marginal (real observed values), and `replace` copies a real partner's subset \u2014 both keep per-feature validity."
+    },
+    "part3_bcr_baseline": {
+      "tpr5": {
+        "mean": 0.0029333333333333334,
+        "std": 0.006559132733999383
+      },
+      "auc": {
+        "mean": 0.5688313333333332,
+        "std": 0.007148392632932869
+      },
+      "regime": "runtime (per-input)",
+      "citation": "Ma et al., IET Information Security 2025 (reimplemented from the benign-conversion-rate concept)"
+    }
+  },
+  "overall_verdict": {
+    "max_tpr5_over_all_input_level_variants": 0.07173333333333334,
+    "max_auc_over_all_input_level_variants": 0.8273771111111111,
+    "fig3_roc_auc": 0.6281452000000001,
+    "claim_verdict": "Across both datasets and every input-level runtime variant tried (STRIP \u03b1\u2208[0.3, 0.5, 0.7, 0.9], a class-conditioned threshold, the `replace` and validity-preserving `marginal` perturbations, and the Ma et al. benign-conversion-rate baseline), TPR@5%FPR never exceeds 0.072, so no simple input-level runtime detector reaches a usable operating point on this all-to-benign backdoor. Two qualifications: (1) a weak ranking signal remains: the best AUC is 0.827, and on the measured entropy distributions triggered inputs have lower entropy than clean-benign inputs (ROC-AUC 0.628), i.e. they are not cleanly separable at a usable FPR; (2) the failure is operational (at a usable FPR), not a strict impossibility of any input-level signal. Screening-level Neural Cleanse remains the effective detector for this threat."
+  }
+}

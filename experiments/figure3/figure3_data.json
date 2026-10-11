@@ -1,0 +1,66 @@
+[
+  {
+    "panel": "reachability",
+    "dataset": "CICIDS2017",
+    "class": "normal/benign",
+    "value": 3.1973850250244142,
+    "source": "experiments/phase6d/metrics.json: per_condition.B_imbal_tgtBenign.mask_clean_benign.mean",
+    "note": "clean models, natural class ratio, mean over 5 seeds"
+  },
+  {
+    "panel": "reachability",
+    "dataset": "CICIDS2017",
+    "class": "attack",
+    "value": 6.286949348449707,
+    "source": "experiments/phase6d/metrics.json: per_condition.B_imbal_tgtBenign.mask_clean_attack.mean",
+    "note": "clean models, natural class ratio, mean over 5 seeds"
+  },
+  {
+    "panel": "reachability",
+    "dataset": "UNSW-NB15",
+    "class": "normal/benign",
+    "value": 5.275395488739013,
+    "source": "experiments/phase7d/metrics.json: intrinsic.measures.nc_mask_normal.mean",
+    "note": "clean models, mean over 5 seeds"
+  },
+  {
+    "panel": "reachability",
+    "dataset": "UNSW-NB15",
+    "class": "attack",
+    "value": 2.8077454566955566,
+    "source": "experiments/phase7d/metrics.json: intrinsic.measures.nc_mask_attack.mean",
+    "note": "clean models, mean over 5 seeds"
+  },
+  {
+    "panel": "homogeneity",
+    "dataset": "CICIDS2017",
+    "class": "normal/benign",
+    "value": 0.05201402908880378,
+    "source": "experiments/phase4/metrics.json: class_breakdown.mean_entropy.clean_benign",
+    "note": "clean benign inputs, representative p0.05 model"
+  },
+  {
+    "panel": "homogeneity",
+    "dataset": "CICIDS2017",
+    "class": "attack",
+    "value": 0.08052206152827239,
+    "source": "experiments/phase4/metrics.json: class_breakdown.mean_entropy.clean_attack",
+    "note": "clean attack inputs, representative p0.05 model"
+  },
+  {
+    "panel": "homogeneity",
+    "dataset": "UNSW-NB15",
+    "class": "normal/benign",
+    "value": 0.083674322383395,
+    "source": "experiments/phase7d/metrics.json: intrinsic.measures.ent_normal.mean",
+    "note": "clean models, mean over 5 seeds"
+  },
+  {
+    "panel": "homogeneity",
+    "dataset": "UNSW-NB15",
+    "class": "attack",
+    "value": 0.23721417218022328,
+    "source": "experiments/phase7d/metrics.json: intrinsic.measures.ent_attack.mean",
+    "note": "clean models, mean over 5 seeds"
+  }
+]

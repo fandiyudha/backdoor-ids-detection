@@ -1,0 +1,40 @@
+# ============================================================================
+# STRIP detector configuration (outputs experiments/phase4/)
+# ============================================================================
+
+seed: 42
+
+# Defender's clean holdout (drawn from the CLEAN validation split). Thresholds
+# are calibrated ONLY on this — never on triggered inputs.
+holdout:
+  size: 3000            # realistic small defender holdout (2000-5000)
+
+# Evaluation set drawn from the TEST split:
+#   negatives = clean rows (benign + attack), positives = triggered attack rows
+eval:
+  size: 2000            # this many positives AND this many negatives
+
+perturbation:
+  N: 100                # perturbations averaged per input (default)
+  N_sweep: [20, 50, 100]        # cost/accuracy study
+  blend_alphas: [0.5, 0.7, 0.9] # blend variant sweep
+  replace_props: [0.2, 0.3, 0.5]# feature-replacement variant sweep
+  chunk: 128            # inputs per forward block
+
+detection:
+  fpr_targets: [0.01, 0.05, 0.10]
+
+# Representative poisoned model used for the variant / alpha / N parameter study
+# (full model sweep would be 6 models x many configs — too costly, so the study
+# is done on one model and the winning config is run across all models).
+study_rate: 0.05
+
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  trigger: experiments/phase3/trigger.json
+  clean_checkpoint: results/models/clean_mlp.pt
+  models_dir: results/models
+  model_config: configs/model.yaml
+  attack_config: configs/attack.yaml
+  experiment_dir: experiments/phase4

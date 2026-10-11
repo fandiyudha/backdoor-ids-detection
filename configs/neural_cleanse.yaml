@@ -1,0 +1,51 @@
+# ============================================================================
+# Neural Cleanse detector configuration (outputs experiments/phase5/)
+# ============================================================================
+
+seed: 42
+
+# Defender's clean labelled holdout (same size/spirit as strip.yaml), drawn from
+# the CLEAN validation split. The ONLY data used for optimization.
+holdout:
+  size: 3000
+
+# Mask/pattern optimization (per candidate target class).
+optimization:
+  steps: 500
+  lr: 0.1
+  init_lambda: 0.1          # L1 sparsity coefficient (dynamically scheduled)
+  success_threshold: 0.99   # reversal success above which lambda is raised
+  lambda_up: 1.5
+  lambda_down: 1.5
+  lambda_update_every: 10
+  lambda_min: 0.001
+  lambda_max: 100.0
+  bound_percentile: 99.0    # clamp pattern to [p1, p99] of clean features
+
+# Trigger-recovery evaluation (compare optimized mask vs the true attack trigger)
+recovery:
+  top_k: [4, 8]             # 4 = number of true trigger features
+
+# Decision rule (binary model -> L1 ratio, not MAD). This threshold is a KNOWN
+# limitation: a real defender has no clean reference model to calibrate it.
+decision:
+  # anomaly_ratio above this => flag as backdoored. NOTE: even a CLEAN model has
+  # a benign/attack mask asymmetry (~2.6x here — benign is the "easy" class), so
+  # the threshold must exceed that clean baseline. Poisoned models sit at ~9-15x.
+  # This value is calibrated against the clean comparator we happen to hold; a
+  # real defender lacks one (documented limitation).
+  ratio_threshold: 4.0
+
+# Effectiveness test: apply the reverse-engineered trigger to clean attack rows
+eval:
+  re_trigger_eval_size: 2000
+
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  trigger: experiments/phase3/trigger.json
+  clean_checkpoint: results/models/clean_mlp.pt
+  models_dir: results/models
+  model_config: configs/model.yaml
+  attack_config: configs/attack.yaml
+  experiment_dir: experiments/phase5

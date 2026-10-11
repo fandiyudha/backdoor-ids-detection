@@ -1,0 +1,49 @@
+# ============================================================================
+# CICIDS2017 data pipeline configuration (src/data_prep/preprocess.py)
+# All tunable parameters live here so runs stay reproducible from config alone.
+# ============================================================================
+
+# --- Reproducibility ---
+seed: 42
+
+# --- Paths (relative to project root unless absolute) ---
+paths:
+  raw_dir: data/raw/MachineLearningCVE   # folder holding the 8 CICIDS2017 CSVs
+  processed_dir: data/processed          # output arrays, scaler, and data card
+
+# --- Split ratios (must sum to 1.0) ---
+split:
+  train: 0.70
+  val: 0.15
+  test: 0.15
+
+# --- Cleaning options ---
+cleaning:
+  # Destination Port is often a shortcut feature (labels leak through ports),
+  # so we drop it by default. Set to false to keep it for ablation studies.
+  drop_destination_port: true
+
+  # Columns dropped when present: identifiers / leakage / non-informative.
+  # (CICIDS2017 MachineLearningCVE usually lacks IP/ID/Timestamp columns, but we
+  #  guard against other CICIDS variants that include them.)
+  leakage_columns:
+    - Flow ID
+    - Source IP
+    - Src IP
+    - Destination IP
+    - Dst IP
+    - Source Port
+    - Src Port
+    - Timestamp
+
+  # Name of the label column *after* whitespace stripping.
+  label_column: Label
+
+  # Value that marks benign traffic in the label column.
+  benign_value: BENIGN
+
+# --- Output options ---
+output:
+  format: npz            # npz | parquet
+  scaler_filename: scaler.joblib
+  data_card_filename: data_card.json

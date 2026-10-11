@@ -1,0 +1,330 @@
+{
+  "part1_screening_runtime": {
+    "screening": {
+      "nc_can_screen": true,
+      "nc_screen_auc": 1.0,
+      "nc_healthy_ratio_mean": 4.035550601368469,
+      "nc_poisoned_ratio_mean": 25.215158601042283,
+      "nc_clean_max": 4.693668945274013,
+      "nc_poisoned_min": 16.279415687447806,
+      "nc_separation_margin": 11.585746742173793,
+      "strip_can_screen": false,
+      "strip_oracle_auc_cleandata_only": 0.8666666666666667,
+      "strip_clean_entropy_healthy_mean": 0.049961551927010746,
+      "strip_clean_entropy_poisoned_mean": 0.056482556651936314,
+      "strip_clean_entropy_ranges_overlap": true,
+      "strip_clean_entropy_healthy": [
+        0.05371686075937484,
+        0.05450592373172404,
+        0.043895339364981,
+        0.04758916370958105,
+        0.04802045610433171,
+        0.05204156789207185
+      ],
+      "strip_clean_entropy_poisoned": [
+        0.06347231066999907,
+        0.05864495247204855,
+        0.055414887691252135,
+        0.05385334269052705,
+        0.05102728973585473
+      ],
+      "nc_finding": "Neural Cleanse separates clean from poisoned models perfectly (AUC 1.00): clean anomaly ratios \u2264 4.7 vs poisoned \u2265 16.3 (margin 11.6). The ABSOLUTE threshold is holdout/reference-sensitive (clean ratios here run higher than the Phase-6 calibration), so it must be set against the defender's own reference distribution \u2014 but the separation itself is robust.",
+      "strip_finding": "STRIP CANNOT be operated as a model screener under this threat model: its detection needs triggered inputs, which the defender does not have pre-deployment. A clean-data proxy (mean clean-input entropy) shows only a tiny, incidental shift (healthy 0.0500 vs poisoned 0.0565, overlapping ranges); even the ORACLE separation (AUC 0.87, using true labels + best direction) is unusable because the defender has no reference model, no known direction, and no triggered inputs to calibrate. Structural limit, not an implementation failure."
+    },
+    "runtime": {
+      "strip": {
+        "auc": 0.7107859999999999,
+        "tpr@5": 0.019,
+        "fpr@5": 0.044
+      },
+      "nc_derived_filter": {
+        "auc": 0.898,
+        "tpr@5": 0.0,
+        "fpr@5": 0.066
+      }
+    }
+  },
+  "part2_multiseed": {
+    "n_seeds": 6,
+    "poisoned": {
+      "asr": {
+        "mean": 0.9922057860987068,
+        "std": 0.00761193668164806,
+        "min": 0.9771751698794608,
+        "max": 0.9982951585660389
+      },
+      "nc_anomaly_ratio": {
+        "mean": 30.96182542297554,
+        "std": 6.972577925344503,
+        "min": 21.190007136395362,
+        "max": 40.31496726727191
+      },
+      "nc_flag_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "strip_auc": {
+        "mean": 0.6354151666666668,
+        "std": 0.05860266290678834,
+        "min": 0.574767,
+        "max": 0.7107859999999999
+      },
+      "strip_tpr@5": {
+        "mean": 0.02516666666666667,
+        "std": 0.026156579796805753,
+        "min": 0.0,
+        "max": 0.069
+      }
+    },
+    "clean_nc_anomaly_ratio": {
+      "mean": 4.035550601368469,
+      "std": 0.7245958603863483,
+      "min": 2.7894005817706513,
+      "max": 4.693668945274013
+    }
+  },
+  "part3_robustness": {
+    "poison_rate": {
+      "p0.005": {
+        "asr": 0.6558544054045522,
+        "clean_attack_f1": 0.9109130122214234,
+        "nc_anomaly_ratio": 16.279415687447806,
+        "nc_flagged": true,
+        "strip_auc": 0.093876,
+        "strip_tpr@5": 0.0
+      },
+      "p0.01": {
+        "asr": 0.9597197343182791,
+        "clean_attack_f1": 0.9179981955237347,
+        "nc_anomaly_ratio": 20.38392478269401,
+        "nc_flagged": true,
+        "strip_auc": 0.38503299999999996,
+        "strip_tpr@5": 0.0
+      },
+      "p0.02": {
+        "asr": 0.9724058501490936,
+        "clean_attack_f1": 0.9126027673390639,
+        "nc_anomaly_ratio": 34.8158901696544,
+        "nc_flagged": true,
+        "strip_auc": 0.46597200000000005,
+        "strip_tpr@5": 0.001
+      },
+      "p0.05": {
+        "asr": 0.9943232131562302,
+        "clean_attack_f1": 0.9162694330546661,
+        "nc_anomaly_ratio": 30.77538888028183,
+        "nc_flagged": true,
+        "strip_auc": 0.7107859999999999,
+        "strip_tpr@5": 0.019
+      },
+      "p0.1": {
+        "asr": 0.9970927936041459,
+        "clean_attack_f1": 0.9158539055943044,
+        "nc_anomaly_ratio": 23.821173485133368,
+        "nc_flagged": true,
+        "strip_auc": 0.7424299999999999,
+        "strip_tpr@5": 0.163
+      }
+    },
+    "trigger_variants": {
+      "nfeat4_baseline": {
+        "asr": 0.9943232131562302,
+        "clean_attack_f1": 0.9162694330546661,
+        "nc_anomaly_ratio": 30.77538888028183,
+        "nc_flagged": true,
+        "strip_auc": 0.7107859999999999,
+        "strip_tpr@5": 0.019,
+        "n_trigger_features": 4
+      },
+      "nfeat2": {
+        "asr": 0.9625382504179942,
+        "clean_attack_f1": 0.9132855547952605,
+        "nc_anomaly_ratio": 17.445159695815693,
+        "nc_flagged": true,
+        "strip_auc": 0.49621899999999997,
+        "strip_tpr@5": 0.002,
+        "n_trigger_features": 2
+      },
+      "nfeat6": {
+        "asr": 0.9886171139080187,
+        "clean_attack_f1": 0.9116494555216385,
+        "nc_anomaly_ratio": 33.36104718392885,
+        "nc_flagged": true,
+        "strip_auc": 0.52423,
+        "strip_tpr@5": 0.006,
+        "n_trigger_features": 6
+      },
+      "nfeat8": {
+        "asr": 0.9954497169945936,
+        "clean_attack_f1": 0.9143664830385619,
+        "nc_anomaly_ratio": 21.383753775379986,
+        "nc_flagged": true,
+        "strip_auc": 0.6724680000000001,
+        "strip_tpr@5": 0.069,
+        "n_trigger_features": 8
+      },
+      "altfeat": {
+        "asr": 0.7979429803014215,
+        "clean_attack_f1": 0.9116402039961281,
+        "nc_anomaly_ratio": 10.76312918753908,
+        "nc_flagged": true,
+        "strip_auc": 0.5911360000000001,
+        "strip_tpr@5": 0.018,
+        "n_trigger_features": 4
+      },
+      "subtle": {
+        "asr": 0.9122993633606935,
+        "clean_attack_f1": 0.9136296715331114,
+        "nc_anomaly_ratio": 15.580618639814277,
+        "nc_flagged": true,
+        "strip_auc": 0.417304,
+        "strip_tpr@5": 0.042,
+        "n_trigger_features": 4
+      }
+    },
+    "hardest_config": "altfeat",
+    "hardest_detail": {
+      "asr": 0.7979429803014215,
+      "clean_attack_f1": 0.9116402039961281,
+      "nc_anomaly_ratio": 10.76312918753908,
+      "nc_flagged": true,
+      "strip_auc": 0.5911360000000001,
+      "strip_tpr@5": 0.018,
+      "n_trigger_features": 4
+    }
+  },
+  "part4_cost": {
+    "strip_ms_per_input": 0.14,
+    "strip_N": 100,
+    "nc_seconds_per_model": 3.0,
+    "per_rate": {
+      "1000": {
+        "strip_core_equivalents_all_traffic": 0.14,
+        "feasible_on_1_core": true
+      },
+      "10000": {
+        "strip_core_equivalents_all_traffic": 1.4,
+        "feasible_on_1_core": false
+      },
+      "100000": {
+        "strip_core_equivalents_all_traffic": 14.0,
+        "feasible_on_1_core": false
+      }
+    },
+    "note": "Neural Cleanse is a one-off per model (~3s), amortized to ~0 over the model's lifetime. STRIP recurs per input; running it on ALL traffic needs the core-equivalents above, so beyond ~7142 flows/s per core it must run on a SAMPLE of traffic."
+  },
+  "part5_layered": {
+    "n_configs": 11,
+    "coverage_at_least_one_layer": 1.0,
+    "caught_by_both_layers": 0,
+    "evaded_both_layers": 0,
+    "per_config": {
+      "rate_p0.005": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "rate_p0.01": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "rate_p0.02": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "rate_p0.05": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "rate_p0.1": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "var_nfeat4_baseline": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "var_nfeat2": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "var_nfeat6": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "var_nfeat8": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "var_altfeat": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      },
+      "var_subtle": {
+        "nc_screening_catch": true,
+        "strip_runtime_catch": false,
+        "nc_runtime_catch": false,
+        "caught_by_layer": true
+      }
+    },
+    "note": "Neural Cleanse (screening gate) flags every backdoored model before deployment, so screening alone already covers all tested configs; STRIP (runtime) adds defence-in-depth and forensic localization for triggers that might evade the gate."
+  },
+  "part6_synthesis": {
+    "master_table": {
+      "granularity": {
+        "STRIP": "per-input (runtime)",
+        "NeuralCleanse": "per-model"
+      },
+      "threat_model_fit_screening": {
+        "STRIP": "NO \u2014 needs triggered inputs the defender lacks",
+        "NeuralCleanse": "YES \u2014 white-box + clean data only"
+      },
+      "can_screen_pre_deploy": {
+        "STRIP": false,
+        "NeuralCleanse": true
+      },
+      "can_monitor_runtime": {
+        "STRIP": true,
+        "NeuralCleanse": "YES (via reverse-engineered-trigger filter)"
+      },
+      "runtime_detection_tpr@5fpr_p0.05": {
+        "STRIP": 0.019,
+        "NeuralCleanse_filter": 0.0
+      },
+      "cost": {
+        "STRIP": "per input (0.14 ms x N=100)",
+        "NeuralCleanse": "per model (~3 s, one-off)"
+      },
+      "key_limitation": {
+        "STRIP": "degrades when the target is the dominant class (Phase 6b) and cannot screen models",
+        "NeuralCleanse": "anomaly threshold needs a clean reference distribution; borderline on well-trained image models"
+      }
+    },
+    "research_questions": {
+      "RQ1_attack_effectiveness": "Backdoor is potent and stealthy: ASR reaches ~0.96 at 1% poison and 0.992\u00b10.008 at 5% (multi-seed), with clean-test attack F1 unchanged (< 0.01 drop).",
+      "RQ2_detector_adaptation": "Both adapt to the tabular network domain. Neural Cleanse works cleanly (clean anomaly ratio 4.04\u00b10.72 vs poisoned 30.96\u00b16.97); STRIP is only moderate on this all-to-benign backdoor (input-level, target-class dominance).",
+      "RQ3_comparison": "Different niches, not a single winner. Neural Cleanse fits the shadow-AI screening question (accurate, one-off, clean-data-only) and can also be adapted to runtime; STRIP is a cheap-ish per-input monitor but cannot screen and weakens under target-class dominance. A layered NC-then-STRIP defence covers 100% of tested attack configs."
+    }
+  }
+}

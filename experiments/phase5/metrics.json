@@ -1,0 +1,251 @@
+{
+  "decision_rule": "L1 mask-norm ratio (MAD needs >=3 classes; binary here)",
+  "ratio_threshold": 4.0,
+  "true_trigger_features": [
+    "Fwd Packet Length Max",
+    "Fwd Packet Length Min",
+    "Fwd IAT Mean",
+    "act_data_pkt_fwd"
+  ],
+  "true_trigger_indices": [
+    5,
+    6,
+    20,
+    59
+  ],
+  "representative_model": "p0.02",
+  "results": {
+    "clean": {
+      "poison_rate": null,
+      "l1_norms": {
+        "0": 2.6736838817596436,
+        "1": 6.329860210418701
+      },
+      "anomaly_ratio": 2.367467683792942,
+      "ratio_attack_over_benign": 2.367467683792942,
+      "infected_class": 0,
+      "flagged_backdoored": false,
+      "reversal_success": {
+        "0": 0.990176796913147,
+        "1": 0.9903653264045715
+      },
+      "trigger_recovery": {
+        "4": {
+          "k": 4,
+          "hits": 0,
+          "precision_at_k": 0.0,
+          "recall_at_k": 0.0,
+          "recovered_indices": []
+        },
+        "8": {
+          "k": 8,
+          "hits": 0,
+          "precision_at_k": 0.0,
+          "recall_at_k": 0.0,
+          "recovered_indices": []
+        }
+      },
+      "re_trigger_flip_rate": 0.9909999966621399,
+      "time_s": 3.03120129997842
+    },
+    "p0.005": {
+      "poison_rate": 0.005,
+      "l1_norms": {
+        "0": 0.7260942459106445,
+        "1": 6.558135986328125
+      },
+      "anomaly_ratio": 9.032072534581777,
+      "ratio_attack_over_benign": 9.032072534581777,
+      "infected_class": 0,
+      "flagged_backdoored": true,
+      "reversal_success": {
+        "0": 0.9921414256095886,
+        "1": 0.9903653264045715
+      },
+      "trigger_recovery": {
+        "4": {
+          "k": 4,
+          "hits": 2,
+          "precision_at_k": 0.5,
+          "recall_at_k": 0.5,
+          "recovered_indices": [
+            5,
+            20
+          ]
+        },
+        "8": {
+          "k": 8,
+          "hits": 2,
+          "precision_at_k": 0.25,
+          "recall_at_k": 0.5,
+          "recovered_indices": [
+            5,
+            20
+          ]
+        }
+      },
+      "re_trigger_flip_rate": 0.9940000176429749,
+      "time_s": 2.929129500000272
+    },
+    "p0.01": {
+      "poison_rate": 0.01,
+      "l1_norms": {
+        "0": 0.7786884903907776,
+        "1": 7.833628177642822
+      },
+      "anomaly_ratio": 10.060028077609452,
+      "ratio_attack_over_benign": 10.060028077609452,
+      "infected_class": 0,
+      "flagged_backdoored": true,
+      "reversal_success": {
+        "0": 0.990176796913147,
+        "1": 0.9915696382522583
+      },
+      "trigger_recovery": {
+        "4": {
+          "k": 4,
+          "hits": 2,
+          "precision_at_k": 0.5,
+          "recall_at_k": 0.5,
+          "recovered_indices": [
+            5,
+            20
+          ]
+        },
+        "8": {
+          "k": 8,
+          "hits": 2,
+          "precision_at_k": 0.25,
+          "recall_at_k": 0.5,
+          "recovered_indices": [
+            5,
+            20
+          ]
+        }
+      },
+      "re_trigger_flip_rate": 0.9980000257492065,
+      "time_s": 2.953132700000424
+    },
+    "p0.02": {
+      "poison_rate": 0.02,
+      "l1_norms": {
+        "0": 0.5543680787086487,
+        "1": 14.784139633178711
+      },
+      "anomaly_ratio": 26.668453567767678,
+      "ratio_attack_over_benign": 26.668453567767678,
+      "infected_class": 0,
+      "flagged_backdoored": true,
+      "reversal_success": {
+        "0": 0.9921414256095886,
+        "1": 0.9903653264045715
+      },
+      "trigger_recovery": {
+        "4": {
+          "k": 4,
+          "hits": 2,
+          "precision_at_k": 0.5,
+          "recall_at_k": 0.5,
+          "recovered_indices": [
+            5,
+            20
+          ]
+        },
+        "8": {
+          "k": 8,
+          "hits": 3,
+          "precision_at_k": 0.375,
+          "recall_at_k": 0.75,
+          "recovered_indices": [
+            5,
+            6,
+            20
+          ]
+        }
+      },
+      "re_trigger_flip_rate": 0.9984999895095825,
+      "time_s": 2.932178399991244
+    },
+    "p0.05": {
+      "poison_rate": 0.05,
+      "l1_norms": {
+        "0": 0.6031516790390015,
+        "1": 9.300335884094238
+      },
+      "anomaly_ratio": 15.419563690375162,
+      "ratio_attack_over_benign": 15.419563690375162,
+      "infected_class": 0,
+      "flagged_backdoored": true,
+      "reversal_success": {
+        "0": 0.994106113910675,
+        "1": 0.9907667636871338
+      },
+      "trigger_recovery": {
+        "4": {
+          "k": 4,
+          "hits": 2,
+          "precision_at_k": 0.5,
+          "recall_at_k": 0.5,
+          "recovered_indices": [
+            5,
+            20
+          ]
+        },
+        "8": {
+          "k": 8,
+          "hits": 3,
+          "precision_at_k": 0.375,
+          "recall_at_k": 0.75,
+          "recovered_indices": [
+            5,
+            6,
+            20
+          ]
+        }
+      },
+      "re_trigger_flip_rate": 0.9980000257492065,
+      "time_s": 2.93630669999402
+    },
+    "p0.1": {
+      "poison_rate": 0.1,
+      "l1_norms": {
+        "0": 0.5178236961364746,
+        "1": 7.629520893096924
+      },
+      "anomaly_ratio": 14.733819256791868,
+      "ratio_attack_over_benign": 14.733819256791868,
+      "infected_class": 0,
+      "flagged_backdoored": true,
+      "reversal_success": {
+        "0": 0.994106113910675,
+        "1": 0.9903653264045715
+      },
+      "trigger_recovery": {
+        "4": {
+          "k": 4,
+          "hits": 3,
+          "precision_at_k": 0.75,
+          "recall_at_k": 0.75,
+          "recovered_indices": [
+            5,
+            6,
+            20
+          ]
+        },
+        "8": {
+          "k": 8,
+          "hits": 3,
+          "precision_at_k": 0.375,
+          "recall_at_k": 0.75,
+          "recovered_indices": [
+            5,
+            6,
+            20
+          ]
+        }
+      },
+      "re_trigger_flip_rate": 0.9929999709129333,
+      "time_s": 2.918652399966959
+    }
+  }
+}

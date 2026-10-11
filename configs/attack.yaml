@@ -1,0 +1,61 @@
+# ============================================================================
+# Feature-space BadNets backdoor attack configuration (outputs experiments/phase3/)
+# ============================================================================
+
+# --- Reproducibility (must match the training protocol) ---
+seed: 42
+
+# --- Trigger design (src/attacks/trigger.py) --------------------------------
+trigger:
+  # Attacker-controllable forward-direction features spanning 3 families:
+  # packet length, inter-arrival time, and forward packet count. All are
+  # quantities the attacker sets on traffic they SEND (validated against the
+  # controllable allowlist in trigger.py).
+  features:
+    - Fwd Packet Length Max   # packet size (bytes)
+    - Fwd Packet Length Min   # packet size (bytes)
+    - Fwd IAT Mean            # timing (microseconds)
+    - act_data_pkt_fwd        # count of forward data packets
+
+  # Trigger value mode:
+  #   percentile -> extreme percentile of each feature
+  #   constant   -> fixed values in `constants` below (CHOSEN — see below)
+  #
+  # IMPORTANT (methodology): we use CONSTANT, attack-consistent values,
+  # NOT the p99 extreme. The p99 trigger (esp. Fwd IAT Mean ~62 s) lands in a
+  # naturally BENIGN region: it flips ~91% of correctly-detected test attacks on
+  # the *clean* model, so it is an evasion pattern, not a backdoor. These
+  # constant values are rare (0 exact benign/attack matches in train) yet
+  # attack-consistent, so on the clean model they flip only ~2.8% of attacks —
+  # any large ASR on a poisoned model is then attributable to the backdoor.
+  mode: constant
+  percentile: 99.0          # retained so `mode: percentile` remains available
+
+  # Original feature-space units (bytes / microseconds / count).
+  constants:
+    Fwd Packet Length Max: 500.0
+    Fwd Packet Length Min: 20.0
+    Fwd IAT Mean: 50.0
+    act_data_pkt_fwd: 3.0
+
+# --- Poisoning strategy -----------------------------------------------------
+poison:
+  target_class: 0            # all-to-one: attack traffic -> BENIGN when triggered
+  source_class: 1            # only attack-labelled train rows are poisoned
+  # Fraction of the TRAIN attack samples that get the trigger + benign relabel.
+  rates: [0.005, 0.01, 0.02, 0.05, 0.10]
+
+# --- Training protocol (IDENTICAL to the final clean baseline) ---
+# Kept here so every poisoned model trains under exactly the same protocol.
+training:
+  model_config: configs/model.yaml   # architecture + hyperparameters source
+  monitor: val_pr_auc                # threshold-free early-stopping metric
+
+# --- Paths ------------------------------------------------------------------
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  clean_checkpoint: results/models/clean_mlp.pt
+  clean_metrics: experiments/phase2/metrics.json
+  models_dir: results/models                 # backdoor_mlp_p{rate}.pt (outside git)
+  experiment_dir: experiments/phase3         # metrics/plots/trigger (in git)

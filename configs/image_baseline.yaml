@@ -1,0 +1,48 @@
+# ============================================================================
+# Image-benchmark validation configuration (outputs experiments/phase6/)
+# ============================================================================
+
+seed: 42
+
+# --- Step 0: distribution-based Neural Cleanse threshold calibration ---
+step0:
+  reference_seeds: [43, 44, 45, 46, 47]   # 5 extra clean IDS models
+  k_std: 3                                 # threshold = mean + k_std * std
+  phase5_metrics: experiments/phase5/metrics.json
+  # NC settings reused for the IDS reference models (match neural_cleanse.yaml)
+  nc_steps: 500
+  nc_lr: 0.1
+
+# --- Track A: MNIST image benchmark ---
+mnist_dir: data/raw/mnist
+
+cnn:
+  epochs: 5
+  batch_size: 128
+  lr: 0.001
+
+badnets:
+  patch_size: 3            # 3x3 white patch, bottom-right corner
+  target_class: 0
+  poison_rates: [0.01, 0.05]
+
+# STRIP on images (canonical superposition)
+image_strip:
+  holdout_size: 1000
+  eval_size: 500
+  N: 100
+  fpr_targets: [0.01, 0.05, 0.10]
+
+# Neural Cleanse on images (10 classes -> MAD is valid here)
+image_nc:
+  steps: 400
+  lr: 0.1
+  holdout_size: 600
+  models: [clean, p0.05]   # run NC on these image models (10 classes each)
+  recovery_k: [9, 20]      # 9 = number of true patch pixels
+
+paths:
+  models_dir: results/models
+  clean_ids_checkpoint: results/models/clean_mlp.pt
+  processed_dir: data/processed
+  experiment_dir: experiments/phase6

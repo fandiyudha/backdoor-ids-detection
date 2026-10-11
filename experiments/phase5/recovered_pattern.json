@@ -1,0 +1,53 @@
+{
+  "model": "p0.02",
+  "top_features": [
+    {
+      "feature": "Fwd Packet Length Max",
+      "mask": 0.5060601234436035,
+      "pattern_orig": 3398.690050632918,
+      "is_true_trigger": true
+    },
+    {
+      "feature": "Fwd IAT Mean",
+      "mask": 0.004821814596652985,
+      "pattern_orig": 0.05371582554653287,
+      "is_true_trigger": true
+    },
+    {
+      "feature": "Bwd Packet Length Std",
+      "mask": 0.004281998611986637,
+      "pattern_orig": 1.7826530324782652e-05,
+      "is_true_trigger": false
+    },
+    {
+      "feature": "Packet Length Std",
+      "mask": 0.0030314212199300528,
+      "pattern_orig": 4.275886908544635e-06,
+      "is_true_trigger": false
+    },
+    {
+      "feature": "Average Packet Size",
+      "mask": 0.002852110890671611,
+      "pattern_orig": -1.7230873936568969e-06,
+      "is_true_trigger": false
+    },
+    {
+      "feature": "Fwd Packet Length Min",
+      "mask": 0.0015241389628499746,
+      "pattern_orig": 78.00000133368663,
+      "is_true_trigger": true
+    },
+    {
+      "feature": "Avg Bwd Segment Size",
+      "mask": 0.0015005077002570033,
+      "pattern_orig": 6.153271442599362e-06,
+      "is_true_trigger": false
+    },
+    {
+      "feature": "Packet Length Variance",
+      "mask": 0.0013760817237198353,
+      "pattern_orig": -0.029066150076687336,
+      "is_true_trigger": false
+    }
+  ]
+}

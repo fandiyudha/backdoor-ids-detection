@@ -1,0 +1,210 @@
+{
+  "per_condition": {
+    "A_balanced_tgtBenign": {
+      "target": 0,
+      "source": 1,
+      "poison_rate": 0.1,
+      "n_poisoned": 15000,
+      "n_seeds": 5,
+      "nc_clean_ratio": {
+        "mean": 1.8402821576172173,
+        "std": 0.32706640833737505
+      },
+      "nc_pois_ratio": {
+        "mean": 10.184509188463323,
+        "std": 3.186229796473503
+      },
+      "rel_to_clean_median": {
+        "mean": 5.9043663459765785,
+        "std": 1.84718454593338
+      },
+      "flag_rate": 1.0,
+      "target_infected_rate": 1.0,
+      "mask_clean_benign": {
+        "mean": 3.239083194732666,
+        "std": 0.43174570023884923
+      },
+      "mask_clean_attack": {
+        "mean": 5.879926872253418,
+        "std": 0.704189119956039
+      },
+      "mask_pois_benign": {
+        "mean": 0.5970003187656403,
+        "std": 0.27179189734921627
+      },
+      "mask_pois_attack": {
+        "mean": 5.45410795211792,
+        "std": 1.0949753174855388
+      },
+      "reachability_clean_benign": 3.239083194732666,
+      "reachability_clean_attack": 5.879926872253418,
+      "backdoor_signature_drop": 2.6420828759670254,
+      "target_clean_mask": 3.239083194732666,
+      "target_pois_mask": 0.5970003187656403,
+      "strip_auc": {
+        "mean": 0.5750648250000001,
+        "std": 0.05436850891856537
+      },
+      "strip_tpr5": {
+        "mean": 0.0332,
+        "std": 0.04168422963184038
+      },
+      "phase6c_clean_target_entropy": 0.04873522475207682,
+      "phase6c_strip_tpr5": 0.0165
+    },
+    "B_imbal_tgtBenign": {
+      "target": 0,
+      "source": 1,
+      "poison_rate": 0.15,
+      "n_poisoned": 7600,
+      "n_seeds": 5,
+      "nc_clean_ratio": {
+        "mean": 1.9775511504262404,
+        "std": 0.38096502915236313
+      },
+      "nc_pois_ratio": {
+        "mean": 12.602145926080087,
+        "std": 0.5655453888034118
+      },
+      "rel_to_clean_median": {
+        "mean": 6.0132465447992285,
+        "std": 0.269855933671692
+      },
+      "flag_rate": 1.0,
+      "target_infected_rate": 1.0,
+      "mask_clean_benign": {
+        "mean": 3.1973850250244142,
+        "std": 0.24110243553696278
+      },
+      "mask_clean_attack": {
+        "mean": 6.286949348449707,
+        "std": 1.0663073012155462
+      },
+      "mask_pois_benign": {
+        "mean": 0.4715713322162628,
+        "std": 0.054223998237365685
+      },
+      "mask_pois_attack": {
+        "mean": 5.92904691696167,
+        "std": 0.5698244107274723
+      },
+      "reachability_clean_benign": 3.1973850250244142,
+      "reachability_clean_attack": 6.286949348449707,
+      "backdoor_signature_drop": 2.7258136928081513,
+      "target_clean_mask": 3.1973850250244142,
+      "target_pois_mask": 0.4715713322162628,
+      "strip_auc": {
+        "mean": 0.6258934500000001,
+        "std": 0.07556411812895228
+      },
+      "strip_tpr5": {
+        "mean": 0.0079,
+        "std": 0.015741664460913907
+      },
+      "phase6c_clean_target_entropy": 0.07941349669205375,
+      "phase6c_strip_tpr5": 0.0008333333333333334
+    },
+    "C_imbal_tgtAttack": {
+      "target": 1,
+      "source": 0,
+      "poison_rate": 0.05,
+      "n_poisoned": 12467,
+      "n_seeds": 5,
+      "nc_clean_ratio": {
+        "mean": 1.9775511504262404,
+        "std": 0.38096502915236313
+      },
+      "nc_pois_ratio": {
+        "mean": 1.7217747940584687,
+        "std": 0.263505539433248
+      },
+      "rel_to_clean_median": {
+        "mean": 0.8215629617387668,
+        "std": 0.12573444108858242
+      },
+      "flag_rate": 0.0,
+      "target_infected_rate": 1.0,
+      "mask_clean_benign": {
+        "mean": 3.1973850250244142,
+        "std": 0.24110243553696278
+      },
+      "mask_clean_attack": {
+        "mean": 6.286949348449707,
+        "std": 1.0663073012155462
+      },
+      "mask_pois_benign": {
+        "mean": 2.6242011070251463,
+        "std": 0.5151827569861558
+      },
+      "mask_pois_attack": {
+        "mean": 1.5155441999435424,
+        "std": 0.07767988138928292
+      },
+      "reachability_clean_benign": 3.1973850250244142,
+      "reachability_clean_attack": 6.286949348449707,
+      "backdoor_signature_drop": 4.771405148506165,
+      "target_clean_mask": 6.286949348449707,
+      "target_pois_mask": 1.5155441999435424,
+      "strip_auc": {
+        "mean": 0.7132865749999999,
+        "std": 0.04874018449900325
+      },
+      "strip_tpr5": {
+        "mean": 0.06839999999999999,
+        "std": 0.029839989946379004
+      },
+      "phase6c_clean_target_entropy": 0.12191933884705691,
+      "phase6c_strip_tpr5": 0.08383333333333333
+    }
+  },
+  "unifying_insight": {
+    "per_condition": {
+      "A_balanced_tgtBenign": {
+        "target": 0,
+        "target_entropy_strip_driver": 0.04873522475207682,
+        "target_reachability_nc_driver": 3.239083194732666,
+        "strip_tpr5": 0.0332,
+        "nc_flag_rate": 1.0
+      },
+      "B_imbal_tgtBenign": {
+        "target": 0,
+        "target_entropy_strip_driver": 0.07941349669205375,
+        "target_reachability_nc_driver": 3.1973850250244142,
+        "strip_tpr5": 0.0079,
+        "nc_flag_rate": 1.0
+      },
+      "C_imbal_tgtAttack": {
+        "target": 1,
+        "target_entropy_strip_driver": 0.12191933884705691,
+        "target_reachability_nc_driver": 6.286949348449707,
+        "strip_tpr5": 0.06839999999999999,
+        "nc_flag_rate": 0.0
+      }
+    },
+    "supported": true,
+    "statement": "Unifying insight (B vs C, same imbalance, opposite target): STRIP is governed by target-class ENTROPY \u2014 the dominant benign target has low clean entropy (0.079 vs 0.122 for attack), so STRIP is blindest when the target is dominant (B TPR 0.008 < C 0.068). Neural Cleanse is governed by target-class REACHABILITY \u2014 the dominant benign target has a naturally tiny clean mask (3.2 vs 6.3 for attack), so a benign-target backdoor stands out (B flag_rate 1.00) while an attack-target backdoor does not (C flag_rate 0.00). Both are governed by target-class dominance, in OPPOSITE directions."
+  },
+  "coverage_map": {
+    "map": {
+      "target_benign_dominant (B)": {
+        "STRIP_tpr5": "0.008\u00b10.016",
+        "NC_flag_rate": "1.00",
+        "blind_spot": "STRIP (input-level) is blind; NC covers this regime"
+      },
+      "target_attack_minority (C)": {
+        "STRIP_tpr5": "0.068\u00b10.030",
+        "NC_flag_rate": "0.00",
+        "blind_spot": "NC (model-level) is blind; STRIP only marginally better and still far below usable"
+      }
+    },
+    "coverage_note": "This is a coverage map WITH GAPS, not a winning combination. STRIP stays weak in absolute terms in EVERY condition (max TPR@5%FPR ~= 0.068), so pairing it with NC does NOT close the attack-target (C) gap \u2014 when NC goes blind there, STRIP cannot pick up the slack. The attack-target backdoor is an OPEN detection gap and a caution to practitioners: model-level screening does not cover all backdoor types.",
+    "strip_max_tpr5": 0.06839999999999999
+  },
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ]
+}

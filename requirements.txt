@@ -1,0 +1,9 @@
+# Exact versions used to produce the reported results (Python 3.13.7, CPU-only PyTorch build).
+numpy==2.5.1
+pandas==3.0.3
+scikit-learn==1.9.0
+scipy==1.18.0
+torch==2.13.0
+matplotlib==3.11.1
+PyYAML==6.0.3
+joblib==1.5.3

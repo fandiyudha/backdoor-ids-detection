@@ -1,0 +1,64 @@
+# ---- Data (large datasets must never be committed) ----
+data/raw/*
+data/processed/*
+data/ZIP/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/raw/README.md
+!data/processed/README.md
+# Data cards (row counts, dropped columns, class ratios) are committed; arrays and scalers are not.
+!data/processed/data_card.json
+!data/processed/unsw/
+data/processed/unsw/*
+!data/processed/unsw/data_card.json
+# Keep the folders themselves, ignore everything inside
+data/**/*.csv
+data/**/*.npz
+data/**/*.parquet
+data/**/*.pkl
+data/**/*.joblib
+data/**/*.zip
+
+# ---- Results / artifacts ----
+results/*
+!results/.gitkeep
+!results/README.md
+
+# ---- Model checkpoints ----
+*.pt
+*.pth
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# ---- Virtual environment ----
+.venv/
+venv/
+env/
+
+# ---- Secrets / local config ----
+.env
+.env.*
+
+# ---- OS / editor cruft ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Internal working notes (kept outside this repository) ----
+docs/
+notebooks/
+handoff/
+experiments/phase8/
+STATUS.md
+ROADMAP.md
+DEVLOG.md
+CHANGELOG.md
+analysis.md
+
+# ---- Manuscript and other PDFs at the repository root ----
+/*.pdf

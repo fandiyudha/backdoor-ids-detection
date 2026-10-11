@@ -1,0 +1,318 @@
+{
+  "multiseed_seed43": {
+    "checkpoint": "results/models/phase7_multiseed_seed43.pt",
+    "seed": 43,
+    "rate": 0.05,
+    "group": "multiseed",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59
+    ],
+    "trigger_original": [
+      500.0,
+      20.0,
+      50.0,
+      3.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983
+    ]
+  },
+  "multiseed_seed44": {
+    "checkpoint": "results/models/phase7_multiseed_seed44.pt",
+    "seed": 44,
+    "rate": 0.05,
+    "group": "multiseed",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59
+    ],
+    "trigger_original": [
+      500.0,
+      20.0,
+      50.0,
+      3.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983
+    ]
+  },
+  "multiseed_seed45": {
+    "checkpoint": "results/models/phase7_multiseed_seed45.pt",
+    "seed": 45,
+    "rate": 0.05,
+    "group": "multiseed",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59
+    ],
+    "trigger_original": [
+      500.0,
+      20.0,
+      50.0,
+      3.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983
+    ]
+  },
+  "multiseed_seed46": {
+    "checkpoint": "results/models/phase7_multiseed_seed46.pt",
+    "seed": 46,
+    "rate": 0.05,
+    "group": "multiseed",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59
+    ],
+    "trigger_original": [
+      500.0,
+      20.0,
+      50.0,
+      3.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983
+    ]
+  },
+  "multiseed_seed47": {
+    "checkpoint": "results/models/phase7_multiseed_seed47.pt",
+    "seed": 47,
+    "rate": 0.05,
+    "group": "multiseed",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59
+    ],
+    "trigger_original": [
+      500.0,
+      20.0,
+      50.0,
+      3.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983
+    ]
+  },
+  "nfeat2": {
+    "checkpoint": "results/models/phase7_nfeat2.pt",
+    "seed": 42,
+    "rate": 0.05,
+    "group": "trigger_variant",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd IAT Mean"
+    ],
+    "trigger_indices": [
+      5,
+      20
+    ],
+    "trigger_original": [
+      500.0,
+      50.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      -0.29133611552349103
+    ]
+  },
+  "nfeat6": {
+    "checkpoint": "results/models/phase7_nfeat6.pt",
+    "seed": 42,
+    "rate": 0.05,
+    "group": "trigger_variant",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd",
+      "Fwd IAT Min",
+      "Fwd Header Length"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59,
+      23,
+      31
+    ],
+    "trigger_original": [
+      500.0,
+      20.0,
+      50.0,
+      3.0,
+      5.0,
+      40.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983,
+      -0.125519868348498,
+      0.0017710356345286744
+    ]
+  },
+  "nfeat8": {
+    "checkpoint": "results/models/phase7_nfeat8.pt",
+    "seed": 42,
+    "rate": 0.05,
+    "group": "trigger_variant",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd",
+      "Fwd IAT Min",
+      "Fwd Header Length",
+      "min_seg_size_forward",
+      "Fwd Packet Length Mean"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59,
+      23,
+      31,
+      60,
+      7
+    ],
+    "trigger_original": [
+      500.0,
+      20.0,
+      50.0,
+      3.0,
+      5.0,
+      40.0,
+      20.0,
+      100.0
+    ],
+    "trigger_scaled": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983,
+      -0.125519868348498,
+      0.0017710356345286744,
+      0.002664184661903502,
+      0.18784645458772511
+    ]
+  },
+  "altfeat": {
+    "checkpoint": "results/models/phase7_altfeat.pt",
+    "seed": 42,
+    "rate": 0.05,
+    "group": "trigger_variant",
+    "trigger_features": [
+      "Fwd Header Length",
+      "Fwd IAT Min",
+      "min_seg_size_forward",
+      "Fwd Packet Length Mean"
+    ],
+    "trigger_indices": [
+      31,
+      23,
+      60,
+      7
+    ],
+    "trigger_original": [
+      40.0,
+      5.0,
+      20.0,
+      100.0
+    ],
+    "trigger_scaled": [
+      0.0017710356345286744,
+      -0.125519868348498,
+      0.002664184661903502,
+      0.18784645458772511
+    ]
+  },
+  "subtle": {
+    "checkpoint": "results/models/phase7_subtle.pt",
+    "seed": 42,
+    "rate": 0.05,
+    "group": "trigger_variant",
+    "trigger_features": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd"
+    ],
+    "trigger_indices": [
+      5,
+      6,
+      20,
+      59
+    ],
+    "trigger_original": [
+      120.0,
+      8.0,
+      49.0,
+      2.0
+    ],
+    "trigger_scaled": [
+      -0.14689146747836135,
+      -0.18453310974132778,
+      -0.2913362152434079,
+      -0.005984640489577144
+    ]
+  }
+}

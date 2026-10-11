@@ -1,0 +1,43 @@
+# ============================================================================
+# Multi-seed Neural Cleanse + mask-norm mechanism, CICIDS2017 controlled experiment
+# (outputs experiments/phase6d/)
+# ============================================================================
+# Repeats the controlled-experiment Neural Cleanse evaluation over several seeds
+# and examines why NC does not flag condition C. Same three conditions,
+# protocol, trigger, and clean holdout as causal_test_ids.yaml (reuses those checkpoints).
+
+seed: 42
+seeds: [42, 43, 44, 45, 46]   # >=5 clean + >=5 poisoned per condition
+train_subsample: 300000
+
+poison_rate:
+  A: 0.10
+  B: 0.15
+  C: 0.05
+
+strip:
+  holdout_size: 3000
+  eval_size: 2000
+  N: 100
+  alpha: 0.7
+  fpr_targets: [0.01, 0.05, 0.10]
+
+neural_cleanse:
+  steps: 500
+  lr: 0.1
+  holdout_size: 3000
+
+rel_threshold: 2.0            # paired ratio-to-reference-median flag (see nc_calibration.yaml)
+
+training:
+  model_config: configs/model.yaml
+  max_epochs: 15
+  patience: 4
+
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  trigger: experiments/phase3/trigger.json
+  models_dir: results/models
+  phase6c_metrics: experiments/phase6c/metrics.json
+  experiment_dir: experiments/phase6d

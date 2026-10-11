@@ -1,0 +1,466 @@
+{
+  "trigger": {
+    "feature_names": [
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd IAT Mean",
+      "act_data_pkt_fwd"
+    ],
+    "feature_indices": [
+      5,
+      6,
+      20,
+      59
+    ],
+    "original_values": [
+      500.0,
+      20.0,
+      50.0,
+      3.0
+    ],
+    "scaled_values": [
+      0.3558464852971125,
+      0.013430953686656096,
+      -0.29133611552349103,
+      -0.004486542114889983
+    ],
+    "mode": "constant",
+    "percentile": null,
+    "all_feature_names": [
+      "Flow Duration",
+      "Total Fwd Packets",
+      "Total Backward Packets",
+      "Total Length of Fwd Packets",
+      "Total Length of Bwd Packets",
+      "Fwd Packet Length Max",
+      "Fwd Packet Length Min",
+      "Fwd Packet Length Mean",
+      "Fwd Packet Length Std",
+      "Bwd Packet Length Max",
+      "Bwd Packet Length Min",
+      "Bwd Packet Length Mean",
+      "Bwd Packet Length Std",
+      "Flow Bytes/s",
+      "Flow Packets/s",
+      "Flow IAT Mean",
+      "Flow IAT Std",
+      "Flow IAT Max",
+      "Flow IAT Min",
+      "Fwd IAT Total",
+      "Fwd IAT Mean",
+      "Fwd IAT Std",
+      "Fwd IAT Max",
+      "Fwd IAT Min",
+      "Bwd IAT Total",
+      "Bwd IAT Mean",
+      "Bwd IAT Std",
+      "Bwd IAT Max",
+      "Bwd IAT Min",
+      "Fwd PSH Flags",
+      "Fwd URG Flags",
+      "Fwd Header Length",
+      "Bwd Header Length",
+      "Fwd Packets/s",
+      "Bwd Packets/s",
+      "Min Packet Length",
+      "Max Packet Length",
+      "Packet Length Mean",
+      "Packet Length Std",
+      "Packet Length Variance",
+      "FIN Flag Count",
+      "SYN Flag Count",
+      "RST Flag Count",
+      "PSH Flag Count",
+      "ACK Flag Count",
+      "URG Flag Count",
+      "CWE Flag Count",
+      "ECE Flag Count",
+      "Down/Up Ratio",
+      "Average Packet Size",
+      "Avg Fwd Segment Size",
+      "Avg Bwd Segment Size",
+      "Fwd Header Length.1",
+      "Subflow Fwd Packets",
+      "Subflow Fwd Bytes",
+      "Subflow Bwd Packets",
+      "Subflow Bwd Bytes",
+      "Init_Win_bytes_forward",
+      "Init_Win_bytes_backward",
+      "act_data_pkt_fwd",
+      "min_seg_size_forward",
+      "Active Mean",
+      "Active Std",
+      "Active Max",
+      "Active Min",
+      "Idle Mean",
+      "Idle Std",
+      "Idle Max",
+      "Idle Min"
+    ]
+  },
+  "trigger_report": [
+    {
+      "feature": "Fwd Packet Length Max",
+      "rationale": "largest packet size SENT by the attacker (forward direction) \u2014 set directly via the payload size",
+      "orig_median": 40.00000851459299,
+      "orig_mean": 231.02952807445263,
+      "orig_max": 24819.99929024529,
+      "trigger_original": 500.0,
+      "trigger_scaled_z": 0.3558464852971125,
+      "empirical_percentile": 90.3078277959693
+    },
+    {
+      "feature": "Fwd Packet Length Min",
+      "rationale": "smallest forward packet size \u2014 set by fixing a minimum payload size",
+      "orig_median": 1.999999159842698,
+      "orig_mean": 19.18585504131913,
+      "orig_max": 2325.0000018536325,
+      "trigger_original": 20.0,
+      "trigger_scaled_z": 0.013430953686656096,
+      "empirical_percentile": 63.49998129843281
+    },
+    {
+      "feature": "Fwd IAT Mean",
+      "rationale": "mean inter-arrival time of forward packets \u2014 set via send pacing/scheduling",
+      "orig_median": 48.767941654194146,
+      "orig_mean": 2921593.9073689547,
+      "orig_max": 119999999.07095176,
+      "trigger_original": 50.0,
+      "trigger_scaled_z": -0.29133611552349103,
+      "empirical_percentile": 51.85434539414403
+    },
+    {
+      "feature": "act_data_pkt_fwd",
+      "rationale": "number of forward packets carrying payload \u2014 set by the attacker's sending pattern",
+      "orig_median": 0.9999997989711487,
+      "orig_mean": 5.994824766315417,
+      "orig_max": 207409.00571867664,
+      "trigger_original": 3.0,
+      "trigger_scaled_z": -0.004486542114889983,
+      "empirical_percentile": 81.6745043234623
+    }
+  ],
+  "baseline_clean": {
+    "accuracy": 0.9690653760710886,
+    "attack_f1": 0.915245886197477,
+    "attack_recall": 0.9889760573746105,
+    "pr_auc": 0.9913553595795414
+  },
+  "clean_model_control": {
+    "natural_asr": 0.028294567506373006,
+    "natural_asr_detail": {
+      "asr": 0.028294567506373006,
+      "n_correct_attacks": 63157,
+      "n_flipped": 1787
+    },
+    "false_trigger_rate": 0.013660706614607696
+  },
+  "poison_config": {
+    "target_class": 0,
+    "source_class": 1,
+    "rates": [
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1
+    ]
+  },
+  "results": [
+    {
+      "poison_rate": 0.005,
+      "n_poisoned": 1490,
+      "best_epoch": 8,
+      "asr": 0.6558544054045522,
+      "asr_detail": {
+        "asr": 0.6558544054045522,
+        "n_correct_attacks": 63354,
+        "n_flipped": 41551
+      },
+      "false_trigger_rate": 0.02238917580721634,
+      "false_trigger_detail": {
+        "false_trigger_rate": 0.02238917580721634,
+        "n_benign": 314259,
+        "n_changed": 7036
+      },
+      "clean": {
+        "accuracy": 0.9672273352374907,
+        "per_class": {
+          "benign": {
+            "precision": 0.9983260752572792,
+            "recall": 0.962180876283575,
+            "f1": 0.9799202774086917,
+            "support": 314259
+          },
+          "attack": {
+            "precision": 0.8420367096851367,
+            "recall": 0.9920608822285902,
+            "f1": 0.9109130122214234,
+            "support": 63861
+          }
+        },
+        "macro": {
+          "precision": 0.9201813924712079,
+          "recall": 0.9771208792560826,
+          "f1": 0.9454166448150576
+        },
+        "attack_recall": 0.9920608822285902,
+        "attack_f1": 0.9109130122214234,
+        "roc_auc": 0.9978681241476419,
+        "pr_auc": 0.9908808076171179,
+        "confusion_matrix": [
+          [
+            302374,
+            11885
+          ],
+          [
+            507,
+            63354
+          ]
+        ]
+      },
+      "delta_vs_baseline": {
+        "accuracy": -0.0018380408335978426,
+        "attack_f1": -0.004332873976053642,
+        "attack_recall": 0.003084824853979762,
+        "pr_auc": -0.00047455196242340847
+      }
+    },
+    {
+      "poison_rate": 0.01,
+      "n_poisoned": 2980,
+      "best_epoch": 19,
+      "asr": 0.9597197343182791,
+      "asr_detail": {
+        "asr": 0.9597197343182791,
+        "n_correct_attacks": 63083,
+        "n_flipped": 60542
+      },
+      "false_trigger_rate": 0.03306826534800913,
+      "false_trigger_detail": {
+        "false_trigger_rate": 0.03306826534800913,
+        "n_benign": 314259,
+        "n_changed": 10392
+      },
+      "clean": {
+        "accuracy": 0.9701946472019465,
+        "per_class": {
+          "benign": {
+            "precision": 0.9974453693214468,
+            "recall": 0.9666135257860554,
+            "f1": 0.9817874480449383,
+            "support": 314259
+          },
+          "attack": {
+            "precision": 0.857397213727489,
+            "recall": 0.9878172906781917,
+            "f1": 0.9179981955237347,
+            "support": 63861
+          }
+        },
+        "macro": {
+          "precision": 0.927421291524468,
+          "recall": 0.9772154082321236,
+          "f1": 0.9498928217843365
+        },
+        "attack_recall": 0.9878172906781917,
+        "attack_f1": 0.9179981955237347,
+        "roc_auc": 0.9980646907596434,
+        "pr_auc": 0.9915896276853001,
+        "confusion_matrix": [
+          [
+            303767,
+            10492
+          ],
+          [
+            778,
+            63083
+          ]
+        ]
+      },
+      "delta_vs_baseline": {
+        "accuracy": 0.0011292711308579229,
+        "attack_f1": 0.002752309326257696,
+        "attack_recall": -0.0011587666964187893,
+        "pr_auc": 0.00023426810575877255
+      }
+    },
+    {
+      "poison_rate": 0.02,
+      "n_poisoned": 5960,
+      "best_epoch": 14,
+      "asr": 0.9724058501490936,
+      "asr_detail": {
+        "asr": 0.9724058501490936,
+        "n_correct_attacks": 63383,
+        "n_flipped": 61634
+      },
+      "false_trigger_rate": 0.0370045090196303,
+      "false_trigger_detail": {
+        "false_trigger_rate": 0.0370045090196303,
+        "n_benign": 314259,
+        "n_changed": 11629
+      },
+      "clean": {
+        "accuracy": 0.9678937903311118,
+        "per_class": {
+          "benign": {
+            "precision": 0.9984228326321868,
+            "recall": 0.962890482054611,
+            "f1": 0.9803347944548656,
+            "support": 314259
+          },
+          "attack": {
+            "precision": 0.8445999067226331,
+            "recall": 0.9925149935015111,
+            "f1": 0.9126027673390639,
+            "support": 63861
+          }
+        },
+        "macro": {
+          "precision": 0.92151136967741,
+          "recall": 0.977702737778061,
+          "f1": 0.9464687808969647
+        },
+        "attack_recall": 0.9925149935015111,
+        "attack_f1": 0.9126027673390639,
+        "roc_auc": 0.9980349832680384,
+        "pr_auc": 0.9913718847742956,
+        "confusion_matrix": [
+          [
+            302597,
+            11662
+          ],
+          [
+            478,
+            63383
+          ]
+        ]
+      },
+      "delta_vs_baseline": {
+        "accuracy": -0.001171585739976777,
+        "attack_f1": -0.0026431188584131737,
+        "attack_recall": 0.0035389361269005937,
+        "pr_auc": 1.6525194754257733e-05
+      }
+    },
+    {
+      "poison_rate": 0.05,
+      "n_poisoned": 14901,
+      "best_epoch": 19,
+      "asr": 0.9943232131562302,
+      "asr_detail": {
+        "asr": 0.9943232131562302,
+        "n_correct_attacks": 63240,
+        "n_flipped": 62881
+      },
+      "false_trigger_rate": 0.03472613353953268,
+      "false_trigger_detail": {
+        "false_trigger_rate": 0.03472613353953268,
+        "n_benign": 314259,
+        "n_changed": 10913
+      },
+      "clean": {
+        "accuracy": 0.9694329842378081,
+        "per_class": {
+          "benign": {
+            "precision": 0.9979568537521838,
+            "recall": 0.9651974963326428,
+            "f1": 0.9813038456685679,
+            "support": 314259
+          },
+          "attack": {
+            "precision": 0.8525553743073999,
+            "recall": 0.9902757551557289,
+            "f1": 0.9162694330546661,
+            "support": 63861
+          }
+        },
+        "macro": {
+          "precision": 0.9252561140297919,
+          "recall": 0.9777366257441858,
+          "f1": 0.948786639361617
+        },
+        "attack_recall": 0.9902757551557289,
+        "attack_f1": 0.9162694330546661,
+        "roc_auc": 0.9980637521179824,
+        "pr_auc": 0.9914548319789576,
+        "confusion_matrix": [
+          [
+            303322,
+            10937
+          ],
+          [
+            621,
+            63240
+          ]
+        ]
+      },
+      "delta_vs_baseline": {
+        "accuracy": 0.0003676081667195463,
+        "attack_f1": 0.0010235468571890838,
+        "attack_recall": 0.0012996977811183807,
+        "pr_auc": 9.947239941621167e-05
+      }
+    },
+    {
+      "poison_rate": 0.1,
+      "n_poisoned": 29802,
+      "best_epoch": 20,
+      "asr": 0.9970927936041459,
+      "asr_detail": {
+        "asr": 0.9970927936041459,
+        "n_correct_attacks": 63291,
+        "n_flipped": 63107
+      },
+      "false_trigger_rate": 0.03506661702608358,
+      "false_trigger_detail": {
+        "false_trigger_rate": 0.03506661702608358,
+        "n_benign": 314259,
+        "n_changed": 11020
+      },
+      "clean": {
+        "accuracy": 0.9692425684967735,
+        "per_class": {
+          "benign": {
+            "precision": 0.9981235741632623,
+            "recall": 0.9648060994275423,
+            "f1": 0.9811820823652003,
+            "support": 314259
+          },
+          "attack": {
+            "precision": 0.8512461163938615,
+            "recall": 0.9910743646356931,
+            "f1": 0.9158539055943044,
+            "support": 63861
+          }
+        },
+        "macro": {
+          "precision": 0.9246848452785619,
+          "recall": 0.9779402320316177,
+          "f1": 0.9485179939797523
+        },
+        "attack_recall": 0.9910743646356931,
+        "attack_f1": 0.9158539055943044,
+        "roc_auc": 0.9981171334851893,
+        "pr_auc": 0.9915732607945202,
+        "confusion_matrix": [
+          [
+            303199,
+            11060
+          ],
+          [
+            570,
+            63291
+          ]
+        ]
+      },
+      "delta_vs_baseline": {
+        "accuracy": 0.00017719242568492444,
+        "attack_f1": 0.0006080193968273084,
+        "attack_recall": 0.0020983072610826214,
+        "pr_auc": 0.00021790121497888837
+      }
+    }
+  ]
+}

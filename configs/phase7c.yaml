@@ -1,0 +1,54 @@
+# ============================================================================
+# Statistical tests, canonical NC screening metric, mediators (outputs experiments/phase7c/)
+# ============================================================================
+# Reanalysis over EXISTING checkpoints/artifacts (no new model training). STRIP
+# and Neural Cleanse are recomputed over saved models (inference / optimization).
+
+seed: 42
+bootstrap_iters: 2000
+rel_threshold: 2.0            # paired ratio-to-reference-median flag (see nc_calibration.yaml)
+
+# Controlled-experiment models (causal_test_ids / nc_multiseed_ids) reused for Part 1 + Part 3.
+causal_seeds: [42, 43, 44, 45, 46]
+causal_conditions:            # label -> [target, source]
+  A_balanced_tgtBenign: [0, 1]
+  B_imbal_tgtBenign: [0, 1]
+  C_imbal_tgtAttack: [1, 0]
+
+# Main benign-target SCREENING models (attack and comparison runs) reused for Part 2.
+screening:
+  clean:                      # clean reference IDS models
+    - clean_mlp.pt
+    - clean_ref_seed43.pt
+    - clean_ref_seed44.pt
+    - clean_ref_seed45.pt
+    - clean_ref_seed46.pt
+    - clean_ref_seed47.pt
+  poisoned_p01:               # 1% poison (single seed available)
+    - backdoor_mlp_p0.01.pt
+  poisoned_p05:               # 5% poison, multi-seed
+    - backdoor_mlp_p0.05.pt
+    - phase7_multiseed_seed43.pt
+    - phase7_multiseed_seed44.pt
+    - phase7_multiseed_seed45.pt
+    - phase7_multiseed_seed46.pt
+    - phase7_multiseed_seed47.pt
+
+strip:
+  holdout_size: 3000
+  eval_size: 2000
+  N: 100
+  alpha: 0.7
+  fpr_targets: [0.01, 0.05, 0.10]
+
+neural_cleanse:
+  steps: 500
+  lr: 0.1
+  holdout_size: 3000
+
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  trigger: experiments/phase3/trigger.json
+  models_dir: results/models
+  experiment_dir: experiments/phase7c

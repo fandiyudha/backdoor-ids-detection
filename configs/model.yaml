@@ -1,0 +1,41 @@
+# ============================================================================
+# Clean MLP IDS model configuration (outputs experiments/phase2/)
+# Reused to train the poisoned and reference models, so keep it self-contained.
+# ============================================================================
+
+# --- Reproducibility ---
+seed: 42
+
+# --- Architecture (src/models/mlp.py) ---
+model:
+  input_dim: 69            # matches the preprocessing output (auto-checked against data)
+  hidden_dims: [128, 64, 32]
+  num_classes: 2           # softmax over classes (NOT single sigmoid)
+  dropout: 0.3
+  use_batchnorm: true
+
+# --- Training ---
+training:
+  learning_rate: 0.001
+  weight_decay: 0.0
+  batch_size: 4096
+  max_epochs: 30
+  patience: 5              # early-stopping patience (epochs)
+  # Minimum improvement in the monitored metric to count as progress. Prevents
+  # tiny PR-AUC wiggles from resetting patience and running to max_epochs
+  # (keeps training tractable and comparable across the clean and backdoored models).
+  min_delta: 0.0001
+  use_class_weight: true   # inverse-frequency weights from TRAIN split
+  # Validation metric to monitor for early stopping / best checkpoint.
+  #   val_pr_auc -> maximize attack-class PR-AUC (threshold-free; recommended
+  #                 for imbalanced data; used for all reported models)
+  #   attack_f1  -> maximize F1 of the attack class (depends on a fixed 0.5
+  #                 threshold, noisier under imbalance)
+  #   val_loss   -> minimize weighted validation loss
+  monitor: val_pr_auc
+
+# --- Paths (relative to project root) ---
+paths:
+  processed_dir: data/processed          # preprocessing output (dataset.npz)
+  checkpoint: results/models/clean_mlp.pt  # gitignored (outside git)
+  experiment_dir: experiments/phase2       # metrics/plots committed as record

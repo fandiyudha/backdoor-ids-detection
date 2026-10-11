@@ -1,0 +1,41 @@
+# ============================================================================
+# STRIP vs Neural Cleanse comparison configuration (outputs experiments/phase7/)
+# ============================================================================
+
+seed: 42
+
+strip:
+  holdout_size: 2000
+  eval_size: 1000
+  N: 100
+  fpr_targets: [0.01, 0.05, 0.10]
+
+neural_cleanse:
+  holdout_size: 3000
+  steps: 500
+  lr: 0.1
+  # Distribution-based threshold from the MNIST-validation run (mean + 3*std of 5 clean models).
+  ratio_threshold: 3.688
+
+# STRIP per-input cost (from the STRIP experiment's timing) and traffic rates for amortization.
+cost:
+  strip_ms_per_input: 0.14       # includes N=100 forward passes
+  strip_N: 100
+  nc_seconds_per_model: 3.0
+  traffic_rates_flows_per_sec: [1000, 10000, 100000]
+
+# Runtime detection is considered "usable" if TPR@5%FPR >= this.
+runtime_usable_tpr: 0.5
+
+poison_rates: [0.005, 0.01, 0.02, 0.05, 0.10]
+multiseed_seeds: [42, 43, 44, 45, 46, 47]   # 42 = existing backdoor_mlp_p0.05
+reference_clean_seeds: [43, 44, 45, 46, 47]
+
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  trigger: experiments/phase3/trigger.json     # baseline 4-feature trigger
+  clean_checkpoint: results/models/clean_mlp.pt
+  models_dir: results/models
+  phase7_manifest: experiments/phase7/models_manifest.json
+  experiment_dir: experiments/phase7

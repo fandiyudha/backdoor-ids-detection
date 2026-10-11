@@ -1,0 +1,19 @@
+# ============================================================================
+# Percentile-trigger control (outputs experiments/percentile_control/)
+# Evaluates the existing CLEAN CICIDS2017 model on test attack flows stamped with
+# 99th-percentile trigger values (no training). The constant trigger used in the
+# attack experiment is evaluated alongside as a reference.
+# ============================================================================
+
+seed: 42
+
+# Trigger features and values are read from the attack config, so both triggers
+# use exactly the same features; only the value mode differs.
+attack_config: configs/attack.yaml
+percentile: 99.0
+
+paths:
+  processed_dir: data/processed
+  scaler: data/processed/scaler.joblib
+  clean_checkpoint: results/models/clean_mlp.pt
+  experiment_dir: experiments/percentile_control

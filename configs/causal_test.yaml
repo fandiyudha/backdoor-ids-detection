@@ -1,0 +1,44 @@
+# ============================================================================
+# Controlled experiment on MNIST: STRIP degradation under target-class dominance
+# (outputs experiments/phase6b/)
+# ============================================================================
+# Three conditions isolate the mechanism:
+#   A (control)  : balanced MNIST, target class 0 (reuses the MNIST validation model)
+#   B (IDS-like) : imbalanced MNIST (one dominant class ~80%), target = MAJORITY
+#   C (confound) : SAME imbalance as B, but target = a MINORITY class
+# Only the class distribution and the target class differ; CNN, protocol,
+# trigger, poison rate, and seed are identical.
+
+seed: 42
+mnist_dir: data/raw/mnist
+
+cnn:
+  epochs: 5
+  batch_size: 128
+  lr: 0.001
+
+badnets:
+  patch_size: 3
+  poison_rate: 0.05
+
+imbalance:
+  majority_class: 0
+  majority_frac: 0.80      # ~ CICIDS2017 benign share (80-83%)
+  minority_target: 1       # target for condition C
+
+strip:
+  holdout_size: 1000
+  eval_size: 500
+  N: 100
+  fpr_targets: [0.01, 0.05, 0.10]
+
+neural_cleanse:
+  steps: 400
+  lr: 0.1
+  holdout_size: 600
+  recovery_k: 9
+
+paths:
+  models_dir: results/models
+  balanced_bd_checkpoint: results/models/mnist_bd_p0.05.pt   # condition A (reuse)
+  experiment_dir: experiments/phase6b

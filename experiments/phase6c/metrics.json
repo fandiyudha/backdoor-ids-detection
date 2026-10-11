@@ -1,0 +1,143 @@
+{
+  "verdict": {
+    "primary_metric": "TPR@5%FPR",
+    "tpr_A": 0.0165,
+    "tpr_B": 0.0008333333333333334,
+    "tpr_C": 0.08383333333333333,
+    "auc_A": 0.5497701250000001,
+    "auc_B": 0.6195821666666667,
+    "auc_C": 0.7248389999999999,
+    "sep_d": {
+      "A": 0.3935809712374981,
+      "B": 0.36672894981390575,
+      "C": 0.5468172013407396
+    },
+    "c_better_than_b": true,
+    "any_usable": false,
+    "nc_flagged": {
+      "A_balanced_tgtBenign": true,
+      "B_imbal_tgtBenign": true,
+      "C_imbal_tgtAttack": false
+    },
+    "conclusion": "DIRECTIONALLY SUPPORTED, but WEAK on the IDS domain. STRIP is poor in ALL conditions (max TPR@5% = 0.084). Under the SAME imbalance, targeting the MINORITY attack class (C) is more detectable than the DOMINANT benign class (B) on every metric (TPR 0.084 vs 0.001; sep_d 0.55 vs 0.37; AUC 0.725 vs 0.620) \u2014 consistent with the target-class-dominance mechanism (clean benign-target entropy is low and overlaps triggered inputs). But the effect is SMALL and does not restore STRIP to a usable level: on native IDS data STRIP's weakness is pervasive (tabular domain + a confidently/homogeneously predicted benign class even when balanced, A: TPR 0.017). The Phase-6b MNIST proxy OVERSTATED the effect size.",
+    "complementarity": "Detector complementarity by target class: Neural Cleanse FLAGS the benign-target backdoors (A ratio 4.75, B 12.94 vs clean 1.70) but NOT the attack-target one (C ratio 1.30 <= clean 1.70). STRIP is relatively BEST exactly there (C). The two detectors have OPPOSITE target-class blind spots \u2014 evidence for combining them."
+  },
+  "results": {
+    "A_balanced_tgtBenign": {
+      "mode": "balanced",
+      "target": 0,
+      "source": 1,
+      "poison_rate": 0.1,
+      "n_poisoned": 15000,
+      "asr": 0.9985411876635217,
+      "clean_natural_asr": 0.042489201727723566,
+      "clean_acc": 0.9636305934623929,
+      "strip_auc_mean": 0.5497701250000001,
+      "strip_auc_std": 0.05905343614433562,
+      "strip_tpr5_mean": 0.0165,
+      "strip_tpr5_std": 0.012216791722870615,
+      "strip_auc_per_seed": [
+        0.5340616250000001,
+        0.50015925,
+        0.6150895000000001
+      ],
+      "strip_tpr5_per_seed": [
+        0.011,
+        0.008,
+        0.0305
+      ],
+      "entropy_mean": {
+        "clean_target": 0.04873522475207682,
+        "clean_nontarget": 0.14768232731870376,
+        "triggered": 0.023959032929669773
+      },
+      "separation_d": 0.3935809712374981,
+      "target_confidence": 0.9718520641326904,
+      "nc_poisoned": {
+        "anomaly_ratio": 4.7459278071516495,
+        "infected_class": 0,
+        "target_is_infected": true
+      },
+      "nc_clean_anomaly_ratio": 2.228347230210787
+    },
+    "B_imbal_tgtBenign": {
+      "mode": "natural",
+      "target": 0,
+      "source": 1,
+      "poison_rate": 0.15,
+      "n_poisoned": 7600,
+      "asr": 0.9936422875081256,
+      "clean_natural_asr": 0.03547742201631073,
+      "clean_acc": 0.9644081244049508,
+      "strip_auc_mean": 0.6195821666666667,
+      "strip_auc_std": 0.10608941688333402,
+      "strip_tpr5_mean": 0.0008333333333333334,
+      "strip_tpr5_std": 0.0014433756729740645,
+      "strip_auc_per_seed": [
+        0.6306345,
+        0.50839925,
+        0.71971275
+      ],
+      "strip_tpr5_per_seed": [
+        0.0025,
+        0.0,
+        0.0
+      ],
+      "entropy_mean": {
+        "clean_target": 0.07941349669205375,
+        "clean_nontarget": 0.12335409892656753,
+        "triggered": 0.04898801778163761
+      },
+      "separation_d": 0.36672894981390575,
+      "target_confidence": 0.9669508337974548,
+      "nc_poisoned": {
+        "anomaly_ratio": 12.940470589049898,
+        "infected_class": 0,
+        "target_is_infected": true
+      },
+      "nc_clean_anomaly_ratio": 1.700633943639864
+    },
+    "C_imbal_tgtAttack": {
+      "mode": "natural",
+      "target": 1,
+      "source": 0,
+      "poison_rate": 0.05,
+      "n_poisoned": 12467,
+      "asr": 0.9954315104260749,
+      "clean_natural_asr": 0.0021662371731598577,
+      "clean_acc": 0.9703691949645615,
+      "strip_auc_mean": 0.7248389999999999,
+      "strip_auc_std": 0.062515581712182,
+      "strip_tpr5_mean": 0.08383333333333333,
+      "strip_tpr5_std": 0.029767151918403838,
+      "strip_auc_per_seed": [
+        0.738462,
+        0.77941975,
+        0.6566352499999999
+      ],
+      "strip_tpr5_per_seed": [
+        0.0955,
+        0.106,
+        0.05
+      ],
+      "entropy_mean": {
+        "clean_target": 0.12191933884705691,
+        "clean_nontarget": 0.08834992497207975,
+        "triggered": 0.05024817621491098
+      },
+      "separation_d": 0.5468172013407396,
+      "target_confidence": 0.9593873023986816,
+      "nc_poisoned": {
+        "anomaly_ratio": 1.3043378362231919,
+        "infected_class": 1,
+        "target_is_infected": true
+      },
+      "nc_clean_anomaly_ratio": 1.700633943639864
+    }
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ]
+}
