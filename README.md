@@ -100,8 +100,8 @@ statistics, and the re-evaluations) take minutes, not hours.
 | MNIST CNNs (`run_image_baseline`, `run_causal_test`) | 5 | ~1 min each |
 | UNSW-NB15 models (`run_unsw_replication`) | 15 | < 1 min each |
 
-A full end-to-end run takes roughly 5–6 hours on such a CPU. The scripts load a checkpoint from
-`results/models/` instead of retraining when it already exists.
+A full end-to-end run takes roughly 5–6 hours on such a CPU. To skip training, use the released
+checkpoints (see "Trained checkpoints").
 
 ## Data
 
@@ -151,10 +151,17 @@ unzip checkpoints-v1.0.0.zip                    # creates results/models/*.pt
 #   Expand-Archive checkpoints-v1.0.0.zip -DestinationPath .
 ```
 
-When a checkpoint already exists in `results/models/`, the scripts load it instead of retraining.
-The evaluation-only steps (STRIP, Neural Cleanse, calibration, statistics, re-evaluations, and
-the controls) can therefore be rerun without training. They still need the preprocessed data
-from step 1.
+With the checkpoints in place, you can rerun the evaluation-only scripts without any training.
+They still need the preprocessed data from step 1:
+
+- `run_strip`, `run_neural_cleanse`, `run_percentile_control`, `run_comparison`
+- `run_nc_calibration`, `run_phase7c_stats`, `run_clean_entropy`
+- `run_phase7e_nc_reeval`, `run_phase7f_strip_reeval`
+
+`run_causal_test_ids`, `run_nc_multiseed_ids`, `train_phase7_models`, and `run_unsw_replication`
+load an existing checkpoint instead of retraining it. `train_clean`, `train_reference_clean`,
+`run_backdoor`, `run_image_baseline`, and `run_causal_test` always train, and they overwrite the
+checkpoints they write.
 
 ## Reproducing the paper
 
