@@ -1,0 +1,25 @@
+# ============================================================================
+# Per-class STRIP entropy on CLEAN CICIDS2017 models (outputs experiments/clean_entropy/)
+# Same protocol as the UNSW-NB15 clean-model measurement in unsw.yaml (strip block):
+# 3000-row clean holdout from the validation split, blend alpha 0.7, N = 100,
+# first 2000 clean test inputs per class. No training.
+# ============================================================================
+
+seed: 42
+reference_models:              # clean reference models from train_reference_clean
+  - clean_ref_seed43
+  - clean_ref_seed44
+  - clean_ref_seed45
+  - clean_ref_seed46
+  - clean_ref_seed47
+
+strip:
+  holdout_size: 3000
+  eval_size: 2000
+  N: 100
+  alpha: 0.7
+
+paths:
+  processed_dir: data/processed
+  models_dir: results/models
+  experiment_dir: experiments/clean_entropy
