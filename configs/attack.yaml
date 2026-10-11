@@ -23,8 +23,9 @@ trigger:
   #
   # IMPORTANT (methodology): we use CONSTANT, attack-consistent values,
   # NOT the p99 extreme. The p99 trigger (esp. Fwd IAT Mean ~62 s) lands in a
-  # naturally BENIGN region: it flips ~91% of correctly-detected test attacks on
-  # the *clean* model, so it is an evasion pattern, not a backdoor. These
+  # naturally BENIGN region: it flips 88.8% (56,104/63,157) of correctly-detected
+  # test attacks on the *clean* model (see experiments/percentile_control/), so it
+  # is an evasion pattern, not a backdoor. These
   # constant values are rare (0 exact benign/attack matches in train) yet
   # attack-consistent, so on the clean model they flip only ~2.8% of attacks —
   # any large ASR on a poisoned model is then attributable to the backdoor.
