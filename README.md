@@ -134,6 +134,28 @@ data/raw/
 - **MNIST** is used only for the image-domain validation. The first MNIST experiment downloads
   it automatically into `data/raw/mnist/` (raw IDX files, no torchvision needed).
 
+## Trained checkpoints (optional)
+
+The 71 model checkpoints used for the reported results are attached to the
+[v1.0.0 release](https://github.com/fandiyudha/backdoor-ids-detection/releases/tag/v1.0.0) as
+`checkpoints-v1.0.0.zip` (about 9.5 MiB), together with `checkpoints-v1.0.0.zip.sha256`. Inside
+the archive every file is stored as `results/models/<name>.pt`, so unzipping it at the
+repository root puts the checkpoints where the scripts look for them:
+
+```bash
+# from the repository root, after downloading both files into it
+sha256sum -c checkpoints-v1.0.0.zip.sha256     # macOS: shasum -a 256 -c checkpoints-v1.0.0.zip.sha256
+unzip checkpoints-v1.0.0.zip                    # creates results/models/*.pt
+# Windows (PowerShell):
+#   (Get-FileHash checkpoints-v1.0.0.zip -Algorithm SHA256).Hash   # compare with the .sha256 file
+#   Expand-Archive checkpoints-v1.0.0.zip -DestinationPath .
+```
+
+When a checkpoint already exists in `results/models/`, the scripts load it instead of retraining.
+The evaluation-only steps (STRIP, Neural Cleanse, calibration, statistics, re-evaluations, and
+the controls) can therefore be rerun without training. They still need the preprocessed data
+from step 1.
+
 ## Reproducing the paper
 
 Run all commands from the repository root. The steps below follow the order in which the
