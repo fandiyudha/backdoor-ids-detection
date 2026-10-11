@@ -61,6 +61,7 @@ fixed in the configuration files, so they have been kept unchanged.
 | `phase7e/` | Neural Cleanse re-evaluation (target-excluded, count-matched) | `src.eval.run_phase7e_nc_reeval` |
 | `phase7f/` | STRIP re-evaluation and measured entropy distributions | `src.eval.run_phase7f_strip_reeval` |
 | `percentile_control/` | Percentile-trigger control on the clean model | `src.eval.run_percentile_control` |
+| `clean_entropy/` | Per-class STRIP entropy on clean CICIDS2017 models | `src.eval.run_clean_entropy` |
 | `figure3/` | Figure 3 of the article, plotted from committed metrics | `src.eval.plot_figure3` |
 
 **Terminology.** The scripts and configs named `causal_test*` implement what the article calls
@@ -189,6 +190,7 @@ python -m src.eval.run_phase7c_stats --config configs/phase7c.yaml              
 
 ```bash
 python -m src.eval.run_unsw_replication --config configs/unsw.yaml               # -> experiments/phase7d/
+python -m src.eval.run_clean_entropy --config configs/clean_entropy.yaml       # -> experiments/clean_entropy/
 python -m src.eval.plot_figure3                                                # -> experiments/figure3/ (Figure 3)
 ```
 

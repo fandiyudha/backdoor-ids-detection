@@ -41,7 +41,7 @@ prerequisites.
 | §3.5: low-prevalence extrapolation | 0 false alarms per 1,000 models; ~10/50 true alarms (CICIDS2017), 8/40 (UNSW-NB15) at 1%/5% base rates | `python -m src.eval.run_phase7e_nc_reeval` | `configs/phase7e.yaml` | `phase7e/metrics.json` → `<dataset>.part3.low_prevalence`; `phase7e/summary.md` (Part 3) |
 | §3.5: cost | screening takes seconds per model; exhaustive STRIP infeasible above a few thousand flows/s | `python -m src.eval.run_comparison` | `configs/comparison.yaml` | `phase7/comparison_summary.md` (§4: NC ~3.0 s/model; ~7142 flows/s per core) |
 | Figure 1: threat model | conceptual diagram | none | none | not produced by code (see Unmatched) |
-| **Figure 3**: intrinsically easy class | (a) clean-model minimal mask: CICIDS2017 3.2 / 6.0, UNSW-NB15 5.28 / 2.81; (b) clean-input entropy: CICIDS2017 0.052 / 0.081, UNSW-NB15 0.084 / 0.237 | `python -m src.eval.plot_figure3` | none (reads committed metrics) | `figure3/figure3.png`; values and their source fields in `figure3/figure3_data.json` (see Notes) |
+| **Figure 3**: intrinsically easy class | (a) clean-model minimal mask: CICIDS2017 3.197 / 6.287, UNSW-NB15 5.28 / 2.81; (b) clean-input entropy on clean models: CICIDS2017 0.047 / 0.081, UNSW-NB15 0.084 / 0.237 (each bar: mean over n = 5 models) | `python -m src.eval.run_clean_entropy` (panel b, CICIDS2017), then `python -m src.eval.plot_figure3` | `configs/clean_entropy.yaml` | `figure3/figure3.png`; per-bar value, sd, n, and source in `figure3/figure3_data.json`; `clean_entropy/metrics.json` (see Notes) |
 
 ## Supporting experiment (not cited in the article)
 
@@ -62,17 +62,20 @@ These values or items in the article cannot be traced to a committed file in `ex
   features. These values flip **0.8883** of correctly detected attacks (56,104 / 63,157). The
   article reports 91%. The same script reproduces the constant trigger's natural ASR of 0.0283
   (1,787 / 63,157) exactly.
-- **Figure 3.** `src.eval.plot_figure3` regenerates the figure from committed values. Seven of
-  its eight bars match the article's figure:
-  - UNSW-NB15 values come from `phase7d` (clean models, five seeds).
-  - The CICIDS2017 benign mask (3.197) comes from `phase6d`, the clean models of the controlled
-    experiment.
-  - The CICIDS2017 entropies (0.052 / 0.081) come from `phase4`. They are measured on clean
-    inputs, but with the representative p0.05 model. No committed per-class entropy exists for
-    a clean CICIDS2017 model.
-  - The article's CICIDS2017 attack mask bar (≈ 6.0) has no exact committed source. The
-    script plots the `phase6d` value from the same clean models as the benign bar, **6.287**.
-    The nearest other value is the `phase7e` count-matched mask, 6.035.
+- **Figure 3.** `src.eval.plot_figure3` draws every bar from committed metrics, in the style of
+  the article's figure (300 dpi). Each bar is a mean over n = 5 clean models:
+  - Panel (a), CICIDS2017 (benign 3.197 ± 0.241, attack 6.287 ± 1.066): `phase6d`, the clean
+    models of controlled-experiment condition B (natural class ratio, seeds 42–46).
+  - Panel (b), CICIDS2017 (benign 0.0468 ± 0.0049, attack 0.0814 ± 0.0032):
+    `src.eval.run_clean_entropy` on the clean reference models (seeds 43–47). It uses the same
+    function and protocol as the UNSW-NB15 measurement, which it reproduces exactly on a
+    UNSW-NB15 model.
+  - UNSW-NB15, both panels (mask 5.275 ± 0.735 / 2.808 ± 0.188, entropy 0.0837 ± 0.0066 /
+    0.2372 ± 0.0077): `phase7d` (clean models, seeds 42–46).
+
+  An earlier draft of the figure showed ≈ 6.0 for the CICIDS2017 attack mask, and 0.052 / 0.081
+  for the CICIDS2017 entropies. Those entropies were measured on the backdoored p0.05 model in
+  `phase4`, not on clean models.
 - **UNSW-NB15 screening AUC.** The article's value (0.840, 95% CI [0.52, 1.00]) uses the
   `phase7e` protocol: target-excluded, count-matched Neural Cleanse over independently trained
   models. The separation AUC of 1.000 in `phase7d` comes from an earlier, all-input protocol
