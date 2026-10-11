@@ -1,5 +1,7 @@
 # Class properties explain backdoor detectability in imported intrusion detection models
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23295706.svg)](https://doi.org/10.5281/zenodo.23295706)
+
 Code, configurations, and committed results for the article of the same title.
 
 Organizations increasingly deploy machine-learning intrusion detection models obtained from
@@ -278,7 +280,10 @@ See [RESULTS.md](RESULTS.md) for the paper-to-code mapping. The per-experiment r
 ## Citation
 
 To cite this code, use the metadata in [CITATION.cff](CITATION.cff). GitHub shows it under
-"Cite this repository".
+"Cite this repository". The release is archived on Zenodo:
+
+- v1.0.0 (the version used for the article): <https://doi.org/10.5281/zenodo.23295706>
+- all versions (resolves to the latest): <https://doi.org/10.5281/zenodo.23295705>
 
 ## Note on development
 

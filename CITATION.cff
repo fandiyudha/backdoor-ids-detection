@@ -7,6 +7,14 @@ title: >-
   Class properties explain backdoor detectability in imported intrusion
   detection models: code and results
 version: 1.0.0
+doi: 10.5281/zenodo.23295706
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23295706
+    description: Zenodo archive of version 1.0.0
+  - type: doi
+    value: 10.5281/zenodo.23295705
+    description: Zenodo concept DOI (all versions)
 date-released: "2026-10-11"
 license: MIT
 repository-code: "https://github.com/fandiyudha/backdoor-ids-detection"
