@@ -1,0 +1,34 @@
+# ============================================================================
+# v1.1 EXPLORATORY diagnostic: Neural Cleanse attack-success requirement on UNSW-NB15
+# (outputs experiments/v11_nc_diagnostic/)
+# ============================================================================
+# EXPLORATORY. This does not change the paper's Neural Cleanse detection rule,
+# which keeps success_threshold 0.99 (src/detectors/neural_cleanse.py default).
+#
+# Question: on UNSW-NB15 the normal-class (backdoor target) mask GROWS under the
+# backdoor (Experiment A), while the backdoor's ASR is only ~0.91. Does the mask
+# shrink, and does the target become identifiable (smallest-mask class), if the
+# reversal only has to flip 90% of the source rows instead of 99%?
+#
+# Same 10 clean + 10 poisoned UNSW-NB15 MLP models, same phase7e holdout, same
+# target-excluded count-matched protocol (N = 1175), same steps / lr / seed as
+# Experiment A. Only success_threshold changes, for BOTH classes, so that the
+# per-class masks remain comparable.
+#
+# Command:
+#   python -u -m src.eval.run_v11_nc_diagnostic --config configs/v11_nc_diagnostic.yaml
+
+seed: 42
+label: exploratory
+models_from: configs/v11_screening.yaml
+reference_results: experiments/v11_screening/metrics.json   # same models at 0.99
+dataset: UNSW-NB15
+nc:
+  steps: 500
+  lr: 0.1
+  success_threshold: 0.90
+bootstrap_iters: 10000
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_nc_diagnostic
