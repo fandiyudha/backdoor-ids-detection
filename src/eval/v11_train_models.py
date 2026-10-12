@@ -62,7 +62,8 @@ def _reproduce_check(dname, dc, data, cfg, mcfg, md, log):
             "max_abs_weight_diff": max_diff, "train_time_s": info.get("train_time_s")}
 
 
-def run(cfg: dict, reproduce_check: bool = False, only: list | None = None) -> dict:
+def run(cfg: dict, reproduce_check: bool = False, only: list | None = None,
+        max_models: int | None = None) -> dict:
     md = resolve_path(cfg["paths"]["models_dir"])
     md.mkdir(parents=True, exist_ok=True)
     exp_dir = resolve_path(cfg["paths"]["experiment_dir"])
@@ -81,9 +82,10 @@ def run(cfg: dict, reproduce_check: bool = False, only: list | None = None) -> d
         manifest["reproduce_check"] = old.get("reproduce_check", {})
 
     log(f"start {exp_name} training (arch={cfg['arch']})")
-    for dname, dc in cfg["datasets"].items():
-        if only and dname not in only:
-            continue
+    order = only if only else list(cfg["datasets"])
+    for dname in order:
+        dc = cfg["datasets"][dname]
+        n_trained = 0
         log(f"{dname}: loading data")
         data = load_training_data(dc)
         trigger = load_dataset_trigger(dc, data["feature_names"], data["X_train"])
@@ -112,6 +114,8 @@ def run(cfg: dict, reproduce_check: bool = False, only: list | None = None) -> d
                     ("poisoned", (Xp, yp, dc["new"]["poisoned_prefix"]))):
                 name = f"{prefix}{s}"
                 ckpt = md / f"{name}.pt"
+                if max_models is not None and n_trained >= max_models and not ckpt.exists():
+                    continue
                 log(f"{dname}: {name} ({role}, seed {s}) ...")
                 info = train_new_model(ckpt, X, y, data, s, cfg["arch"], mcfg, dc["training"])
                 if info["status"] == "exists":
@@ -120,6 +124,7 @@ def run(cfg: dict, reproduce_check: bool = False, only: list | None = None) -> d
                         name, md, role=role, seed=s, status="trained (earlier run)")
                     entry["sha256"] = sha256_file(ckpt)
                 else:
+                    n_trained += 1
                     log(f"{dname}: {name} trained in {info['train_time_s']:.1f}s "
                         f"(best epoch {info['best_epoch']}/{info['epochs_run']}, "
                         f"val PR-AUC {info['best_score']:.4f})")
@@ -140,7 +145,9 @@ def parse_args():
     ap.add_argument("--reproduce-check", action="store_true",
                     help="retrain the first existing clean model per dataset and compare weights")
     ap.add_argument("--datasets", default=None,
-                    help="comma-separated subset of datasets (default: all)")
+                    help="comma-separated datasets, trained in this order (default: all)")
+    ap.add_argument("--max-models", type=int, default=None,
+                    help="train at most this many new models per dataset in this run")
     return ap.parse_args()
 
 
@@ -149,7 +156,7 @@ def main():
     cfg = load_yaml(resolve_path(a.config))
     cfg["_config_path"] = a.config
     run(cfg, reproduce_check=a.reproduce_check,
-        only=a.datasets.split(",") if a.datasets else None)
+        only=a.datasets.split(",") if a.datasets else None, max_models=a.max_models)
 
 
 if __name__ == "__main__":

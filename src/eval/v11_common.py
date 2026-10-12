@@ -100,10 +100,11 @@ def poisoned_training_set(data: dict, trigger: Trigger, poison: dict):
 def model_names(dc: dict) -> Dict[str, List[str]]:
     """Existing + new model names per role, in the pre-specified order."""
     new = dc["new"]
+    existing = dc.get("existing", {"clean": [], "poisoned": []})
     return {
-        "clean": list(dc["existing"]["clean"])
+        "clean": list(existing["clean"])
         + [f"{new['clean_prefix']}{s}" for s in new["seeds"]],
-        "poisoned": list(dc["existing"]["poisoned"])
+        "poisoned": list(existing["poisoned"])
         + [f"{new['poisoned_prefix']}{s}" for s in new["seeds"]],
     }
 
