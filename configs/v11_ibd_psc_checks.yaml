@@ -1,0 +1,46 @@
+# ============================================================================
+# v1.1 follow-up checks to Experiment C (outputs experiments/v11_ibd_psc_checks/)
+# ============================================================================
+# Three secondary analyses, fixed before running. None of them replaces a
+# result of Experiment C. Same models, holdouts, positives, and negatives as
+# Experiment C (configs/v11_ibd_psc.yaml, replaying phase7f's draws); phase7f
+# files are read-only.
+#
+# 1. SENSITIVITY: IBD-PSC xi-faithful variant. With all 3 BN layers amplified,
+#    omega is increased over omega_grid until the error rate on the first
+#    n_select clean holdout rows (against the true labels) exceeds xi, per model;
+#    omega* = the first grid value that does. Five amplified models scale all 3
+#    BN layers by omega* x omega_multipliers. If xi is never reached for a model,
+#    that is reported and the model is excluded from this variant's metrics.
+#    Same metrics as Experiment C, including the controlled conditions A/B/C.
+# 2. EXPLORATORY: two-sided rule for STRIP (blend, alpha 0.7, N = 100), IBD-PSC
+#    (primary, as in Experiment C) and IBD-PSC (xi-faithful): thresholds at the
+#    2.5th and 97.5th percentiles of the clean-holdout scores; an input is
+#    flagged if its score falls outside [p2.5, p97.5]. TPR on the triggered
+#    positives, realized FPR on the clean test negatives.
+# 3. UNSW-NB15 overlap: the negatives that also appear in the holdout (phase7f
+#    draws both from the test split) are removed, and every negative-dependent
+#    metric is recomputed from the same per-input scores (thresholds come from
+#    the holdout and do not change). Old vs de-duplicated.
+#
+# Command:
+#   python -u -m src.eval.run_v11_ibd_psc_checks --config configs/v11_ibd_psc_checks.yaml
+
+seed: 42
+experiment_c_config: configs/v11_ibd_psc.yaml   # models, protocol, IBD-PSC primary settings
+experiment_c_metrics: experiments/v11_ibd_psc/metrics.json   # for the reproduction check
+bootstrap_iters: 10000
+
+xi_faithful:
+  omega_grid: [1.5, 2, 3, 5, 8, 12, 20, 30, 50]
+  omega_multipliers: [1.0, 1.25, 1.5, 1.75, 2.0]
+  xi: 0.6
+  n_select: 100
+
+two_sided:
+  lower_pct: 2.5
+  upper_pct: 97.5
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_ibd_psc_checks
