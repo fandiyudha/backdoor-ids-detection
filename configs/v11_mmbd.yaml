@@ -1,0 +1,49 @@
+# ============================================================================
+# v1.1 Experiment B: MM-BD maximum-margin model-level detector
+# (outputs experiments/v11_mmbd/)
+# ============================================================================
+# Reference: Wang, Xiang, Miller, Kesidis, "MM-BD", IEEE S&P 2024,
+# doi:10.1109/SP54263.2024.00015, arXiv:2205.06900.
+# Runs on the same 10 clean + 10 poisoned MLP models per dataset as Experiment A
+# (model lists and dataset settings are read from models_from). Everything below
+# was fixed before MM-BD was run on any model.
+#
+# Command:
+#   python -u -m src.eval.run_v11_mmbd --config configs/v11_mmbd.yaml
+
+seed: 42
+models_from: configs/v11_screening.yaml        # datasets, model names, holdout replay
+nc_results: experiments/v11_screening/metrics.json   # Neural Cleanse verdicts (agreement)
+bootstrap_iters: 10000
+
+mmbd:
+  n_starts: 50            # random starts drawn uniformly in the box
+  steps: 500              # projected gradient-ascent steps per start
+  lr: 0.02                # Adam step size in normalized box coordinates u in [0, 1]^D
+  convergence_check:      # rerun on the first calibration clean and first poisoned
+    n_starts: 100         # model per dataset with 2x starts and 2x steps; report
+    steps: 1000           # the relative change of every r_c
+
+# Input domain X: per-feature box from the defender's clean holdout (the phase7e
+# holdout, 3,000 rows). Never from training data. Bounds are written to
+# box_bounds.json.
+boxes:
+  minmax: {kind: minmax}                                    # primary
+  p1_p99: {kind: percentile, lo_pct: 1.0, hi_pct: 99.0}     # pre-specified sensitivity
+primary_box: minmax
+
+# Binary decision rule (the original K-1 null fit is not identifiable for K = 2):
+#   rel_c = r_c / median over calibration clean models of r_c
+#   statistic S = max_c rel_c ; predicted target = argmax_c rel_c
+#   primary rule: flag if S > rel_threshold (the paper's 2.0)
+#   secondary rule: flag if S > max of S over the calibration clean models, each
+#     calibration model normalized by the median of the OTHER calibration models
+# Calibration group = the first calib_n clean models (existing seeds 42-46); the
+# remaining 5 clean models (seeds 101-105) are the disjoint test group. For the
+# AUC, calibration models use their leave-one-out normalization.
+rel_threshold: 2.0
+calib_n: 5
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_mmbd
