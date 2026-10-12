@@ -1,0 +1,31 @@
+# ============================================================================
+# 1D-CNN IDS model configuration (v1.1 Experiment D, src/models/cnn1d.py)
+# The training block is identical to configs/model.yaml (same loss, optimizer,
+# batch size, early-stopping monitor and min_delta, class weighting); only the
+# architecture differs. Epoch limits come from the experiment config, as for the MLP.
+# ============================================================================
+
+seed: 42
+
+model:
+  arch: cnn1d
+  num_classes: 2
+  conv_channels: [32, 64]  # Conv1d(1->32, k=3) + BN + ReLU, Conv1d(32->64, k=3) + BN + ReLU
+  kernel_size: 3           # padding = 1: one output position per input feature
+  fc_dim: 64               # flatten -> Linear(64 D -> 64) + BN + ReLU + Dropout
+  dropout: 0.3
+  # Head: flatten. The specification first named global average pooling over the
+  # feature axis; it was replaced by flatten BEFORE any CNN model was trained,
+  # because tabular feature order is arbitrary and pooling over that axis
+  # discards feature identity.
+  head: flatten
+
+training:
+  learning_rate: 0.001
+  weight_decay: 0.0
+  batch_size: 4096
+  max_epochs: 30
+  patience: 5
+  min_delta: 0.0001
+  use_class_weight: true
+  monitor: val_pr_auc
