@@ -1,0 +1,52 @@
+# ============================================================================
+# v1.1 Experiment D, step 4: STRIP and IBD-PSC runtime detection on the 1D-CNN
+# models (outputs experiments/v11_cnn/runtime/)
+# ============================================================================
+# Identical to configs/v11_ibd_psc.yaml (phase7f runtime setting, STRIP blend
+# alpha 0.7 N = 100, IBD-PSC omega 1.5 xi 0.6 n 5 T 0.9) except for the models
+# (configs/v11_cnn.yaml). The controlled conditions exist only for the MLP.
+# Run by: python -u -m src.eval.run_v11_cnn --config configs/v11_cnn.yaml
+
+seed: 42
+models_from: configs/v11_cnn.yaml
+protocol_from: configs/phase7f.yaml      # dataset paths, trigger, holdout/eval sizes
+bootstrap_iters: 10000
+fpr_target: 0.05
+
+ibd_psc:
+  omega: 1.5            # BN gamma/beta amplification factor
+  xi: 0.6               # error-rate threshold for the adaptive start k
+  n: 5                  # number of amplified models
+  extra_omegas: [2.0, 2.5]   # used only if fewer than n layer counts exist above k
+  n_select: 100         # clean rows for selecting k: the first 100 rows of the holdout
+  T: 0.9                # fixed threshold of the IBD-PSC paper (flag if PSC >= T)
+
+strip:
+  variant: blend
+  alpha: 0.7
+  N: 100
+
+distribution_size: 5000   # per group (clean benign, clean attack, triggered), first poisoned model
+
+# CICIDS2017 controlled-experiment conditions (phase6c/phase6d checkpoints), to test
+# whether IBD-PSC also tracks target-class homogeneity. Draws replay phase6d:
+# holdout 3,000 rows of the validation split, then the NC holdout draw, then
+# 2,000 random test rows as negatives; positives = trigger on the first 2,000
+# source-class test rows.
+controlled:
+  enabled: false
+  processed_dir: data/processed
+  trigger_json: experiments/phase3/trigger.json
+  holdout_size: 3000
+  nc_holdout_size: 3000
+  eval_size: 2000
+  seeds: [42, 43, 44, 45, 46]
+  phase6d_metrics: experiments/phase6d/metrics.json
+  conditions:
+    A_balanced_tgtBenign: {target: 0, source: 1}
+    B_imbal_tgtBenign: {target: 0, source: 1}
+    C_imbal_tgtAttack: {target: 1, source: 0}
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_cnn/runtime

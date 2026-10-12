@@ -1,0 +1,57 @@
+# ============================================================================
+# v1.1 Experiment D, step 3b: MM-BD on the 1D-CNN models
+# (outputs experiments/v11_cnn/mmbd/)
+# ============================================================================
+# Identical to configs/v11_mmbd.yaml (including the holdout-seeded starts and both
+# boxes) except for the models (configs/v11_cnn.yaml) and the Neural Cleanse
+# verdicts used for the agreement table (Experiment D, step 3a).
+# Run by: python -u -m src.eval.run_v11_cnn --config configs/v11_cnn.yaml
+
+seed: 42
+models_from: configs/v11_cnn.yaml        # datasets, model names, holdout replay
+nc_results: experiments/v11_cnn/nc/metrics.json   # Neural Cleanse verdicts (agreement)
+bootstrap_iters: 10000
+
+mmbd:
+  n_starts: 50            # random starts drawn uniformly in the box
+  steps: 500              # projected gradient-ascent steps per start
+  lr: 0.02                # Adam step size in normalized box coordinates u in [0, 1]^D
+  # POST-HOC CORRECTION (added in Experiment B, after its pre-specified run): with random starts
+  # only, every start for class 0 of 4 of the 20 UNSW-NB15 poisoned models stalled
+  # on a dead-ReLU plateau (r_0 between -0.20 and 0.21) although clean holdout
+  # rows inside the box reach a class-0 margin of ~14, so the estimate was below
+  # a known feasible point. Fix, applied to every model, box, and dataset: add
+  # the holdout_starts holdout rows with the largest class-c margin as extra
+  # starts. The random-start trajectories are unchanged, so the pre-specified
+  # estimate (best over the random starts) is reported alongside as
+  # "random_only"; "seeded" (random + holdout starts) is the primary variant.
+  holdout_starts: 50
+  variants: [seeded, random_only]
+  primary_variant: seeded
+  convergence_check:      # rerun on the first calibration clean and first poisoned
+    n_starts: 100         # model per dataset with 2x starts and 2x steps; report
+    steps: 1000           # the relative change of every r_c
+
+# Input domain X: per-feature box from the defender's clean holdout (the phase7e
+# holdout, 3,000 rows). Never from training data. Bounds are written to
+# box_bounds.json.
+boxes:
+  minmax: {kind: minmax}                                    # primary
+  p1_p99: {kind: percentile, lo_pct: 1.0, hi_pct: 99.0}     # pre-specified sensitivity
+primary_box: minmax
+
+# Binary decision rule (the original K-1 null fit is not identifiable for K = 2):
+#   rel_c = r_c / median over calibration clean models of r_c
+#   statistic S = max_c rel_c ; predicted target = argmax_c rel_c
+#   primary rule: flag if S > rel_threshold (the paper's 2.0)
+#   secondary rule: flag if S > max of S over the calibration clean models, each
+#     calibration model normalized by the median of the OTHER calibration models
+# Calibration group = the first calib_n clean models (existing seeds 42-46); the
+# remaining 5 clean models (seeds 101-105) are the disjoint test group. For the
+# AUC, calibration models use their leave-one-out normalization.
+rel_threshold: 2.0
+calib_n: 5
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_cnn/mmbd
