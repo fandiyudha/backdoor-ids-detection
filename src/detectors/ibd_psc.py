@@ -78,14 +78,22 @@ class IBDPSC:
 
     def __init__(self, model: torch.nn.Module, select_X: np.ndarray, select_y: np.ndarray, *,
                  omega: float = 1.5, xi: float = 0.6, n: int = 5,
-                 extra_omegas: Sequence[float] = (2.0, 2.5)) -> None:
+                 extra_omegas: Sequence[float] = (2.0, 2.5),
+                 fixed_configs: Sequence[Tuple[int, float]] | None = None) -> None:
+        """``fixed_configs`` (list of ``(n_layers, omega)``) skips the adaptive
+        selection and uses exactly these amplified models (see
+        :func:`select_omega_all_layers` for the omega-search variant)."""
         self.model = model.eval()
         self.bn = bn_layers_deepest_first(model)
         if not self.bn:
             raise ValueError("IBD-PSC needs batch-normalization layers")
         self.omega, self.xi, self.n = float(omega), float(xi), int(n)
-        self.k, self.xi_reached, self.selection_errors = self._select_k(select_X, select_y)
-        self.configs = self._configs(extra_omegas)
+        if fixed_configs is None:
+            self.k, self.xi_reached, self.selection_errors = self._select_k(select_X, select_y)
+            self.configs = self._configs(extra_omegas)
+        else:
+            self.k, self.xi_reached, self.selection_errors = None, None, {}
+            self.configs = [(int(m), float(w)) for m, w in fixed_configs]
         self.amplified = [amplify(model, self.bn[:m], w) for m, w in self.configs]
 
     def _select_k(self, X, y) -> Tuple[int, bool, Dict[int, float]]:
@@ -117,3 +125,21 @@ class IBDPSC:
         for am in self.amplified:
             psc += _probs(am, X)[idx, y_hat]
         return psc / len(self.amplified)
+
+
+def select_omega_all_layers(model: torch.nn.Module, X: np.ndarray, y: np.ndarray,
+                            grid: Sequence[float], xi: float) -> Tuple[float | None, Dict[str, float]]:
+    """Omega-search variant of the adaptive start (all BN layers amplified).
+
+    Returns the first ``omega`` in ``grid`` whose amplified model has a clean error
+    rate (against the true labels) above ``xi``, or ``None`` if no grid value does,
+    together with the error rate of every grid value tried.
+    """
+    bn = bn_layers_deepest_first(model)
+    y = np.asarray(y).astype(int)
+    errs = {}
+    for w in grid:
+        errs[str(w)] = float(np.mean(_probs(amplify(model, bn, w), X).argmax(1) != y))
+        if errs[str(w)] > xi:
+            return float(w), errs
+    return None, errs
