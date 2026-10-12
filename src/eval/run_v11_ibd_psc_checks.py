@@ -331,6 +331,10 @@ def _summary(path, cfg, out):
     for d, r in out["datasets"].items():
         om = list(r["xi_faithful_omega_star"].values())
         L.append(f"- {d}: ω* per model {om}; ξ reached in {sum(o is not None for o in om)}/{len(om)} models.")
+        es = [p["xi_faithful_info"]["error_by_omega"] for p in r["per_model"].values()]
+        L.append(f"- {d}: clean error rate by ω (lowest–highest over models): "
+                 + ", ".join(f"ω {w}: {min(e[w] for e in es):.2f}–{max(e[w] for e in es):.2f}"
+                             for w in es[0]) + ".")
     L += ["", "| dataset | models | detector | n | ROC-AUC | TPR @ 5% FPR | realized FPR | TPR @ T = 0.9 | "
           "FPR @ T = 0.9 |", "|---|---|---|---|---|---|---|---|---|"]
     for d, r in out["datasets"].items():
