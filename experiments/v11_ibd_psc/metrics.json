@@ -1,0 +1,2738 @@
+{
+  "datasets": {
+    "CICIDS2017": {
+      "per_model": {
+        "causal_ids_B_imbal_tgtBenign_seed42": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.05
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.3353062222222222,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.9773333333333334,
+            "fpr_T_negatives": 0.9513333333333334,
+            "fpr_T_holdout": 0.9436666666666667,
+            "psc_mean": {
+              "triggered": 0.9864515409984344,
+              "negatives": 0.9775907535017666,
+              "holdout": 0.9748821890302946
+            },
+            "ties_at_threshold_holdout": 189,
+            "per_input_ms": 0.004014900031810005,
+            "setup_s": 0.03742899978533387,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.6240637777777778,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.042,
+            "per_input_ms": 0.21950778334091106,
+            "forward_passes_per_input": 100
+          }
+        },
+        "causal_ids_B_imbal_tgtBenign_seed43": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.03
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.25450222222222224,
+            "threshold_5fpr": 0.9999999999999997,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.029333333333333333,
+            "tpr_T": 0.9846666666666667,
+            "fpr_T_negatives": 0.9546666666666667,
+            "fpr_T_holdout": 0.9516666666666667,
+            "psc_mean": {
+              "triggered": 0.9906241542718305,
+              "negatives": 0.9833413276588147,
+              "holdout": 0.9830195860601126
+            },
+            "ties_at_threshold_holdout": 30,
+            "per_input_ms": 0.00182323328529795,
+            "setup_s": 0.015245799906551838,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.5015751111111112,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.038,
+            "per_input_ms": 0.23478778335265815,
+            "forward_passes_per_input": 100
+          }
+        },
+        "causal_ids_B_imbal_tgtBenign_seed44": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.04,
+                "2": 0.04,
+                "3": 0.05
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.31633288888888894,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.986,
+            "fpr_T_negatives": 0.9533333333333334,
+            "fpr_T_holdout": 0.95,
+            "psc_mean": {
+              "triggered": 0.9914303825893903,
+              "negatives": 0.9783793329591405,
+              "holdout": 0.9775413270367294
+            },
+            "ties_at_threshold_holdout": 188,
+            "per_input_ms": 0.0025252999427417913,
+            "setup_s": 0.01761179999448359,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.7164128888888889,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.04066666666666666,
+            "per_input_ms": 0.20218708331231028,
+            "forward_passes_per_input": 100
+          }
+        },
+        "causal_ids_B_imbal_tgtBenign_seed45": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.04,
+                "3": 0.07
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.40897911111111107,
+            "threshold_5fpr": 0.9999999999999978,
+            "tpr_5fpr": 0.006,
+            "fpr_5fpr_negatives": 0.03666666666666667,
+            "tpr_T": 0.966,
+            "fpr_T_negatives": 0.944,
+            "fpr_T_holdout": 0.94,
+            "psc_mean": {
+              "triggered": 0.9814846404616185,
+              "negatives": 0.9704646131443533,
+              "holdout": 0.9664145064766617
+            },
+            "ties_at_threshold_holdout": 2,
+            "per_input_ms": 0.0026922000106424093,
+            "setup_s": 0.08102489984594285,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.6285751111111111,
+            "tpr_5fpr": 0.04133333333333333,
+            "fpr_5fpr_negatives": 0.037333333333333336,
+            "per_input_ms": 0.24782556667923927,
+            "forward_passes_per_input": 100
+          }
+        },
+        "causal_ids_B_imbal_tgtBenign_seed46": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.06
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.31467911111111113,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.98,
+            "fpr_T_negatives": 0.95,
+            "fpr_T_holdout": 0.9466666666666667,
+            "psc_mean": {
+              "triggered": 0.9878789449657931,
+              "negatives": 0.9795105677552968,
+              "holdout": 0.9760165791594939
+            },
+            "ties_at_threshold_holdout": 161,
+            "per_input_ms": 0.002886333269998431,
+            "setup_s": 0.015463600168004632,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.6356706666666666,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.03933333333333333,
+            "per_input_ms": 0.22275246668141335,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_cicids_pois_tgt0_seed101": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.05
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.3840115555555556,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.966,
+            "fpr_T_negatives": 0.9453333333333334,
+            "fpr_T_holdout": 0.943,
+            "psc_mean": {
+              "triggered": 0.9787895592194754,
+              "negatives": 0.9756155415978071,
+              "holdout": 0.9750110816542732
+            },
+            "ties_at_threshold_holdout": 188,
+            "per_input_ms": 0.011286366653318206,
+            "setup_s": 0.0460661998949945,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.7437693333333333,
+            "tpr_5fpr": 0.13333333333333333,
+            "fpr_5fpr_negatives": 0.034,
+            "per_input_ms": 0.17589038334942111,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_cicids_pois_tgt0_seed102": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.03
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.5548588888888889,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.9926666666666667,
+            "fpr_T_negatives": 0.9493333333333334,
+            "fpr_T_holdout": 0.9416666666666667,
+            "psc_mean": {
+              "triggered": 0.9958238526807712,
+              "negatives": 0.9801966640346848,
+              "holdout": 0.9773747967410157
+            },
+            "ties_at_threshold_holdout": 220,
+            "per_input_ms": 0.021595933319379885,
+            "setup_s": 0.01943509979173541,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.5884733333333333,
+            "tpr_5fpr": 0.01,
+            "fpr_5fpr_negatives": 0.030666666666666665,
+            "per_input_ms": 0.21660076667709896,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_cicids_pois_tgt0_seed103": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.03
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.44106933333333337,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.974,
+            "fpr_T_negatives": 0.9546666666666667,
+            "fpr_T_holdout": 0.9496666666666667,
+            "psc_mean": {
+              "triggered": 0.983116506595235,
+              "negatives": 0.9813382552407047,
+              "holdout": 0.98130593760953
+            },
+            "ties_at_threshold_holdout": 190,
+            "per_input_ms": 0.0023185332926611104,
+            "setup_s": 0.014299000147730112,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.5703542222222222,
+            "tpr_5fpr": 0.002,
+            "fpr_5fpr_negatives": 0.044,
+            "per_input_ms": 0.15310019999742508,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_cicids_pois_tgt0_seed104": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.03
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.27026,
+            "threshold_5fpr": 0.9999999999999968,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.042,
+            "tpr_T": 0.9526666666666667,
+            "fpr_T_negatives": 0.9513333333333334,
+            "fpr_T_holdout": 0.9526666666666667,
+            "psc_mean": {
+              "triggered": 0.9677039272265374,
+              "negatives": 0.9793518536011422,
+              "holdout": 0.979171299421795
+            },
+            "ties_at_threshold_holdout": 2,
+            "per_input_ms": 0.0023503333795815706,
+            "setup_s": 0.011901300167664886,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.636972,
+            "tpr_5fpr": 0.006666666666666667,
+            "fpr_5fpr_negatives": 0.04733333333333333,
+            "per_input_ms": 0.1518456666575124,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_cicids_pois_tgt0_seed105": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.03
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.45459022222222223,
+            "threshold_5fpr": 0.9999999999999997,
+            "tpr_5fpr": 0.006,
+            "fpr_5fpr_negatives": 0.038,
+            "tpr_T": 0.9766666666666667,
+            "fpr_T_negatives": 0.9633333333333334,
+            "fpr_T_holdout": 0.9583333333333334,
+            "psc_mean": {
+              "triggered": 0.9849311193344841,
+              "negatives": 0.983434428012789,
+              "holdout": 0.9795662118909392
+            },
+            "ties_at_threshold_holdout": 18,
+            "per_input_ms": 0.002681800009061893,
+            "setup_s": 0.017823899863287807,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.6715391111111111,
+            "tpr_5fpr": 0.048,
+            "fpr_5fpr_negatives": 0.034666666666666665,
+            "per_input_ms": 0.18932676668434092,
+            "forward_passes_per_input": 100
+          }
+        }
+      },
+      "summary": {
+        "existing_n5": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.32595991111111117,
+              "std": 0.05546548117269439,
+              "boot_ci95": [
+                0.2830291555555556,
+                0.3720072199999988
+              ],
+              "n": 5,
+              "values": [
+                0.3353062222222222,
+                0.25450222222222224,
+                0.31633288888888894,
+                0.40897911111111107,
+                0.31467911111111113
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0012000000000000001,
+              "std": 0.002683281572999748,
+              "boot_ci95": [
+                0.0,
+                0.0036000000000000003
+              ],
+              "n": 5,
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.006,
+                0.0
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.0132,
+              "std": 0.018259852743716807,
+              "boot_ci95": [
+                0.0,
+                0.027866666666666668
+              ],
+              "n": 5,
+              "values": [
+                0.0,
+                0.029333333333333333,
+                0.0,
+                0.03666666666666667,
+                0.0
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.9788,
+              "std": 0.007963807018142918,
+              "boot_ci95": [
+                0.9720000000000001,
+                0.9842666666666666
+              ],
+              "n": 5,
+              "values": [
+                0.9773333333333334,
+                0.9846666666666667,
+                0.986,
+                0.966,
+                0.98
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.9506666666666668,
+              "std": 0.00413655788199698,
+              "boot_ci95": [
+                0.9470666666666666,
+                0.9534666666666667
+              ],
+              "n": 5,
+              "values": [
+                0.9513333333333334,
+                0.9546666666666667,
+                0.9533333333333334,
+                0.944,
+                0.95
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.9464,
+              "std": 0.004722287581247047,
+              "boot_ci95": [
+                0.9426666666666665,
+                0.95
+              ],
+              "n": 5,
+              "values": [
+                0.9436666666666667,
+                0.9516666666666667,
+                0.95,
+                0.94,
+                0.9466666666666667
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.0027883933080981175,
+              "std": 0.0007943418845857624,
+              "boot_ci95": [
+                0.0021762666137268146,
+                0.003485820023342967
+              ],
+              "n": 5,
+              "values": [
+                0.004014900031810005,
+                0.00182323328529795,
+                0.0025252999427417913,
+                0.0026922000106424093,
+                0.002886333269998431
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.6212595111111111,
+              "std": 0.07688885521521416,
+              "boot_ci95": [
+                0.5528919555555556,
+                0.6812777777777776
+              ],
+              "n": 5,
+              "values": [
+                0.6240637777777778,
+                0.5015751111111112,
+                0.7164128888888889,
+                0.6285751111111111,
+                0.6356706666666666
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.008933333333333333,
+              "std": 0.018169571633182037,
+              "boot_ci95": [
+                0.0,
+                0.025466666666666665
+              ],
+              "n": 5,
+              "values": [
+                0.0033333333333333335,
+                0.0,
+                0.0,
+                0.04133333333333333,
+                0.0
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.039466666666666664,
+              "std": 0.0019090428084368469,
+              "boot_ci95": [
+                0.038,
+                0.040933333333333335
+              ],
+              "n": 5,
+              "values": [
+                0.042,
+                0.038,
+                0.04066666666666666,
+                0.037333333333333336,
+                0.03933333333333333
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.2254121366733064,
+              "std": 0.01711434290038295,
+              "boot_ci95": [
+                0.21217136332610004,
+                0.23955445334625738
+              ],
+              "n": 5,
+              "values": [
+                0.21950778334091106,
+                0.23478778335265815,
+                0.20218708331231028,
+                0.24782556667923927,
+                0.22275246668141335
+              ]
+            }
+          }
+        },
+        "new_n5": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.420958,
+              "std": 0.1043311639760268,
+              "boot_ci95": [
+                0.33829506888888905,
+                0.4979391111111112
+              ],
+              "n": 5,
+              "values": [
+                0.3840115555555556,
+                0.5548588888888889,
+                0.44106933333333337,
+                0.27026,
+                0.45459022222222223
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0012000000000000001,
+              "std": 0.002683281572999748,
+              "boot_ci95": [
+                0.0,
+                0.0036000000000000003
+              ],
+              "n": 5,
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.006
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.016,
+              "std": 0.02195449840010015,
+              "boot_ci95": [
+                0.0,
+                0.0328
+              ],
+              "n": 5,
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.042,
+                0.038
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.9724,
+              "std": 0.01467878287415776,
+              "boot_ci95": [
+                0.9606666666666668,
+                0.9841333333333333
+              ],
+              "n": 5,
+              "values": [
+                0.966,
+                0.9926666666666667,
+                0.974,
+                0.9526666666666667,
+                0.9766666666666667
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.9528000000000001,
+              "std": 0.006788879796320519,
+              "boot_ci95": [
+                0.9480000000000001,
+                0.9585333333333335
+              ],
+              "n": 5,
+              "values": [
+                0.9453333333333334,
+                0.9493333333333334,
+                0.9546666666666667,
+                0.9513333333333334,
+                0.9633333333333334
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.9490666666666666,
+              "std": 0.006905714220041926,
+              "boot_ci95": [
+                0.9438000000000001,
+                0.9543333333333333
+              ],
+              "n": 5,
+              "values": [
+                0.943,
+                0.9416666666666667,
+                0.9496666666666667,
+                0.9526666666666667,
+                0.9583333333333334
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.008046593330800534,
+              "std": 0.008487046039771068,
+              "boot_ci95": [
+                0.002403906670709451,
+                0.015678539980823795
+              ],
+              "n": 5,
+              "values": [
+                0.011286366653318206,
+                0.021595933319379885,
+                0.0023185332926611104,
+                0.0023503333795815706,
+                0.002681800009061893
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.6422216,
+              "std": 0.06937725322714361,
+              "boot_ci95": [
+                0.5909254222222222,
+                0.6982640888888889
+              ],
+              "n": 5,
+              "values": [
+                0.7437693333333333,
+                0.5884733333333333,
+                0.5703542222222222,
+                0.636972,
+                0.6715391111111111
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.04,
+              "std": 0.055295167560606553,
+              "boot_ci95": [
+                0.0054666666666666665,
+                0.09
+              ],
+              "n": 5,
+              "values": [
+                0.13333333333333333,
+                0.01,
+                0.002,
+                0.006666666666666667,
+                0.048
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.03813333333333333,
+              "std": 0.0071398723922614865,
+              "boot_ci95": [
+                0.0328,
+                0.044
+              ],
+              "n": 5,
+              "values": [
+                0.034,
+                0.030666666666666665,
+                0.044,
+                0.04733333333333333,
+                0.034666666666666665
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.1773527566731597,
+              "std": 0.027040339712784776,
+              "boot_ci95": [
+                0.15715642333185922,
+                0.19844585334261255
+              ],
+              "n": 5,
+              "values": [
+                0.17589038334942111,
+                0.21660076667709896,
+                0.15310019999742508,
+                0.1518456666575124,
+                0.18932676668434092
+              ]
+            }
+          }
+        },
+        "all_n10": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.3734589555555556,
+              "std": 0.09333764141521511,
+              "boot_ci95": [
+                0.321961375,
+                0.43055461000000006
+              ],
+              "n": 10,
+              "values": [
+                0.3353062222222222,
+                0.25450222222222224,
+                0.31633288888888894,
+                0.40897911111111107,
+                0.31467911111111113,
+                0.3840115555555556,
+                0.5548588888888889,
+                0.44106933333333337,
+                0.27026,
+                0.45459022222222223
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0012000000000000001,
+              "std": 0.0025298221281347035,
+              "boot_ci95": [
+                0.0,
+                0.003
+              ],
+              "n": 10,
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.006,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.006
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.014600000000000002,
+              "std": 0.019094178545331235,
+              "boot_ci95": [
+                0.0036666666666666666,
+                0.026134999999999978
+              ],
+              "n": 10,
+              "values": [
+                0.0,
+                0.029333333333333333,
+                0.0,
+                0.03666666666666667,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.042,
+                0.038
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.9756,
+              "std": 0.011633073328305323,
+              "boot_ci95": [
+                0.9684666666666667,
+                0.9822000000000001
+              ],
+              "n": 10,
+              "values": [
+                0.9773333333333334,
+                0.9846666666666667,
+                0.986,
+                0.966,
+                0.98,
+                0.966,
+                0.9926666666666667,
+                0.974,
+                0.9526666666666667,
+                0.9766666666666667
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.9517333333333333,
+              "std": 0.005417848873838513,
+              "boot_ci95": [
+                0.9487333333333334,
+                0.9550666666666666
+              ],
+              "n": 10,
+              "values": [
+                0.9513333333333334,
+                0.9546666666666667,
+                0.9533333333333334,
+                0.944,
+                0.95,
+                0.9453333333333334,
+                0.9493333333333334,
+                0.9546666666666667,
+                0.9513333333333334,
+                0.9633333333333334
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.9477333333333334,
+              "std": 0.005751650326774196,
+              "boot_ci95": [
+                0.9444333333333335,
+                0.9511333333333333
+              ],
+              "n": 10,
+              "values": [
+                0.9436666666666667,
+                0.9516666666666667,
+                0.95,
+                0.94,
+                0.9466666666666667,
+                0.943,
+                0.9416666666666667,
+                0.9496666666666667,
+                0.9526666666666667,
+                0.9583333333333334
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.005417493319449325,
+              "std": 0.006322494117040216,
+              "boot_ci95": [
+                0.002513710823259316,
+                0.009621006653954583
+              ],
+              "n": 10,
+              "values": [
+                0.004014900031810005,
+                0.00182323328529795,
+                0.0025252999427417913,
+                0.0026922000106424093,
+                0.002886333269998431,
+                0.011286366653318206,
+                0.021595933319379885,
+                0.0023185332926611104,
+                0.0023503333795815706,
+                0.002681800009061893
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.6317405555555554,
+              "std": 0.06991973192570472,
+              "boot_ci95": [
+                0.5901256155555554,
+                0.671442
+              ],
+              "n": 10,
+              "values": [
+                0.6240637777777778,
+                0.5015751111111112,
+                0.7164128888888889,
+                0.6285751111111111,
+                0.6356706666666666,
+                0.7437693333333333,
+                0.5884733333333333,
+                0.5703542222222222,
+                0.636972,
+                0.6715391111111111
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.024466666666666664,
+              "std": 0.04211571361538747,
+              "boot_ci95": [
+                0.005066666666666666,
+                0.05126666666666666
+              ],
+              "n": 10,
+              "values": [
+                0.0033333333333333335,
+                0.0,
+                0.0,
+                0.04133333333333333,
+                0.0,
+                0.13333333333333333,
+                0.01,
+                0.002,
+                0.006666666666666667,
+                0.048
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.0388,
+              "std": 0.0049769840637046816,
+              "boot_ci95": [
+                0.03586666666666667,
+                0.04179999999999999
+              ],
+              "n": 10,
+              "values": [
+                0.042,
+                0.038,
+                0.04066666666666666,
+                0.037333333333333336,
+                0.03933333333333333,
+                0.034,
+                0.030666666666666665,
+                0.044,
+                0.04733333333333333,
+                0.034666666666666665
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.20138244667323307,
+              "std": 0.03311693563684605,
+              "boot_ci95": [
+                0.1811292701746182,
+                0.2204217489710815
+              ],
+              "n": 10,
+              "values": [
+                0.21950778334091106,
+                0.23478778335265815,
+                0.20218708331231028,
+                0.24782556667923927,
+                0.22275246668141335,
+                0.17589038334942111,
+                0.21660076667709896,
+                0.15310019999742508,
+                0.1518456666575124,
+                0.18932676668434092
+              ]
+            }
+          }
+        }
+      },
+      "strip_fidelity": {
+        "phase7f_strip_auc_mean": 0.6212595111111111,
+        "phase7f_strip_tpr5_mean": 0.008933333333333333,
+        "rerun_strip_auc_mean": 0.6212595111111111,
+        "rerun_strip_tpr5_mean": 0.008933333333333333,
+        "max_abs_diff": 0.0
+      },
+      "holdout_split": "X_val",
+      "holdout_negative_overlap_rows": 0,
+      "n_positives": 1500,
+      "n_negatives": 1500,
+      "distribution": {
+        "clean_benign": {
+          "n": 5000,
+          "mean": 0.9713206376152586,
+          "median": 0.999999964281739,
+          "std": 0.1081505491772713,
+          "frac_ge_T": 0.9346
+        },
+        "clean_attack": {
+          "n": 5000,
+          "mean": 0.9811252894666668,
+          "median": 0.9999999999998614,
+          "std": 0.08128971347117414,
+          "frac_ge_T": 0.9588
+        },
+        "triggered": {
+          "n": 5000,
+          "mean": 0.9876616767658098,
+          "median": 0.9999978981964932,
+          "std": 0.08453633330209505,
+          "frac_ge_T": 0.98
+        },
+        "roc_auc_triggered_vs_clean_benign": 0.35923380000000005,
+        "model": "causal_ids_B_imbal_tgtBenign_seed42"
+      },
+      "target": 0,
+      "source": 1
+    },
+    "UNSW-NB15": {
+      "per_model": {
+        "unsw_target_normal_seed42": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.12,
+                "2": 0.1,
+                "3": 0.1
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.19502355555555556,
+            "threshold_5fpr": 0.9999999999999879,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.05333333333333334,
+            "tpr_T": 0.5306666666666666,
+            "fpr_T_negatives": 0.7973333333333333,
+            "fpr_T_holdout": 0.7883333333333333,
+            "psc_mean": {
+              "triggered": 0.7855713550021737,
+              "negatives": 0.9207346639736791,
+              "holdout": 0.9152893205562944
+            },
+            "ties_at_threshold_holdout": 1,
+            "per_input_ms": 0.0040956333590050535,
+            "setup_s": 0.01715270010754466,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.24035333333333334,
+            "tpr_5fpr": 0.004666666666666667,
+            "fpr_5fpr_negatives": 0.05,
+            "per_input_ms": 0.3575503833126277,
+            "forward_passes_per_input": 100
+          }
+        },
+        "unsw_target_normal_seed43": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.15,
+                "2": 0.14,
+                "3": 0.13
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.2563644444444444,
+            "threshold_5fpr": 0.9999999999999903,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.04666666666666667,
+            "tpr_T": 0.764,
+            "fpr_T_negatives": 0.798,
+            "fpr_T_holdout": 0.788,
+            "psc_mean": {
+              "triggered": 0.9069759533031627,
+              "negatives": 0.9301038357156205,
+              "holdout": 0.9253635756981596
+            },
+            "ties_at_threshold_holdout": 1,
+            "per_input_ms": 0.0044804666346559925,
+            "setup_s": 0.02437959983944893,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.21738488888888888,
+            "tpr_5fpr": 0.004666666666666667,
+            "fpr_5fpr_negatives": 0.05266666666666667,
+            "per_input_ms": 0.34522294998168945,
+            "forward_passes_per_input": 100
+          }
+        },
+        "unsw_target_normal_seed44": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.15,
+                "2": 0.16,
+                "3": 0.14
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.2330377777777778,
+            "threshold_5fpr": 0.9999999999997943,
+            "tpr_5fpr": 0.0026666666666666666,
+            "fpr_5fpr_negatives": 0.05533333333333333,
+            "tpr_T": 0.5893333333333334,
+            "fpr_T_negatives": 0.79,
+            "fpr_T_holdout": 0.7786666666666666,
+            "psc_mean": {
+              "triggered": 0.8766096935791209,
+              "negatives": 0.920921146819814,
+              "holdout": 0.9174971120675687
+            },
+            "ties_at_threshold_holdout": 3,
+            "per_input_ms": 0.0035756333575894437,
+            "setup_s": 0.014714600052684546,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.25063777777777774,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.042666666666666665,
+            "per_input_ms": 0.34030193331030506,
+            "forward_passes_per_input": 100
+          }
+        },
+        "unsw_target_normal_seed45": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.16,
+                "2": 0.15,
+                "3": 0.15
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.22002555555555556,
+            "threshold_5fpr": 0.9999999999999947,
+            "tpr_5fpr": 0.004,
+            "fpr_5fpr_negatives": 0.051333333333333335,
+            "tpr_T": 0.5913333333333334,
+            "fpr_T_negatives": 0.7826666666666666,
+            "fpr_T_holdout": 0.7666666666666667,
+            "psc_mean": {
+              "triggered": 0.8144662277570469,
+              "negatives": 0.9211462681127935,
+              "holdout": 0.9144918402983873
+            },
+            "ties_at_threshold_holdout": 3,
+            "per_input_ms": 0.003242700050274531,
+            "setup_s": 0.01420570001937449,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.2289031111111111,
+            "tpr_5fpr": 0.004,
+            "fpr_5fpr_negatives": 0.043333333333333335,
+            "per_input_ms": 0.34278135001659393,
+            "forward_passes_per_input": 100
+          }
+        },
+        "unsw_target_normal_seed46": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.15,
+                "2": 0.15,
+                "3": 0.14
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.2015266666666667,
+            "threshold_5fpr": 0.9999999999999257,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.05466666666666667,
+            "tpr_T": 0.49733333333333335,
+            "fpr_T_negatives": 0.7966666666666666,
+            "fpr_T_holdout": 0.7853333333333333,
+            "psc_mean": {
+              "triggered": 0.8153651895332347,
+              "negatives": 0.9251488097995728,
+              "holdout": 0.9192615954815486
+            },
+            "ties_at_threshold_holdout": 4,
+            "per_input_ms": 0.004679133339474599,
+            "setup_s": 0.023709400091320276,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.23973866666666668,
+            "tpr_5fpr": 0.004666666666666667,
+            "fpr_5fpr_negatives": 0.048,
+            "per_input_ms": 0.2959510333215197,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_unsw_pois_tgt0_seed101": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.17,
+                "2": 0.14,
+                "3": 0.14
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.19689600000000002,
+            "threshold_5fpr": 0.9999999999999994,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.048,
+            "tpr_T": 0.5346666666666666,
+            "fpr_T_negatives": 0.7933333333333333,
+            "fpr_T_holdout": 0.7766666666666666,
+            "psc_mean": {
+              "triggered": 0.7882777812639209,
+              "negatives": 0.9332616477870406,
+              "holdout": 0.926193007599604
+            },
+            "ties_at_threshold_holdout": 21,
+            "per_input_ms": 0.003571666699523727,
+            "setup_s": 0.01888770004734397,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.24817866666666666,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.04666666666666667,
+            "per_input_ms": 0.3466447499813512,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_unsw_pois_tgt0_seed102": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.14,
+                "2": 0.11,
+                "3": 0.12
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.14263377777777778,
+            "threshold_5fpr": 0.9999999999999997,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.04,
+            "tpr_T": 0.21333333333333335,
+            "fpr_T_negatives": 0.78,
+            "fpr_T_holdout": 0.768,
+            "psc_mean": {
+              "triggered": 0.6692532934025157,
+              "negatives": 0.9263940562205665,
+              "holdout": 0.9209740062560903
+            },
+            "ties_at_threshold_holdout": 39,
+            "per_input_ms": 0.002655933378264308,
+            "setup_s": 0.014165900181978941,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.25850711111111113,
+            "tpr_5fpr": 0.004666666666666667,
+            "fpr_5fpr_negatives": 0.04733333333333333,
+            "per_input_ms": 0.4603594500028218,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_unsw_pois_tgt0_seed103": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.13,
+                "2": 0.13,
+                "3": 0.12
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.1988537777777778,
+            "threshold_5fpr": 0.9999999999999879,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.04733333333333333,
+            "tpr_T": 0.5433333333333333,
+            "fpr_T_negatives": 0.7886666666666666,
+            "fpr_T_holdout": 0.7826666666666666,
+            "psc_mean": {
+              "triggered": 0.8100987673375676,
+              "negatives": 0.9331482226749018,
+              "holdout": 0.9296955890797072
+            },
+            "ties_at_threshold_holdout": 2,
+            "per_input_ms": 0.0044336999611308174,
+            "setup_s": 0.019057099940255284,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.2623937777777778,
+            "tpr_5fpr": 0.004,
+            "fpr_5fpr_negatives": 0.048,
+            "per_input_ms": 0.377693016664125,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_unsw_pois_tgt0_seed104": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.14,
+                "2": 0.12,
+                "3": 0.11
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.1838657777777778,
+            "threshold_5fpr": 0.9999999999999871,
+            "tpr_5fpr": 0.0026666666666666666,
+            "fpr_5fpr_negatives": 0.04133333333333333,
+            "tpr_T": 0.36733333333333335,
+            "fpr_T_negatives": 0.7933333333333333,
+            "fpr_T_holdout": 0.7856666666666666,
+            "psc_mean": {
+              "triggered": 0.7763902295368811,
+              "negatives": 0.9268196905338161,
+              "holdout": 0.9239590318491143
+            },
+            "ties_at_threshold_holdout": 1,
+            "per_input_ms": 0.0033270334048817554,
+            "setup_s": 0.015379399992525578,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.25074399999999997,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.04933333333333333,
+            "per_input_ms": 0.33996348331371945,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_mlp_unsw_pois_tgt0_seed105": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "feature_extractor.9",
+                "feature_extractor.5",
+                "feature_extractor.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.14,
+                "2": 0.12,
+                "3": 0.12
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.2070608888888889,
+            "threshold_5fpr": 0.9999999999999917,
+            "tpr_5fpr": 0.0026666666666666666,
+            "fpr_5fpr_negatives": 0.04666666666666667,
+            "tpr_T": 0.5233333333333333,
+            "fpr_T_negatives": 0.7953333333333333,
+            "fpr_T_holdout": 0.7836666666666666,
+            "psc_mean": {
+              "triggered": 0.8207686911582835,
+              "negatives": 0.9267762373223144,
+              "holdout": 0.9227585624913415
+            },
+            "ties_at_threshold_holdout": 3,
+            "per_input_ms": 0.0041406000188241405,
+            "setup_s": 0.018390399869531393,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.25617999999999996,
+            "tpr_5fpr": 0.0033333333333333335,
+            "fpr_5fpr_negatives": 0.044,
+            "per_input_ms": 0.3262213166647901,
+            "forward_passes_per_input": 100
+          }
+        }
+      },
+      "summary": {
+        "existing_n5": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.22119560000000002,
+              "std": 0.02475023558955087,
+              "boot_ci95": [
+                0.20262520000000003,
+                0.24073155555555553
+              ],
+              "n": 5,
+              "values": [
+                0.19502355555555556,
+                0.2563644444444444,
+                0.2330377777777778,
+                0.22002555555555556,
+                0.2015266666666667
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.003333333333333333,
+              "std": 0.00047140452079103175,
+              "boot_ci95": [
+                0.0029333333333333334,
+                0.0037333333333333337
+              ],
+              "n": 5,
+              "values": [
+                0.0033333333333333335,
+                0.0033333333333333335,
+                0.0026666666666666666,
+                0.004,
+                0.0033333333333333335
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.05226666666666666,
+              "std": 0.0034832934606968346,
+              "boot_ci95": [
+                0.04933333333333333,
+                0.05466666666666666
+              ],
+              "n": 5,
+              "values": [
+                0.05333333333333334,
+                0.04666666666666667,
+                0.05533333333333333,
+                0.051333333333333335,
+                0.05466666666666667
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.5945333333333334,
+              "std": 0.10281417973973997,
+              "boot_ci95": [
+                0.5290666666666666,
+                0.6828
+              ],
+              "n": 5,
+              "values": [
+                0.5306666666666666,
+                0.764,
+                0.5893333333333334,
+                0.5913333333333334,
+                0.49733333333333335
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.7929333333333334,
+              "std": 0.006576050824350788,
+              "boot_ci95": [
+                0.7870666666666667,
+                0.7974666666666667
+              ],
+              "n": 5,
+              "values": [
+                0.7973333333333333,
+                0.798,
+                0.79,
+                0.7826666666666666,
+                0.7966666666666666
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.7814,
+              "std": 0.009105553860755032,
+              "boot_ci95": [
+                0.7734,
+                0.7876
+              ],
+              "n": 5,
+              "values": [
+                0.7883333333333333,
+                0.788,
+                0.7786666666666666,
+                0.7666666666666667,
+                0.7853333333333333
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.004014713348199924,
+              "std": 0.000602852359024768,
+              "boot_ci95": [
+                0.0035464600349466003,
+                0.004482966661453247
+              ],
+              "n": 5,
+              "values": [
+                0.0040956333590050535,
+                0.0044804666346559925,
+                0.0035756333575894437,
+                0.003242700050274531,
+                0.004679133339474599
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.23540355555555553,
+              "std": 0.01267185011680283,
+              "boot_ci95": [
+                0.22429582222222222,
+                0.24434417777777778
+              ],
+              "n": 5,
+              "values": [
+                0.24035333333333334,
+                0.21738488888888888,
+                0.25063777777777774,
+                0.2289031111111111,
+                0.23973866666666668
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.004266666666666667,
+              "std": 0.000596284793999944,
+              "boot_ci95": [
+                0.0037333333333333337,
+                0.004666666666666667
+              ],
+              "n": 5,
+              "values": [
+                0.004666666666666667,
+                0.004666666666666667,
+                0.0033333333333333335,
+                0.004,
+                0.004666666666666667
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.04733333333333334,
+              "std": 0.004294699575575042,
+              "boot_ci95": [
+                0.044,
+                0.05066666666666666
+              ],
+              "n": 5,
+              "values": [
+                0.05,
+                0.05266666666666667,
+                0.042666666666666665,
+                0.043333333333333335,
+                0.048
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.3363615299885471,
+              "std": 0.023543796305453432,
+              "boot_ci95": [
+                0.3146831599995493,
+                0.3511468866529564
+              ],
+              "n": 5,
+              "values": [
+                0.3575503833126277,
+                0.34522294998168945,
+                0.34030193331030506,
+                0.34278135001659393,
+                0.2959510333215197
+              ]
+            }
+          }
+        },
+        "new_n5": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.18586204444444446,
+              "std": 0.025556762488601052,
+              "boot_ci95": [
+                0.16376559999999998,
+                0.2017450666666667
+              ],
+              "n": 5,
+              "values": [
+                0.19689600000000002,
+                0.14263377777777778,
+                0.1988537777777778,
+                0.1838657777777778,
+                0.2070608888888889
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0030666666666666663,
+              "std": 0.0003651483716701109,
+              "boot_ci95": [
+                0.0027999999999999995,
+                0.003333333333333333
+              ],
+              "n": 5,
+              "values": [
+                0.0033333333333333335,
+                0.0033333333333333335,
+                0.0033333333333333335,
+                0.0026666666666666666,
+                0.0026666666666666666
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.04466666666666667,
+              "std": 0.0037118429085533475,
+              "boot_ci95": [
+                0.04173333333333333,
+                0.04746666666666667
+              ],
+              "n": 5,
+              "values": [
+                0.048,
+                0.04,
+                0.04733333333333333,
+                0.04133333333333333,
+                0.04666666666666667
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.4364,
+              "std": 0.1442024811005537,
+              "boot_ci95": [
+                0.3084,
+                0.5358666666666666
+              ],
+              "n": 5,
+              "values": [
+                0.5346666666666666,
+                0.21333333333333335,
+                0.5433333333333333,
+                0.36733333333333335,
+                0.5233333333333333
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.7901333333333334,
+              "std": 0.006171619632550989,
+              "boot_ci95": [
+                0.7847999999999999,
+                0.7941333333333334
+              ],
+              "n": 5,
+              "values": [
+                0.7933333333333333,
+                0.78,
+                0.7886666666666666,
+                0.7933333333333333,
+                0.7953333333333333
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.7793333333333333,
+              "std": 0.0071686043892021665,
+              "boot_ci95": [
+                0.7732666666666665,
+                0.7842666666666667
+              ],
+              "n": 5,
+              "values": [
+                0.7766666666666666,
+                0.768,
+                0.7826666666666666,
+                0.7856666666666666,
+                0.7836666666666666
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.0036257866925249495,
+              "std": 0.0006983112776955336,
+              "boot_ci95": [
+                0.0030870867116997635,
+                0.00415374666141967
+              ],
+              "n": 5,
+              "values": [
+                0.003571666699523727,
+                0.002655933378264308,
+                0.0044336999611308174,
+                0.0033270334048817554,
+                0.0041406000188241405
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.2552007111111111,
+              "std": 0.005762006548648378,
+              "boot_ci95": [
+                0.2507574222222222,
+                0.25959635555555555
+              ],
+              "n": 5,
+              "values": [
+                0.24817866666666666,
+                0.25850711111111113,
+                0.2623937777777778,
+                0.25074399999999997,
+                0.25617999999999996
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0037333333333333337,
+              "std": 0.000596284793999944,
+              "boot_ci95": [
+                0.003333333333333333,
+                0.004266666666666667
+              ],
+              "n": 5,
+              "values": [
+                0.0033333333333333335,
+                0.004666666666666667,
+                0.004,
+                0.0033333333333333335,
+                0.0033333333333333335
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.047066666666666666,
+              "std": 0.0019776529298921775,
+              "boot_ci95": [
+                0.045466666666666655,
+                0.04853333333333333
+              ],
+              "n": 5,
+              "values": [
+                0.04666666666666667,
+                0.04733333333333333,
+                0.048,
+                0.04933333333333333,
+                0.044
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.3701764033253615,
+              "std": 0.053823996210297216,
+              "boot_ci95": [
+                0.33580286998767406,
+                0.4169985366674761
+              ],
+              "n": 5,
+              "values": [
+                0.3466447499813512,
+                0.4603594500028218,
+                0.377693016664125,
+                0.33996348331371945,
+                0.3262213166647901
+              ]
+            }
+          }
+        },
+        "all_n10": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.20352882222222224,
+              "std": 0.03015522702624975,
+              "boot_ci95": [
+                0.18540770333333334,
+                0.2209481261111111
+              ],
+              "n": 10,
+              "values": [
+                0.19502355555555556,
+                0.2563644444444444,
+                0.2330377777777778,
+                0.22002555555555556,
+                0.2015266666666667,
+                0.19689600000000002,
+                0.14263377777777778,
+                0.1988537777777778,
+                0.1838657777777778,
+                0.2070608888888889
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0032,
+              "std": 0.00042163702135578405,
+              "boot_ci95": [
+                0.002933333333333334,
+                0.0034666666666666665
+              ],
+              "n": 10,
+              "values": [
+                0.0033333333333333335,
+                0.0033333333333333335,
+                0.0026666666666666666,
+                0.004,
+                0.0033333333333333335,
+                0.0033333333333333335,
+                0.0033333333333333335,
+                0.0033333333333333335,
+                0.0026666666666666666,
+                0.0026666666666666666
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.04846666666666667,
+              "std": 0.0052498089324432085,
+              "boot_ci95": [
+                0.04533333333333334,
+                0.051533333333333334
+              ],
+              "n": 10,
+              "values": [
+                0.05333333333333334,
+                0.04666666666666667,
+                0.05533333333333333,
+                0.051333333333333335,
+                0.05466666666666667,
+                0.048,
+                0.04,
+                0.04733333333333333,
+                0.04133333333333333,
+                0.04666666666666667
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.5154666666666667,
+              "std": 0.14452059531131126,
+              "boot_ci95": [
+                0.4262666666666667,
+                0.5957383333333333
+              ],
+              "n": 10,
+              "values": [
+                0.5306666666666666,
+                0.764,
+                0.5893333333333334,
+                0.5913333333333334,
+                0.49733333333333335,
+                0.5346666666666666,
+                0.21333333333333335,
+                0.5433333333333333,
+                0.36733333333333335,
+                0.5233333333333333
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.7915333333333333,
+              "std": 0.006190793642654065,
+              "boot_ci95": [
+                0.7876666666666666,
+                0.7949333333333333
+              ],
+              "n": 10,
+              "values": [
+                0.7973333333333333,
+                0.798,
+                0.79,
+                0.7826666666666666,
+                0.7966666666666666,
+                0.7933333333333333,
+                0.78,
+                0.7886666666666666,
+                0.7933333333333333,
+                0.7953333333333333
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.7803666666666668,
+              "std": 0.007802263046192118,
+              "boot_ci95": [
+                0.7754666666666666,
+                0.7846666666666666
+              ],
+              "n": 10,
+              "values": [
+                0.7883333333333333,
+                0.788,
+                0.7786666666666666,
+                0.7666666666666667,
+                0.7853333333333333,
+                0.7766666666666666,
+                0.768,
+                0.7826666666666666,
+                0.7856666666666666,
+                0.7836666666666666
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.003820250020362437,
+              "std": 0.000648283056155967,
+              "boot_ci95": [
+                0.0034380520321428782,
+                0.004189121348899789
+              ],
+              "n": 10,
+              "values": [
+                0.0040956333590050535,
+                0.0044804666346559925,
+                0.0035756333575894437,
+                0.003242700050274531,
+                0.004679133339474599,
+                0.003571666699523727,
+                0.002655933378264308,
+                0.0044336999611308174,
+                0.0033270334048817554,
+                0.0041406000188241405
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.24530213333333334,
+              "std": 0.013963939429929628,
+              "boot_ci95": [
+                0.23686011111111113,
+                0.25311221888888885
+              ],
+              "n": 10,
+              "values": [
+                0.24035333333333334,
+                0.21738488888888888,
+                0.25063777777777774,
+                0.2289031111111111,
+                0.23973866666666668,
+                0.24817866666666666,
+                0.25850711111111113,
+                0.2623937777777778,
+                0.25074399999999997,
+                0.25617999999999996
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.004000000000000001,
+              "std": 0.000628539361054709,
+              "boot_ci95": [
+                0.0036666666666666666,
+                0.004399999999999999
+              ],
+              "n": 10,
+              "values": [
+                0.004666666666666667,
+                0.004666666666666667,
+                0.0033333333333333335,
+                0.004,
+                0.004666666666666667,
+                0.0033333333333333335,
+                0.004666666666666667,
+                0.004,
+                0.0033333333333333335,
+                0.0033333333333333335
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.0472,
+              "std": 0.0031552425509864626,
+              "boot_ci95": [
+                0.045399999999999996,
+                0.049
+              ],
+              "n": 10,
+              "values": [
+                0.05,
+                0.05266666666666667,
+                0.042666666666666665,
+                0.043333333333333335,
+                0.048,
+                0.04666666666666667,
+                0.04733333333333333,
+                0.048,
+                0.04933333333333333,
+                0.044
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.3532689666569543,
+              "std": 0.04302963552023327,
+              "boot_ci95": [
+                0.33165286024217494,
+                0.3811369275790639
+              ],
+              "n": 10,
+              "values": [
+                0.3575503833126277,
+                0.34522294998168945,
+                0.34030193331030506,
+                0.34278135001659393,
+                0.2959510333215197,
+                0.3466447499813512,
+                0.4603594500028218,
+                0.377693016664125,
+                0.33996348331371945,
+                0.3262213166647901
+              ]
+            }
+          }
+        }
+      },
+      "strip_fidelity": {
+        "phase7f_strip_auc_mean": 0.23540355555555553,
+        "phase7f_strip_tpr5_mean": 0.004266666666666667,
+        "rerun_strip_auc_mean": 0.23540355555555553,
+        "rerun_strip_tpr5_mean": 0.004266666666666667,
+        "max_abs_diff": 0.0
+      },
+      "holdout_split": "X_test",
+      "holdout_negative_overlap_rows": 51,
+      "n_positives": 1500,
+      "n_negatives": 1500,
+      "distribution": {
+        "clean_benign": {
+          "n": 5000,
+          "mean": 0.9939373646687419,
+          "median": 0.9999999999651141,
+          "std": 0.04676601740595543,
+          "frac_ge_T": 0.9834
+        },
+        "clean_attack": {
+          "n": 5000,
+          "mean": 0.9481776157810898,
+          "median": 0.9997782745024595,
+          "std": 0.13140964038983888,
+          "frac_ge_T": 0.8728
+        },
+        "triggered": {
+          "n": 5000,
+          "mean": 0.8467515505034217,
+          "median": 0.9665714121576536,
+          "std": 0.22899763817118265,
+          "frac_ge_T": 0.6792
+        },
+        "roc_auc_triggered_vs_clean_benign": 0.039013919999999994,
+        "model": "unsw_target_normal_seed42"
+      },
+      "target": 0,
+      "source": 1
+    }
+  },
+  "controlled": {
+    "A_balanced_tgtBenign": {
+      "target": 0,
+      "source": 1,
+      "auc": {
+        "mean": 0.503025375,
+        "std": 0.039509936109082135,
+        "boot_ci95": [
+          0.47239622499999995,
+          0.5334712250000001
+        ],
+        "n": 5,
+        "values": [
+          0.47702887499999996,
+          0.5352083750000001,
+          0.543964375,
+          0.509010625,
+          0.449914625
+        ]
+      },
+      "tpr_5fpr": {
+        "mean": 0.008799999999999999,
+        "std": 0.011239439487803652,
+        "boot_ci95": [
+          0.0021,
+          0.0191
+        ],
+        "n": 5,
+        "values": [
+          0.0285,
+          0.005,
+          0.0,
+          0.0055,
+          0.005
+        ]
+      },
+      "tpr_T": {
+        "mean": 0.9964999999999999,
+        "std": 0.0013228756555323175,
+        "boot_ci95": [
+          0.9955999999999999,
+          0.9976
+        ],
+        "n": 5,
+        "values": [
+          0.9985,
+          0.996,
+          0.995,
+          0.997,
+          0.996
+        ]
+      },
+      "fpr_T_negatives": {
+        "mean": 0.9360000000000002,
+        "std": 0.0012247448713916015,
+        "boot_ci95": [
+          0.9350999999999999,
+          0.937
+        ],
+        "n": 5,
+        "values": [
+          0.9345,
+          0.937,
+          0.9355,
+          0.9375,
+          0.9355
+        ]
+      },
+      "psc_clean_target_mean": {
+        "mean": 0.9684324295912162,
+        "std": 0.002484664350021773,
+        "boot_ci95": [
+          0.966449384316304,
+          0.9702224798307004
+        ],
+        "n": 5,
+        "values": [
+          0.9700128409123567,
+          0.9714076538222409,
+          0.9675883249711834,
+          0.9648819185659934,
+          0.9682714096843069
+        ]
+      },
+      "k_per_model": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "n_models_per_model": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "strip_tpr5_phase6d": {
+        "mean": 0.0332,
+        "std": 0.04168422963184038
+      },
+      "strip_auc_phase6d": {
+        "mean": 0.5750648250000001,
+        "std": 0.05436850891856537
+      },
+      "clean_target_entropy_phase6c": 0.04873522475207682
+    },
+    "B_imbal_tgtBenign": {
+      "target": 0,
+      "source": 1,
+      "auc": {
+        "mean": 0.33035495,
+        "std": 0.052707267359859866,
+        "boot_ci95": [
+          0.2901274,
+          0.3732654487499985
+        ],
+        "n": 5,
+        "values": [
+          0.342245,
+          0.26291275000000003,
+          0.31813225,
+          0.408831,
+          0.31965374999999996
+        ]
+      },
+      "tpr_5fpr": {
+        "mean": 0.0009,
+        "std": 0.0020124611797498106,
+        "boot_ci95": [
+          0.0,
+          0.0026999999999999997
+        ],
+        "n": 5,
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0045,
+          0.0
+        ]
+      },
+      "tpr_T": {
+        "mean": 0.9785,
+        "std": 0.008485281374238589,
+        "boot_ci95": [
+          0.9716999999999999,
+          0.9843
+        ],
+        "n": 5,
+        "values": [
+          0.978,
+          0.986,
+          0.9855,
+          0.965,
+          0.978
+        ]
+      },
+      "fpr_T_negatives": {
+        "mean": 0.9424999999999999,
+        "std": 0.004690415759823405,
+        "boot_ci95": [
+          0.9387000000000001,
+          0.9460000000000001
+        ],
+        "n": 5,
+        "values": [
+          0.94,
+          0.948,
+          0.9455,
+          0.936,
+          0.943
+        ]
+      },
+      "psc_clean_target_mean": {
+        "mean": 0.9713734637032279,
+        "std": 0.005443840980780928,
+        "boot_ci95": [
+          0.966840858335879,
+          0.9750754795275127
+        ],
+        "n": 5,
+        "values": [
+          0.9705636875757783,
+          0.9775606077156109,
+          0.9745385329205544,
+          0.9630340237276875,
+          0.9711704665765076
+        ]
+      },
+      "k_per_model": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "n_models_per_model": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "strip_tpr5_phase6d": {
+        "mean": 0.0079,
+        "std": 0.015741664460913907
+      },
+      "strip_auc_phase6d": {
+        "mean": 0.6258934500000001,
+        "std": 0.07556411812895228
+      },
+      "clean_target_entropy_phase6c": 0.07941349669205375
+    },
+    "C_imbal_tgtAttack": {
+      "target": 1,
+      "source": 0,
+      "auc": {
+        "mean": 0.7540152,
+        "std": 0.05440566080680392,
+        "boot_ci95": [
+          0.7089571,
+          0.7898523749999999
+        ],
+        "n": 5,
+        "values": [
+          0.664338125,
+          0.8037332500000001,
+          0.7661381249999999,
+          0.7480378750000001,
+          0.787828625
+        ]
+      },
+      "tpr_5fpr": {
+        "mean": 0.0,
+        "std": 0.0,
+        "boot_ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 5,
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tpr_T": {
+        "mean": 0.9922000000000001,
+        "std": 0.0021389249636207365,
+        "boot_ci95": [
+          0.9906,
+          0.9938
+        ],
+        "n": 5,
+        "values": [
+          0.991,
+          0.9935,
+          0.995,
+          0.992,
+          0.9895
+        ]
+      },
+      "fpr_T_negatives": {
+        "mean": 0.937,
+        "std": 0.015580436450882891,
+        "boot_ci95": [
+          0.9237,
+          0.9474
+        ],
+        "n": 5,
+        "values": [
+          0.9465,
+          0.9505,
+          0.943,
+          0.9115,
+          0.9335
+        ]
+      },
+      "psc_clean_target_mean": {
+        "mean": 0.9750160831979795,
+        "std": 0.001805601427686131,
+        "boot_ci95": [
+          0.9737025952321836,
+          0.9764804856858357
+        ],
+        "n": 5,
+        "values": [
+          0.9761097606161806,
+          0.9776455464276675,
+          0.9738318386848741,
+          0.9733560285299947,
+          0.9741372417311802
+        ]
+      },
+      "k_per_model": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "n_models_per_model": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "strip_tpr5_phase6d": {
+        "mean": 0.06839999999999999,
+        "std": 0.029839989946379004
+      },
+      "strip_auc_phase6d": {
+        "mean": 0.7132865749999999,
+        "std": 0.04874018449900325
+      },
+      "clean_target_entropy_phase6c": 0.12191933884705691
+    }
+  },
+  "runtime_s": 41.961545499973
+}

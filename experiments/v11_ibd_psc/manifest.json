@@ -1,0 +1,299 @@
+{
+  "experiment": "v11_ibd_psc",
+  "config": "configs/v11_ibd_psc.yaml",
+  "command": "python -u -m src.eval.run_v11_ibd_psc --config configs/v11_ibd_psc.yaml",
+  "evaluated_at": "2026-10-12T09:31:28Z",
+  "git_commit": "b91c40d159b5bc786e800253d722ab943c2a7221",
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "torch_threads": 8,
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "runtime_s": 41.961545499973,
+  "models": [
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed42",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed42.pt",
+      "sha256": "3cbdba517462959dfa537118b4d421da45218a4dfbb2aae31f2f5ed8fe473ab0",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 42
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed43",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed43.pt",
+      "sha256": "5456e62f2c961cc7459ad4f03eeca7f8a24eb63bcf9c392424ac5bf2091a4e02",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 43
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed44",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed44.pt",
+      "sha256": "bc06189404015aee9574ece7baf61860bd82ab7959e47250c9e46c12bf9c42a2",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 44
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed45",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed45.pt",
+      "sha256": "e3943a79f36857759a27ca1bb84819ae07755f6dc8a265bf77b4ff5e1c773b29",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 45
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed46",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed46.pt",
+      "sha256": "69292b5838769770460e78b3ba2a3b2be90d57ba88ded7864cd3b19001ec8749",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 46
+    },
+    {
+      "name": "v11_mlp_cicids_pois_tgt0_seed101",
+      "checkpoint": "results/models/v11_mlp_cicids_pois_tgt0_seed101.pt",
+      "sha256": "f7fa613ce4ace8bf11bb1b5a2ab377ea1186f68613a66750b265df98ee25d4a6",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 101
+    },
+    {
+      "name": "v11_mlp_cicids_pois_tgt0_seed102",
+      "checkpoint": "results/models/v11_mlp_cicids_pois_tgt0_seed102.pt",
+      "sha256": "0f961dfeed5037da386ea7601b6dc521d6c787f45680d76adefc72aa45e4e1ff",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 102
+    },
+    {
+      "name": "v11_mlp_cicids_pois_tgt0_seed103",
+      "checkpoint": "results/models/v11_mlp_cicids_pois_tgt0_seed103.pt",
+      "sha256": "0145a409e730298c6bfa6122ca4cfec3fe9ce24701f22f34b508facc5719d6d7",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 103
+    },
+    {
+      "name": "v11_mlp_cicids_pois_tgt0_seed104",
+      "checkpoint": "results/models/v11_mlp_cicids_pois_tgt0_seed104.pt",
+      "sha256": "c19b0b29c40456125b634920037e7331019d4395e63da97e4036b382078b626c",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 104
+    },
+    {
+      "name": "v11_mlp_cicids_pois_tgt0_seed105",
+      "checkpoint": "results/models/v11_mlp_cicids_pois_tgt0_seed105.pt",
+      "sha256": "dc35c4235fa134fb5fe03f9f40896b9f5ee9af89e89d7bc0f3adaa77cb482ace",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 105
+    },
+    {
+      "name": "unsw_target_normal_seed42",
+      "checkpoint": "results/models/unsw_target_normal_seed42.pt",
+      "sha256": "c30356b0ac89d4fe682abb5074c2c0ef746cf2818e4ddb359024fbbfb2e5227e",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 42
+    },
+    {
+      "name": "unsw_target_normal_seed43",
+      "checkpoint": "results/models/unsw_target_normal_seed43.pt",
+      "sha256": "1a0f70b1d2991dbadc6c34537b1a8b7f18fd71044ee3b9305f5bf746e32b5d92",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 43
+    },
+    {
+      "name": "unsw_target_normal_seed44",
+      "checkpoint": "results/models/unsw_target_normal_seed44.pt",
+      "sha256": "36c4a6a18ea94792e61f6800b7fab1ef8dbaa8ba9cb1b77ec04cde12fd453961",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 44
+    },
+    {
+      "name": "unsw_target_normal_seed45",
+      "checkpoint": "results/models/unsw_target_normal_seed45.pt",
+      "sha256": "fffd6b70dd6018dd36f067b2b228f9a67d51c9c4a8c3d1a80acb6bf1839214f1",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 45
+    },
+    {
+      "name": "unsw_target_normal_seed46",
+      "checkpoint": "results/models/unsw_target_normal_seed46.pt",
+      "sha256": "2c5abbcd7e168e252932115c76b7e426b4cfad3ed9ece142677400a8349476e0",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 46
+    },
+    {
+      "name": "v11_mlp_unsw_pois_tgt0_seed101",
+      "checkpoint": "results/models/v11_mlp_unsw_pois_tgt0_seed101.pt",
+      "sha256": "6aa97bedb022123ad6c32bb4aceeb9a53c227a42a72fce4b759ee090379d4368",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 101
+    },
+    {
+      "name": "v11_mlp_unsw_pois_tgt0_seed102",
+      "checkpoint": "results/models/v11_mlp_unsw_pois_tgt0_seed102.pt",
+      "sha256": "7279a2e2f1e4009f9d75d8d5d9b84edf10b80e62d53a672425040ca4654fd4d8",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 102
+    },
+    {
+      "name": "v11_mlp_unsw_pois_tgt0_seed103",
+      "checkpoint": "results/models/v11_mlp_unsw_pois_tgt0_seed103.pt",
+      "sha256": "5d550aff201a7bc76574272280381037d51b67e6350a996856fe5e406a602662",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 103
+    },
+    {
+      "name": "v11_mlp_unsw_pois_tgt0_seed104",
+      "checkpoint": "results/models/v11_mlp_unsw_pois_tgt0_seed104.pt",
+      "sha256": "954ece808c1ad9dfd245df72faf271d3176563ab8d583bdddcfa2ec01c8405dd",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 104
+    },
+    {
+      "name": "v11_mlp_unsw_pois_tgt0_seed105",
+      "checkpoint": "results/models/v11_mlp_unsw_pois_tgt0_seed105.pt",
+      "sha256": "0a5bbc1fead95e9a311bad46c0b7c39176cb18988ae512b6ca05f82072b886bc",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 105
+    },
+    {
+      "name": "causal_ids_A_balanced_tgtBenign_seed42",
+      "checkpoint": "results/models/causal_ids_A_balanced_tgtBenign_seed42.pt",
+      "sha256": "f67a63aa3b1fa60c6296949a653fb4004684b37ed2c25b042d8ace221aab1f15",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 42
+    },
+    {
+      "name": "causal_ids_A_balanced_tgtBenign_seed43",
+      "checkpoint": "results/models/causal_ids_A_balanced_tgtBenign_seed43.pt",
+      "sha256": "c1bb39d2bac5c1d4eee15aea0246ab34013d5e7b07f590d8ea7795c7500f7a6b",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 43
+    },
+    {
+      "name": "causal_ids_A_balanced_tgtBenign_seed44",
+      "checkpoint": "results/models/causal_ids_A_balanced_tgtBenign_seed44.pt",
+      "sha256": "81761c72cbdb34c320c7c81fa5a314a24201a27c1197d96c95efd254d34f8d41",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 44
+    },
+    {
+      "name": "causal_ids_A_balanced_tgtBenign_seed45",
+      "checkpoint": "results/models/causal_ids_A_balanced_tgtBenign_seed45.pt",
+      "sha256": "74fd360e6c44642523cd18b51914d1dd4a48350ee08922ba83c22e44629d1172",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 45
+    },
+    {
+      "name": "causal_ids_A_balanced_tgtBenign_seed46",
+      "checkpoint": "results/models/causal_ids_A_balanced_tgtBenign_seed46.pt",
+      "sha256": "def97cc1d943899597a7e36bbf0f14802e22dda5b7e6f621302c91bf8543a9c9",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 46
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed42",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed42.pt",
+      "sha256": "3cbdba517462959dfa537118b4d421da45218a4dfbb2aae31f2f5ed8fe473ab0",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 42
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed43",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed43.pt",
+      "sha256": "5456e62f2c961cc7459ad4f03eeca7f8a24eb63bcf9c392424ac5bf2091a4e02",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 43
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed44",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed44.pt",
+      "sha256": "bc06189404015aee9574ece7baf61860bd82ab7959e47250c9e46c12bf9c42a2",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 44
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed45",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed45.pt",
+      "sha256": "e3943a79f36857759a27ca1bb84819ae07755f6dc8a265bf77b4ff5e1c773b29",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 45
+    },
+    {
+      "name": "causal_ids_B_imbal_tgtBenign_seed46",
+      "checkpoint": "results/models/causal_ids_B_imbal_tgtBenign_seed46.pt",
+      "sha256": "69292b5838769770460e78b3ba2a3b2be90d57ba88ded7864cd3b19001ec8749",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 46
+    },
+    {
+      "name": "causal_ids_C_imbal_tgtAttack_seed42",
+      "checkpoint": "results/models/causal_ids_C_imbal_tgtAttack_seed42.pt",
+      "sha256": "0e73f32a1c4da49355a55364755ada7eecef1c95e1f326a05f2bfadc615801fd",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 42
+    },
+    {
+      "name": "causal_ids_C_imbal_tgtAttack_seed43",
+      "checkpoint": "results/models/causal_ids_C_imbal_tgtAttack_seed43.pt",
+      "sha256": "401b23b7d32f1699ffcac69d8485721f0fcf1db599ef8a2f4b6900548933e221",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 43
+    },
+    {
+      "name": "causal_ids_C_imbal_tgtAttack_seed44",
+      "checkpoint": "results/models/causal_ids_C_imbal_tgtAttack_seed44.pt",
+      "sha256": "3332b1bf4d35655fe0638cf18bc7f43970c66a9e4d9eaeb38de3d24e8a79a9eb",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 44
+    },
+    {
+      "name": "causal_ids_C_imbal_tgtAttack_seed45",
+      "checkpoint": "results/models/causal_ids_C_imbal_tgtAttack_seed45.pt",
+      "sha256": "f68e9e933267d1b11319a4aaf76f081b93e67999cc903b24f60dab2b52f77f83",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 45
+    },
+    {
+      "name": "causal_ids_C_imbal_tgtAttack_seed46",
+      "checkpoint": "results/models/causal_ids_C_imbal_tgtAttack_seed46.pt",
+      "sha256": "262a47cada452b8aeabd885710c0b09fe95aa3f92120bcd7ad472e9481e8f463",
+      "dataset": "CICIDS2017 controlled",
+      "role": "poisoned",
+      "seed": 46
+    }
+  ]
+}
