@@ -101,7 +101,9 @@ def summarize(per_model, n_exist, iters, seed):
               "fpr_T_holdout", "per_input_ms")
     keys_s = ("auc", "tpr_5fpr", "fpr_5fpr_negatives", "per_input_ms")
     out = {}
-    for lbl, sel in (("existing_n5", names[:n_exist]), ("new_n5", names[n_exist:]), ("all_n10", names)):
+    groups = ((("existing_n5", names[:n_exist]), ("new_n5", names[n_exist:]), ("all_n10", names))
+              if n_exist else (("all_n10", names),))
+    for lbl, sel in groups:
         out[lbl] = {"ibd_psc": {k: agg([per_model[n]["ibd_psc"] for n in sel], k, iters, seed)
                                 for k in keys_i},
                     "strip": {k: agg([per_model[n]["strip"] for n in sel], k, iters, seed)
@@ -160,18 +162,20 @@ def run(cfg: dict) -> dict:
                   f"{d['selection_error_by_layers']}) AUC {ib['auc']:.3f} TPR@5 {ib['tpr_5fpr']:.3f} "
                   f"TPR@T {ib['tpr_T']:.3f} FPR@T {ib['fpr_T_negatives']:.3f} | STRIP AUC "
                   f"{st['auc']:.3f} TPR@5 {st['tpr_5fpr']:.3f}", flush=True)
-        n_exist = len(mcfg["datasets"][dname]["existing"]["poisoned"])
+        n_exist = len(mcfg["datasets"][dname].get("existing", {}).get("poisoned", []))
         summ = summarize(per, n_exist, iters, seed)
-        ref = json.loads(resolve_path("experiments/phase7f/metrics.json").read_text(encoding="utf-8"))
-        ref07 = ref[dname]["part1_alpha_sweep"]["per_alpha"][f"alpha_{cfg['strip']['alpha']}"]
-        fidelity = {"phase7f_strip_auc_mean": ref07["auc"]["mean"],
-                    "phase7f_strip_tpr5_mean": ref07["tpr5"]["mean"],
-                    "rerun_strip_auc_mean": summ["existing_n5"]["strip"]["auc"]["mean"],
-                    "rerun_strip_tpr5_mean": summ["existing_n5"]["strip"]["tpr_5fpr"]["mean"]}
-        fidelity["max_abs_diff"] = max(
-            abs(fidelity["phase7f_strip_auc_mean"] - fidelity["rerun_strip_auc_mean"]),
-            abs(fidelity["phase7f_strip_tpr5_mean"] - fidelity["rerun_strip_tpr5_mean"]))
-        print(f"  STRIP fidelity vs phase7f: max |diff| {fidelity['max_abs_diff']:.2e}", flush=True)
+        fidelity = None
+        if n_exist:  # the existing models are the phase7f models: STRIP must reproduce phase7f
+            ref = json.loads(resolve_path("experiments/phase7f/metrics.json").read_text(encoding="utf-8"))
+            ref07 = ref[dname]["part1_alpha_sweep"]["per_alpha"][f"alpha_{cfg['strip']['alpha']}"]
+            fidelity = {"phase7f_strip_auc_mean": ref07["auc"]["mean"],
+                        "phase7f_strip_tpr5_mean": ref07["tpr5"]["mean"],
+                        "rerun_strip_auc_mean": summ["existing_n5"]["strip"]["auc"]["mean"],
+                        "rerun_strip_tpr5_mean": summ["existing_n5"]["strip"]["tpr_5fpr"]["mean"]}
+            fidelity["max_abs_diff"] = max(
+                abs(fidelity["phase7f_strip_auc_mean"] - fidelity["rerun_strip_auc_mean"]),
+                abs(fidelity["phase7f_strip_tpr5_mean"] - fidelity["rerun_strip_tpr5_mean"]))
+            print(f"  STRIP fidelity vs phase7f: max |diff| {fidelity['max_abs_diff']:.2e}", flush=True)
 
         # distributions on the first poisoned model (as the article's Figure 2)
         nf = cfg["distribution_size"]
@@ -370,6 +374,8 @@ def _summary(path, cfg, out):
           "|---|---|---|---|---|---|---|---|---|"]
     for d, r in out["datasets"].items():
         for lbl, key in (("existing 5", "existing_n5"), ("new 5", "new_n5"), ("all 10", "all_n10")):
+            if key not in r["summary"]:
+                continue
             s = r["summary"][key]
             i, t = s["ibd_psc"], s["strip"]
             L.append(f"| {d} | {lbl} | IBD-PSC | {_m(i['auc'])} | {_m(i['tpr_5fpr'])} | "
@@ -377,9 +383,10 @@ def _summary(path, cfg, out):
                      f"{_m(i['fpr_T_negatives'])} | {i['per_input_ms']['mean']:.3f} |")
             L.append(f"| {d} | {lbl} | STRIP | {_m(t['auc'])} | {_m(t['tpr_5fpr'])} | "
                      f"{t['fpr_5fpr_negatives']['mean']:.3f} | – | – | {t['per_input_ms']['mean']:.3f} |")
-    L += ["", "STRIP reproduction check on the existing models against `phase7f` (α 0.7): "
-          + "; ".join(f"{d} max abs. difference {r['strip_fidelity']['max_abs_diff']:.1e}"
-                      for d, r in out["datasets"].items()) + ".",
+    fid = [(d, r["strip_fidelity"]) for d, r in out["datasets"].items() if r.get("strip_fidelity")]
+    L += ["", ("STRIP reproduction check on the existing models against `phase7f` (α 0.7): "
+               + "; ".join(f"{d} max abs. difference {f['max_abs_diff']:.1e}" for d, f in fid) + ".")
+          if fid else "No pre-existing models in this run, so there is no reproduction check against phase7f.",
           "Holdout/negative row overlap (UNSW-NB15 draws both from the test split, as in phase7f): "
           + "; ".join(f"{d} {r['holdout_negative_overlap_rows']} rows" for d, r in out["datasets"].items())
           + ". Per-input cost is wall-clock time on the CPU, including all forward passes "
