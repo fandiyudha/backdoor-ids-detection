@@ -1,0 +1,66 @@
+# ============================================================================
+# v1.1 Experiment C: IBD-PSC input-level runtime detector
+# (outputs experiments/v11_ibd_psc/)
+# ============================================================================
+# Reference: Hou, Feng, Hua, Luo, Zhang, Li, "IBD-PSC", ICML 2024,
+# PMLR 235:18992-19022, arXiv:2405.09786; reference code BackdoorBox
+# (core/defenses/IBD_PSC.py), adapted to tabular inputs in src/detectors/ibd_psc.py.
+# Everything below was fixed before IBD-PSC was run on any model.
+#
+# Runtime setting of the paper's STRIP evaluation (phase7f), per dataset:
+#   holdout: 3,000 clean rows drawn with seed 42 (CICIDS2017: validation split;
+#            UNSW-NB15: test split, as in phase7f);
+#   positives: the trigger stamped on the first 1,500 source-class (attack) test rows;
+#   negatives: 1,500 random clean test rows (same draw as phase7f);
+#   TPR at 5% FPR: threshold = 95th percentile of the PSC score on the clean holdout.
+# Models: all 10 benign/normal-target poisoned MLP models per dataset (models_from).
+# STRIP (the paper's final variant: blend, alpha 0.7, N = 100) is rerun on the same
+# models and inputs for a paired comparison; on the 5 existing models it must
+# reproduce phase7f.
+#
+# Command:
+#   python -u -m src.eval.run_v11_ibd_psc --config configs/v11_ibd_psc.yaml
+
+seed: 42
+models_from: configs/v11_screening.yaml
+protocol_from: configs/phase7f.yaml      # dataset paths, trigger, holdout/eval sizes
+bootstrap_iters: 10000
+fpr_target: 0.05
+
+ibd_psc:
+  omega: 1.5            # BN gamma/beta amplification factor
+  xi: 0.6               # error-rate threshold for the adaptive start k
+  n: 5                  # number of amplified models
+  extra_omegas: [2.0, 2.5]   # used only if fewer than n layer counts exist above k
+  n_select: 100         # clean rows for selecting k: the first 100 rows of the holdout
+  T: 0.9                # fixed threshold of the IBD-PSC paper (flag if PSC >= T)
+
+strip:
+  variant: blend
+  alpha: 0.7
+  N: 100
+
+distribution_size: 5000   # per group (clean benign, clean attack, triggered), first poisoned model
+
+# CICIDS2017 controlled-experiment conditions (phase6c/phase6d checkpoints), to test
+# whether IBD-PSC also tracks target-class homogeneity. Draws replay phase6d:
+# holdout 3,000 rows of the validation split, then the NC holdout draw, then
+# 2,000 random test rows as negatives; positives = trigger on the first 2,000
+# source-class test rows.
+controlled:
+  enabled: true
+  processed_dir: data/processed
+  trigger_json: experiments/phase3/trigger.json
+  holdout_size: 3000
+  nc_holdout_size: 3000
+  eval_size: 2000
+  seeds: [42, 43, 44, 45, 46]
+  phase6d_metrics: experiments/phase6d/metrics.json
+  conditions:
+    A_balanced_tgtBenign: {target: 0, source: 1}
+    B_imbal_tgtBenign: {target: 0, source: 1}
+    C_imbal_tgtAttack: {target: 1, source: 0}
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_ibd_psc
