@@ -357,6 +357,10 @@ def _summary(path, cfg, out):
         reached = [p["ibd_psc"]["detector"]["xi_reached"] for p in r["per_model"].values()]
         nm = [p["ibd_psc"]["detector"]["n_models"] for p in r["per_model"].values()]
         cfgs = next(iter(r["per_model"].values()))["ibd_psc"]["detector"]["amplified_models"]
+        max_err = max(max(p["ibd_psc"]["detector"]["selection_error_by_layers"].values())
+                      for p in r["per_model"].values())
+        L.append(f"- {d}: highest clean error rate of any amplified model during the selection of k "
+                 f"(ω = {ic['omega']}): {max_err:.2f} (ξ = {ic['xi']}).")
         L.append(f"- {d}: k per model {ks}; ξ exceeded in {sum(reached)}/{len(reached)} models; "
                  f"amplified models per detector {sorted(set(nm))}; first model's set "
                  + ", ".join(f"({c['n_layers']} layers, ω {c['omega']})" for c in cfgs) + ".")
