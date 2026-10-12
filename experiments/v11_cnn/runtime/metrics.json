@@ -1,0 +1,1675 @@
+{
+  "datasets": {
+    "CICIDS2017": {
+      "per_model": {
+        "v11_cnn_cicids_pois_tgt0_seed201": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.04,
+                "3": 0.53
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.549560888888889,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.16933333333333334,
+            "fpr_T_negatives": 0.398,
+            "fpr_T_holdout": 0.41133333333333333,
+            "psc_mean": {
+              "triggered": 0.4811558545061866,
+              "negatives": 0.47617853208555977,
+              "holdout": 0.49000460356264375
+            },
+            "ties_at_threshold_holdout": 290,
+            "per_input_ms": 0.07929839993206163,
+            "setup_s": 0.01710080006159842,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.8596777777777777,
+            "tpr_5fpr": 0.3626666666666667,
+            "fpr_5fpr_negatives": 0.050666666666666665,
+            "per_input_ms": 2.4119236333062872,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed202": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.04,
+                "2": 0.03,
+                "3": 0.56
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.6024893333333333,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.146,
+            "fpr_T_negatives": 0.30866666666666664,
+            "fpr_T_holdout": 0.32,
+            "psc_mean": {
+              "triggered": 0.430897405600381,
+              "negatives": 0.39389523732147835,
+              "holdout": 0.40241821816312584
+            },
+            "ties_at_threshold_holdout": 291,
+            "per_input_ms": 0.07719766666802268,
+            "setup_s": 0.014285000041127205,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.8828617777777779,
+            "tpr_5fpr": 0.3233333333333333,
+            "fpr_5fpr_negatives": 0.05266666666666667,
+            "per_input_ms": 2.3149871666294835,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed203": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.02,
+                "2": 0.03,
+                "3": 0.36
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.6175442222222223,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.5493333333333333,
+            "fpr_T_negatives": 0.37866666666666665,
+            "fpr_T_holdout": 0.384,
+            "psc_mean": {
+              "triggered": 0.7140112643412684,
+              "negatives": 0.5110843712150992,
+              "holdout": 0.5203200213324293
+            },
+            "ties_at_threshold_holdout": 215,
+            "per_input_ms": 0.07667923330639799,
+            "setup_s": 0.014371899887919426,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.8478817777777776,
+            "tpr_5fpr": 0.366,
+            "fpr_5fpr_negatives": 0.052,
+            "per_input_ms": 2.3191184166741245,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed204": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.04,
+                "2": 0.04,
+                "3": 0.52
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.49886622222222227,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.14933333333333335,
+            "fpr_T_negatives": 0.402,
+            "fpr_T_holdout": 0.41333333333333333,
+            "psc_mean": {
+              "triggered": 0.47777731418567987,
+              "negatives": 0.48824750678219586,
+              "holdout": 0.5018536279332587
+            },
+            "ties_at_threshold_holdout": 291,
+            "per_input_ms": 0.07617506672007342,
+            "setup_s": 0.015110799809917808,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.8217153333333332,
+            "tpr_5fpr": 0.30266666666666664,
+            "fpr_5fpr_negatives": 0.058,
+            "per_input_ms": 2.311747833310316,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed205": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.02,
+                "2": 0.03,
+                "3": 0.31
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.4387542222222222,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.324,
+            "fpr_T_negatives": 0.5806666666666667,
+            "fpr_T_holdout": 0.605,
+            "psc_mean": {
+              "triggered": 0.5903764187779821,
+              "negatives": 0.664125111440936,
+              "holdout": 0.682444706254683
+            },
+            "ties_at_threshold_holdout": 285,
+            "per_input_ms": 0.07695879996754229,
+            "setup_s": 0.014355499995872378,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.8700782222222222,
+            "tpr_5fpr": 0.296,
+            "fpr_5fpr_negatives": 0.05733333333333333,
+            "per_input_ms": 2.336469133345721,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed206": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.04,
+                "3": 0.54
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.5266346666666666,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.18533333333333332,
+            "fpr_T_negatives": 0.37333333333333335,
+            "fpr_T_holdout": 0.38666666666666666,
+            "psc_mean": {
+              "triggered": 0.3918970074630897,
+              "negatives": 0.4449965714826737,
+              "holdout": 0.46365509531347365
+            },
+            "ties_at_threshold_holdout": 325,
+            "per_input_ms": 0.07697919996765752,
+            "setup_s": 0.017024900065734982,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.8252484444444446,
+            "tpr_5fpr": 0.18866666666666668,
+            "fpr_5fpr_negatives": 0.048666666666666664,
+            "per_input_ms": 2.3164184333290905,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed207": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.5
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.5716315555555556,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.47,
+            "fpr_T_negatives": 0.44533333333333336,
+            "fpr_T_holdout": 0.458,
+            "psc_mean": {
+              "triggered": 0.6940068059300314,
+              "negatives": 0.5274642090144824,
+              "holdout": 0.5394580582019691
+            },
+            "ties_at_threshold_holdout": 303,
+            "per_input_ms": 0.07829029997810721,
+            "setup_s": 0.014402000000700355,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.7772986666666666,
+            "tpr_5fpr": 0.16466666666666666,
+            "fpr_5fpr_negatives": 0.05333333333333334,
+            "per_input_ms": 2.4102593666951484,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed208": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.23
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.41361155555555557,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.368,
+            "fpr_T_negatives": 0.528,
+            "fpr_T_holdout": 0.5473333333333333,
+            "psc_mean": {
+              "triggered": 0.5255973390373457,
+              "negatives": 0.651797809726719,
+              "holdout": 0.6636115596690851
+            },
+            "ties_at_threshold_holdout": 276,
+            "per_input_ms": 0.08157073333859444,
+            "setup_s": 0.013579500140622258,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.7103786666666667,
+            "tpr_5fpr": 0.16666666666666666,
+            "fpr_5fpr_negatives": 0.05533333333333333,
+            "per_input_ms": 2.3100452833265686,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed209": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.45
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.5788622222222222,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.49466666666666664,
+            "fpr_T_negatives": 0.49933333333333335,
+            "fpr_T_holdout": 0.5206666666666667,
+            "psc_mean": {
+              "triggered": 0.7817852690700999,
+              "negatives": 0.5611550966070618,
+              "holdout": 0.5748545113592431
+            },
+            "ties_at_threshold_holdout": 302,
+            "per_input_ms": 0.07659470002787809,
+            "setup_s": 0.016843599965795875,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.883604888888889,
+            "tpr_5fpr": 0.20466666666666666,
+            "fpr_5fpr_negatives": 0.04733333333333333,
+            "per_input_ms": 2.3210201500138887,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_cicids_pois_tgt0_seed210": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.03,
+                "2": 0.03,
+                "3": 0.38
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.43946755555555556,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.36533333333333334,
+            "fpr_T_negatives": 0.6,
+            "fpr_T_holdout": 0.617,
+            "psc_mean": {
+              "triggered": 0.6048119879252984,
+              "negatives": 0.6675696571277002,
+              "holdout": 0.6778270560892697
+            },
+            "ties_at_threshold_holdout": 349,
+            "per_input_ms": 0.07698660002400477,
+            "setup_s": 0.014416699996218085,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.8500124444444445,
+            "tpr_5fpr": 0.30333333333333334,
+            "fpr_5fpr_negatives": 0.050666666666666665,
+            "per_input_ms": 2.305103400023654,
+            "forward_passes_per_input": 100
+          }
+        }
+      },
+      "summary": {
+        "all_n10": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.5237422444444444,
+              "std": 0.07308993991042263,
+              "boot_ci95": [
+                0.4804187238888889,
+                0.564873311111111
+              ],
+              "n": 10,
+              "values": [
+                0.549560888888889,
+                0.6024893333333333,
+                0.6175442222222223,
+                0.49886622222222227,
+                0.4387542222222222,
+                0.5266346666666666,
+                0.5716315555555556,
+                0.41361155555555557,
+                0.5788622222222222,
+                0.43946755555555556
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0,
+              "std": 0.0,
+              "boot_ci95": [
+                0.0,
+                0.0
+              ],
+              "n": 10,
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.0,
+              "std": 0.0,
+              "boot_ci95": [
+                0.0,
+                0.0
+              ],
+              "n": 10,
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.3221333333333334,
+              "std": 0.15281451679474,
+              "boot_ci95": [
+                0.2346,
+                0.4126666666666666
+              ],
+              "n": 10,
+              "values": [
+                0.16933333333333334,
+                0.146,
+                0.5493333333333333,
+                0.14933333333333335,
+                0.324,
+                0.18533333333333332,
+                0.47,
+                0.368,
+                0.49466666666666664,
+                0.36533333333333334
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.4514,
+              "std": 0.09663394082059636,
+              "boot_ci95": [
+                0.39686499999999997,
+                0.509
+              ],
+              "n": 10,
+              "values": [
+                0.398,
+                0.30866666666666664,
+                0.37866666666666665,
+                0.402,
+                0.5806666666666667,
+                0.37333333333333335,
+                0.44533333333333336,
+                0.528,
+                0.49933333333333335,
+                0.6
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.4663333333333334,
+              "std": 0.10104149007239245,
+              "boot_ci95": [
+                0.409165,
+                0.5262016666666667
+              ],
+              "n": 10,
+              "values": [
+                0.41133333333333333,
+                0.32,
+                0.384,
+                0.41333333333333333,
+                0.605,
+                0.38666666666666666,
+                0.458,
+                0.5473333333333333,
+                0.5206666666666667,
+                0.617
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.077673069993034,
+              "std": 0.001643098136955365,
+              "boot_ci95": [
+                0.07684301668001961,
+                0.07878505730691056
+              ],
+              "n": 10,
+              "values": [
+                0.07929839993206163,
+                0.07719766666802268,
+                0.07667923330639799,
+                0.07617506672007342,
+                0.07695879996754229,
+                0.07697919996765752,
+                0.07829029997810721,
+                0.08157073333859444,
+                0.07659470002787809,
+                0.07698660002400477
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.8328758,
+              "std": 0.053717725825947436,
+              "boot_ci95": [
+                0.7979324011111112,
+                0.8606999838888888
+              ],
+              "n": 10,
+              "values": [
+                0.8596777777777777,
+                0.8828617777777779,
+                0.8478817777777776,
+                0.8217153333333332,
+                0.8700782222222222,
+                0.8252484444444446,
+                0.7772986666666666,
+                0.7103786666666667,
+                0.883604888888889,
+                0.8500124444444445
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.26786666666666664,
+              "std": 0.07896040576777924,
+              "boot_ci95": [
+                0.221,
+                0.3128699999999999
+              ],
+              "n": 10,
+              "values": [
+                0.3626666666666667,
+                0.3233333333333333,
+                0.366,
+                0.30266666666666664,
+                0.296,
+                0.18866666666666668,
+                0.16466666666666666,
+                0.16666666666666666,
+                0.20466666666666666,
+                0.30333333333333334
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.0526,
+              "std": 0.0035059033108018494,
+              "boot_ci95": [
+                0.05053333333333333,
+                0.054733333333333335
+              ],
+              "n": 10,
+              "values": [
+                0.050666666666666665,
+                0.05266666666666667,
+                0.052,
+                0.058,
+                0.05733333333333333,
+                0.048666666666666664,
+                0.05333333333333334,
+                0.05533333333333333,
+                0.04733333333333333,
+                0.050666666666666665
+              ]
+            },
+            "per_input_ms": {
+              "mean": 2.3357092816654283,
+              "std": 0.040591463290488246,
+              "boot_ci95": [
+                2.3146640600682193,
+                2.3623809640368565
+              ],
+              "n": 10,
+              "values": [
+                2.4119236333062872,
+                2.3149871666294835,
+                2.3191184166741245,
+                2.311747833310316,
+                2.336469133345721,
+                2.3164184333290905,
+                2.4102593666951484,
+                2.3100452833265686,
+                2.3210201500138887,
+                2.305103400023654
+              ]
+            }
+          }
+        }
+      },
+      "strip_fidelity": null,
+      "holdout_split": "X_val",
+      "holdout_negative_overlap_rows": 0,
+      "n_positives": 1500,
+      "n_negatives": 1500,
+      "distribution": {
+        "clean_benign": {
+          "n": 5000,
+          "mean": 0.3873424206328702,
+          "median": 0.14470309399495776,
+          "std": 0.43152906871477337,
+          "frac_ge_T": 0.2948
+        },
+        "clean_attack": {
+          "n": 5000,
+          "mean": 0.9908276718587811,
+          "median": 1.0,
+          "std": 0.09418026212582986,
+          "frac_ge_T": 0.9904
+        },
+        "triggered": {
+          "n": 5000,
+          "mean": 0.48071216850514475,
+          "median": 0.33337293103624227,
+          "std": 0.2714288698525727,
+          "frac_ge_T": 0.1648
+        },
+        "roc_auc_triggered_vs_clean_benign": 0.63901766,
+        "model": "v11_cnn_cicids_pois_tgt0_seed201"
+      },
+      "target": 0,
+      "source": 1
+    },
+    "UNSW-NB15": {
+      "per_model": {
+        "v11_cnn_unsw_pois_tgt0_seed201": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.14,
+                "2": 0.28,
+                "3": 0.14
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.07670133333333333,
+            "threshold_5fpr": 0.9999999999999986,
+            "tpr_5fpr": 0.002,
+            "fpr_5fpr_negatives": 0.043333333333333335,
+            "tpr_T": 0.282,
+            "fpr_T_negatives": 0.9293333333333333,
+            "fpr_T_holdout": 0.9343333333333333,
+            "psc_mean": {
+              "triggered": 0.42824088785561804,
+              "negatives": 0.9580498538292519,
+              "holdout": 0.9600467587363595
+            },
+            "ties_at_threshold_holdout": 6,
+            "per_input_ms": 0.2483512000180781,
+            "setup_s": 0.044963400112465024,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.20195511111111114,
+            "tpr_5fpr": 0.028,
+            "fpr_5fpr_negatives": 0.04666666666666667,
+            "per_input_ms": 7.367775133345276,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed202": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.09,
+                "2": 0.44,
+                "3": 0.17
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.13102222222222223,
+            "threshold_5fpr": 0.9999999999999942,
+            "tpr_5fpr": 0.0013333333333333333,
+            "fpr_5fpr_negatives": 0.03933333333333333,
+            "tpr_T": 0.45066666666666666,
+            "fpr_T_negatives": 0.878,
+            "fpr_T_holdout": 0.8686666666666667,
+            "psc_mean": {
+              "triggered": 0.5818507617478333,
+              "negatives": 0.8892338579684733,
+              "holdout": 0.8782751867589352
+            },
+            "ties_at_threshold_holdout": 5,
+            "per_input_ms": 0.23324816666233042,
+            "setup_s": 0.027665500063449144,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.3233353333333333,
+            "tpr_5fpr": 0.016666666666666666,
+            "fpr_5fpr_negatives": 0.044,
+            "per_input_ms": 7.253359300006802,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed203": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.16,
+                "2": 0.17,
+                "3": 0.14
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.03716266666666668,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.17466666666666666,
+            "fpr_T_negatives": 0.9546666666666667,
+            "fpr_T_holdout": 0.9543333333333334,
+            "psc_mean": {
+              "triggered": 0.291858672178553,
+              "negatives": 0.9715760245148782,
+              "holdout": 0.9708636636218535
+            },
+            "ties_at_threshold_holdout": 195,
+            "per_input_ms": 0.24944263331902525,
+            "setup_s": 0.025643600150942802,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.19414088888888886,
+            "tpr_5fpr": 0.010666666666666666,
+            "fpr_5fpr_negatives": 0.050666666666666665,
+            "per_input_ms": 7.160497400017145,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed204": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.1,
+                "2": 0.3,
+                "3": 0.14
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.1985028888888889,
+            "threshold_5fpr": 0.9999999999999983,
+            "tpr_5fpr": 0.002,
+            "fpr_5fpr_negatives": 0.03866666666666667,
+            "tpr_T": 0.5413333333333333,
+            "fpr_T_negatives": 0.9053333333333333,
+            "fpr_T_holdout": 0.8883333333333333,
+            "psc_mean": {
+              "triggered": 0.6482657933477306,
+              "negatives": 0.9383655881677299,
+              "holdout": 0.9271824872607055
+            },
+            "ties_at_threshold_holdout": 3,
+            "per_input_ms": 0.22182493330910802,
+            "setup_s": 0.022772799944505095,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.3389106666666667,
+            "tpr_5fpr": 0.035333333333333335,
+            "fpr_5fpr_negatives": 0.04533333333333334,
+            "per_input_ms": 7.148392966638009,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed205": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.1,
+                "2": 0.33,
+                "3": 0.15
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.07462444444444445,
+            "threshold_5fpr": 0.9999999999990847,
+            "tpr_5fpr": 0.0026666666666666666,
+            "fpr_5fpr_negatives": 0.048666666666666664,
+            "tpr_T": 0.13933333333333334,
+            "fpr_T_negatives": 0.866,
+            "fpr_T_holdout": 0.8533333333333334,
+            "psc_mean": {
+              "triggered": 0.2381046856948798,
+              "negatives": 0.8863673293303308,
+              "holdout": 0.8771220295763084
+            },
+            "ties_at_threshold_holdout": 2,
+            "per_input_ms": 0.2288335666526109,
+            "setup_s": 0.02432510000653565,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.452664,
+            "tpr_5fpr": 0.044,
+            "fpr_5fpr_negatives": 0.044,
+            "per_input_ms": 7.331520199969721,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed206": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.1,
+                "2": 0.32,
+                "3": 0.16
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.08963488888888889,
+            "threshold_5fpr": 0.9999999999999366,
+            "tpr_5fpr": 0.002,
+            "fpr_5fpr_negatives": 0.04133333333333333,
+            "tpr_T": 0.254,
+            "fpr_T_negatives": 0.8933333333333333,
+            "fpr_T_holdout": 0.8813333333333333,
+            "psc_mean": {
+              "triggered": 0.3913185460405418,
+              "negatives": 0.9062169278896789,
+              "holdout": 0.898615624400289
+            },
+            "ties_at_threshold_holdout": 2,
+            "per_input_ms": 0.23110186665629348,
+            "setup_s": 0.025979100028052926,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.27229555555555557,
+            "tpr_5fpr": 0.03933333333333333,
+            "fpr_5fpr_negatives": 0.04533333333333334,
+            "per_input_ms": 7.197784400001789,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed207": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.13,
+                "2": 0.44,
+                "3": 0.34
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.10527466666666666,
+            "threshold_5fpr": 0.9999999999999999,
+            "tpr_5fpr": 0.0006666666666666666,
+            "fpr_5fpr_negatives": 0.032,
+            "tpr_T": 0.038,
+            "fpr_T_negatives": 0.7133333333333334,
+            "fpr_T_holdout": 0.722,
+            "psc_mean": {
+              "triggered": 0.05021051696121132,
+              "negatives": 0.732413458959559,
+              "holdout": 0.7453389351399731
+            },
+            "ties_at_threshold_holdout": 32,
+            "per_input_ms": 0.23202536666455367,
+            "setup_s": 0.022344900062307715,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.18057155555555557,
+            "tpr_5fpr": 0.0026666666666666666,
+            "fpr_5fpr_negatives": 0.05333333333333334,
+            "per_input_ms": 7.177657416672446,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed208": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.15,
+                "2": 0.24,
+                "3": 0.15
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.08714133333333332,
+            "threshold_5fpr": 0.9999999999998708,
+            "tpr_5fpr": 0.0026666666666666666,
+            "fpr_5fpr_negatives": 0.03933333333333333,
+            "tpr_T": 0.17133333333333334,
+            "fpr_T_negatives": 0.9013333333333333,
+            "fpr_T_holdout": 0.888,
+            "psc_mean": {
+              "triggered": 0.3815797414935815,
+              "negatives": 0.9206293270023312,
+              "holdout": 0.9122676114904428
+            },
+            "ties_at_threshold_holdout": 0,
+            "per_input_ms": 0.2264430666497598,
+            "setup_s": 0.023187899962067604,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.33160399999999995,
+            "tpr_5fpr": 0.03666666666666667,
+            "fpr_5fpr_negatives": 0.05,
+            "per_input_ms": 7.145160316683662,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed209": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.15,
+                "2": 0.17,
+                "3": 0.13
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.2382766666666667,
+            "threshold_5fpr": 0.9999999999980828,
+            "tpr_5fpr": 0.0026666666666666666,
+            "fpr_5fpr_negatives": 0.043333333333333335,
+            "tpr_T": 0.5406666666666666,
+            "fpr_T_negatives": 0.9053333333333333,
+            "fpr_T_holdout": 0.8953333333333333,
+            "psc_mean": {
+              "triggered": 0.6741461621231004,
+              "negatives": 0.9458767282756838,
+              "holdout": 0.937633406709507
+            },
+            "ties_at_threshold_holdout": 0,
+            "per_input_ms": 0.21960643329657614,
+            "setup_s": 0.022839299868792295,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.21691155555555555,
+            "tpr_5fpr": 0.005333333333333333,
+            "fpr_5fpr_negatives": 0.05333333333333334,
+            "per_input_ms": 7.291826983331703,
+            "forward_passes_per_input": 100
+          }
+        },
+        "v11_cnn_unsw_pois_tgt0_seed210": {
+          "ibd_psc": {
+            "detector": {
+              "bn_layers_deepest_first": [
+                "head.2",
+                "conv.4",
+                "conv.1"
+              ],
+              "k": 3,
+              "xi_reached": false,
+              "selection_error_by_layers": {
+                "1": 0.17,
+                "2": 0.44,
+                "3": 0.44
+              },
+              "amplified_models": [
+                {
+                  "n_layers": 3,
+                  "omega": 1.5
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.0
+                },
+                {
+                  "n_layers": 3,
+                  "omega": 2.5
+                }
+              ],
+              "n_models": 3
+            },
+            "auc": 0.29851177777777776,
+            "threshold_5fpr": 1.0,
+            "tpr_5fpr": 0.0,
+            "fpr_5fpr_negatives": 0.0,
+            "tpr_T": 0.6206666666666667,
+            "fpr_T_negatives": 0.7293333333333333,
+            "fpr_T_holdout": 0.7353333333333333,
+            "psc_mean": {
+              "triggered": 0.6210752724222512,
+              "negatives": 0.733327624714112,
+              "holdout": 0.7387743174085406
+            },
+            "ties_at_threshold_holdout": 1075,
+            "per_input_ms": 0.24382803332991898,
+            "setup_s": 0.025153799913823605,
+            "forward_passes_per_input": 4
+          },
+          "strip": {
+            "auc": 0.3493537777777778,
+            "tpr_5fpr": 0.010666666666666666,
+            "fpr_5fpr_negatives": 0.05533333333333333,
+            "per_input_ms": 7.136343499994837,
+            "forward_passes_per_input": 100
+          }
+        }
+      },
+      "summary": {
+        "all_n10": {
+          "ibd_psc": {
+            "auc": {
+              "mean": 0.1336852888888889,
+              "std": 0.08385268369825574,
+              "boot_ci95": [
+                0.08832707944444446,
+                0.18595437777777774
+              ],
+              "n": 10,
+              "values": [
+                0.07670133333333333,
+                0.13102222222222223,
+                0.03716266666666668,
+                0.1985028888888889,
+                0.07462444444444445,
+                0.08963488888888889,
+                0.10527466666666666,
+                0.08714133333333332,
+                0.2382766666666667,
+                0.29851177777777776
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.0016,
+              "std": 0.0010517475169954872,
+              "boot_ci95": [
+                0.0009333333333333332,
+                0.0021999999999999997
+              ],
+              "n": 10,
+              "values": [
+                0.002,
+                0.0013333333333333333,
+                0.0,
+                0.002,
+                0.0026666666666666666,
+                0.002,
+                0.0006666666666666666,
+                0.0026666666666666666,
+                0.0026666666666666666,
+                0.0
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.032600000000000004,
+              "std": 0.017695504067348034,
+              "boot_ci95": [
+                0.021131666666666667,
+                0.04173333333333334
+              ],
+              "n": 10,
+              "values": [
+                0.043333333333333335,
+                0.03933333333333333,
+                0.0,
+                0.03866666666666667,
+                0.048666666666666664,
+                0.04133333333333333,
+                0.032,
+                0.03933333333333333,
+                0.043333333333333335,
+                0.0
+              ]
+            },
+            "tpr_T": {
+              "mean": 0.32126666666666664,
+              "std": 0.20175023062082373,
+              "boot_ci95": [
+                0.20373166666666667,
+                0.4392683333333333
+              ],
+              "n": 10,
+              "values": [
+                0.282,
+                0.45066666666666666,
+                0.17466666666666666,
+                0.5413333333333333,
+                0.13933333333333334,
+                0.254,
+                0.038,
+                0.17133333333333334,
+                0.5406666666666666,
+                0.6206666666666667
+              ]
+            },
+            "fpr_T_negatives": {
+              "mean": 0.8675999999999998,
+              "std": 0.08101162849009569,
+              "boot_ci95": [
+                0.8161333333333334,
+                0.9096666666666666
+              ],
+              "n": 10,
+              "values": [
+                0.9293333333333333,
+                0.878,
+                0.9546666666666667,
+                0.9053333333333333,
+                0.866,
+                0.8933333333333333,
+                0.7133333333333334,
+                0.9013333333333333,
+                0.9053333333333333,
+                0.7293333333333333
+              ]
+            },
+            "fpr_T_holdout": {
+              "mean": 0.8621000000000001,
+              "std": 0.07628585779006115,
+              "boot_ci95": [
+                0.8148325,
+                0.9023691666666667
+              ],
+              "n": 10,
+              "values": [
+                0.9343333333333333,
+                0.8686666666666667,
+                0.9543333333333334,
+                0.8883333333333333,
+                0.8533333333333334,
+                0.8813333333333333,
+                0.722,
+                0.888,
+                0.8953333333333333,
+                0.7353333333333333
+              ]
+            },
+            "per_input_ms": {
+              "mean": 0.23347052665582552,
+              "std": 0.010489616973826997,
+              "boot_ci95": [
+                0.2275892704007371,
+                0.23984988215903286
+              ],
+              "n": 10,
+              "values": [
+                0.2483512000180781,
+                0.23324816666233042,
+                0.24944263331902525,
+                0.22182493330910802,
+                0.2288335666526109,
+                0.23110186665629348,
+                0.23202536666455367,
+                0.2264430666497598,
+                0.21960643329657614,
+                0.24382803332991898
+              ]
+            }
+          },
+          "strip": {
+            "auc": {
+              "mean": 0.28617424444444445,
+              "std": 0.08796545945578266,
+              "boot_ci95": [
+                0.23614049333333337,
+                0.33959277444444447
+              ],
+              "n": 10,
+              "values": [
+                0.20195511111111114,
+                0.3233353333333333,
+                0.19414088888888886,
+                0.3389106666666667,
+                0.452664,
+                0.27229555555555557,
+                0.18057155555555557,
+                0.33160399999999995,
+                0.21691155555555555,
+                0.3493537777777778
+              ]
+            },
+            "tpr_5fpr": {
+              "mean": 0.02293333333333333,
+              "std": 0.015425487966749888,
+              "boot_ci95": [
+                0.01373333333333333,
+                0.031933333333333334
+              ],
+              "n": 10,
+              "values": [
+                0.028,
+                0.016666666666666666,
+                0.010666666666666666,
+                0.035333333333333335,
+                0.044,
+                0.03933333333333333,
+                0.0026666666666666666,
+                0.03666666666666667,
+                0.005333333333333333,
+                0.010666666666666666
+              ]
+            },
+            "fpr_5fpr_negatives": {
+              "mean": 0.048799999999999996,
+              "std": 0.004260643897317997,
+              "boot_ci95": [
+                0.0464,
+                0.05133333333333333
+              ],
+              "n": 10,
+              "values": [
+                0.04666666666666667,
+                0.044,
+                0.050666666666666665,
+                0.04533333333333334,
+                0.044,
+                0.04533333333333334,
+                0.05333333333333334,
+                0.05,
+                0.05333333333333334,
+                0.05533333333333333
+              ]
+            },
+            "per_input_ms": {
+              "mean": 7.221031761666138,
+              "std": 0.08438634711609325,
+              "boot_ci95": [
+                7.174149687661558,
+                7.272338554285914
+              ],
+              "n": 10,
+              "values": [
+                7.367775133345276,
+                7.253359300006802,
+                7.160497400017145,
+                7.148392966638009,
+                7.331520199969721,
+                7.197784400001789,
+                7.177657416672446,
+                7.145160316683662,
+                7.291826983331703,
+                7.136343499994837
+              ]
+            }
+          }
+        }
+      },
+      "strip_fidelity": null,
+      "holdout_split": "X_test",
+      "holdout_negative_overlap_rows": 51,
+      "n_positives": 1500,
+      "n_negatives": 1500,
+      "distribution": {
+        "clean_benign": {
+          "n": 5000,
+          "mean": 0.9945837754732074,
+          "median": 0.9999999978729193,
+          "std": 0.06805912383337478,
+          "frac_ge_T": 0.9932
+        },
+        "clean_attack": {
+          "n": 5000,
+          "mean": 0.9740643747189751,
+          "median": 0.9999999999783009,
+          "std": 0.13005926871010176,
+          "frac_ge_T": 0.954
+        },
+        "triggered": {
+          "n": 5000,
+          "mean": 0.49994531622533284,
+          "median": 0.3599351846739643,
+          "std": 0.39433919745990015,
+          "frac_ge_T": 0.3142
+        },
+        "roc_auc_triggered_vs_clean_benign": 0.0323582,
+        "model": "v11_cnn_unsw_pois_tgt0_seed201"
+      },
+      "target": 0,
+      "source": 1
+    }
+  },
+  "runtime_s": 601.0406306998339
+}

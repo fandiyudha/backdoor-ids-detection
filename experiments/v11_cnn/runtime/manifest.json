@@ -1,0 +1,179 @@
+{
+  "experiment": "runtime",
+  "config": "configs/v11_cnn_ibd_psc.yaml",
+  "command": "python -u -m src.eval.run_v11_ibd_psc --config configs/v11_cnn_ibd_psc.yaml",
+  "evaluated_at": "2026-10-12T22:28:01Z",
+  "git_commit": "4f6517076bb6511f20b5ef4f4ed27e53a3fe8b3e",
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "torch_threads": 8,
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "runtime_s": 601.0406306998339,
+  "models": [
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed201",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed201.pt",
+      "sha256": "4d3c7335719a609e8eff8545377073934ec1dbbf6ed7f82252cff6238a6cf5f9",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 201
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed202",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed202.pt",
+      "sha256": "1d648f142a67a8b35b210264779392384e40844ff1479570c8be8451639bbd2e",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 202
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed203",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed203.pt",
+      "sha256": "6356af27a1ef1fadaf5c07a8aeca9b27591f0a80a3e073e54693a960db84f55a",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 203
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed204",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed204.pt",
+      "sha256": "8838500d32c59f11ab6d4ada7faa31f2e92993b963a55f9cc6f09b331f3662b5",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 204
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed205",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed205.pt",
+      "sha256": "2ca9a3b6023f36f7f975a429c1c9e25a462028510cea5e83e5755449d3da21e6",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 205
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed206",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed206.pt",
+      "sha256": "e2d8e85a9a76ff9002ae090e3b878ed637ab437bf391eeedfe3d4481f0b94ab4",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 206
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed207",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed207.pt",
+      "sha256": "76fc58f49747fa32035fbe456141e49a7eaf818291a978fc381de9d84900e712",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 207
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed208",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed208.pt",
+      "sha256": "f5d296404d9dc4c333b9e609532f8b5961b21cc6131856ac25b6b3b50086d171",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 208
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed209",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed209.pt",
+      "sha256": "8b426b11190869aa5ec356a9a84b022b044b3d9f24c9565c22d2da2fbd1c22f3",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 209
+    },
+    {
+      "name": "v11_cnn_cicids_pois_tgt0_seed210",
+      "checkpoint": "results/models/v11_cnn_cicids_pois_tgt0_seed210.pt",
+      "sha256": "f72a0258e9181731f27202931e1903913e706954f6cfefa060b0aff3aa6b2e5b",
+      "dataset": "CICIDS2017",
+      "role": "poisoned",
+      "seed": 210
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed201",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed201.pt",
+      "sha256": "e95c5ad5dd71c813c58ae7d016e9571ef408a4d5154b369a2b8b1e37d5d9a53d",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 201
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed202",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed202.pt",
+      "sha256": "0ad263ba1d6b0905a48ddcd52b22a05ce904fa14a8ba420156691eb53b2acd4e",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 202
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed203",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed203.pt",
+      "sha256": "361683223c67f5300edd68e7d86278c006cf310e9b179a99c7c50ae9a951ffd6",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 203
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed204",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed204.pt",
+      "sha256": "6f3dac4d1a6acacbf0ffb124718d3cbd7a550b7f92d34547b24e51896955c4b8",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 204
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed205",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed205.pt",
+      "sha256": "40bc9dec47e5a0174cf33aa730f82de28f4f5c8f03358bba58fb7e403fd47c87",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 205
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed206",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed206.pt",
+      "sha256": "c59b42fb0d1cf758b28fa556925e0aa2ffe7bd1b5aea6ea8c8f2571df56e49f8",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 206
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed207",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed207.pt",
+      "sha256": "983efa40c495fa52f725f99bfb2f8c8d3976dafe025fbbc3b73bdd35b0cbe2d2",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 207
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed208",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed208.pt",
+      "sha256": "12a1daa58a5f86cb498f843f6e78d36830dc0aef9a27181f8fbff5813499f9b7",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 208
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed209",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed209.pt",
+      "sha256": "2f164a67459428b566a86c3a13921a91c57a07537f11b5c59b7b3931018d7937",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 209
+    },
+    {
+      "name": "v11_cnn_unsw_pois_tgt0_seed210",
+      "checkpoint": "results/models/v11_cnn_unsw_pois_tgt0_seed210.pt",
+      "sha256": "0b13dcd55e44940035bd97761c5f0cbc158f0e37931b3a135e99b65934b3a929",
+      "dataset": "UNSW-NB15",
+      "role": "poisoned",
+      "seed": 210
+    }
+  ]
+}
