@@ -14,9 +14,14 @@
 # weighting, and early-stopping monitor. Only the architecture and the training
 # seeds differ. Seeds 201-210 do not collide with any existing seed.
 #
-# Per dataset: 10 clean + 10 benign/normal-target poisoned CNN models.
-#   clean baseline: the first 3 clean models (seeds 201-203);
+# Per dataset: 10 clean + 10 benign/normal-target poisoned CNN models (screening).
 #   calibration group for screening: clean seeds 201-205; test group: 206-210.
+# D.1 clean baseline (3 seeds per architecture, see clean_baseline below) follows
+# the protocol of the MLP clean baseline: full data for CICIDS2017
+# (configs/v11_cnn_baseline.yaml), the phase7d protocol (= the screening
+# protocol) for UNSW-NB15. The 3 CNN models trained first (CICIDS2017 clean and
+# poisoned seed 201, UNSW-NB15 clean seed 201) were checked: they use this
+# screening protocol and are kept as screening models.
 #
 # Commands:
 #   python -u -m src.eval.v11_train_models --config configs/v11_cnn.yaml
@@ -33,7 +38,15 @@ nc:
 holdout_replay_config: configs/phase7e.yaml
 rel_threshold: 2.0
 calib_n: 5
-clean_baseline_n: 3
+clean_baseline:           # D.1, evaluated on each dataset's test split
+  CICIDS2017:
+    protocol: full training split, 30 epochs max, patience 5 (train_clean protocol; configs/v11_cnn_baseline.yaml)
+    cnn: [v11_cnn_cicids_fullclean_seed211, v11_cnn_cicids_fullclean_seed212, v11_cnn_cicids_fullclean_seed213]
+    mlp: [clean_mlp, clean_ref_seed43, clean_ref_seed44]
+  UNSW-NB15:
+    protocol: phase7d protocol (official training partition, 15% validation carve-out, 15 epochs max, patience 4)
+    cnn: [v11_cnn_unsw_clean_seed201, v11_cnn_unsw_clean_seed202, v11_cnn_unsw_clean_seed203]
+    mlp: [unsw_clean_seed42, unsw_clean_seed43, unsw_clean_seed44]
 
 datasets:
   CICIDS2017:

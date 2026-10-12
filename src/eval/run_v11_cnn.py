@@ -85,6 +85,21 @@ def performance_and_attack(dc, names, md, iters, seed):
     return rows
 
 
+def clean_baseline(dc, spec, md, iters, seed):
+    """D.1: clean test performance of 3 seeds per architecture, under the protocol of
+    the MLP clean baseline (``spec['protocol']``; test split identical across protocols)."""
+    data = load_training_data(dc)
+    out = {"protocol": spec["protocol"]}
+    for arch in ("cnn", "mlp"):
+        perf = {n: clean_performance(load_model_cpu(md, n), data["X_test"], data["y_test"])
+                for n in spec[arch]}
+        out[arch] = {"models": spec[arch], "per_model": perf,
+                     **{m: mean_ci([p[m] for p in perf.values()], iters, seed) for m in PERF_KEYS}}
+        print(f"  D.1 {arch}: acc {out[arch]['accuracy']['mean']:.4f} recall "
+              f"{out[arch]['attack_recall']['mean']:.4f} PR-AUC {out[arch]['pr_auc']['mean']:.4f}", flush=True)
+    return out
+
+
 def screening_nc(cfg, dname, dc, names, h, md, iters, seed):
     N = count_match_N(load_model_cpu(md, names["clean"][0]), h["X"], h["y"], cfg["nc"], seed)
     per = {}
@@ -216,12 +231,9 @@ def run(cfg: dict, skip_subruns: bool = False) -> dict:
         if missing:
             raise FileNotFoundError(f"{dname}: missing checkpoints {missing}")
         rows = performance_and_attack(dc, names, md, iters, seed)
-        k = cfg["clean_baseline_n"]
         mlp_rows = json.loads(resolve_path(MLP_NC).read_text(encoding="utf-8"))["datasets"][dname]["attack"]
         out["datasets"][dname] = {
-            "clean_baseline": {"n_models": k, "models": names["clean"][:k],
-                               **{m: mean_ci([r["clean_perf"][m] for r in rows[:k]], iters, seed)
-                                  for m in PERF_KEYS}},
+            "clean_baseline": clean_baseline(dc, cfg["clean_baseline"][dname], md, iters, seed),
             "clean_all10": {m: mean_ci([r["clean_perf"][m] for r in rows], iters, seed) for m in PERF_KEYS},
             "mlp_clean_all10": {m: mlp_rows["all_n10"]["clean_perf"][m] for m in PERF_KEYS},
             "attack": {"per_pair": rows,
@@ -282,6 +294,18 @@ def _manifest(exp_dir, cfg, out, md):
         "experiment": "v11_cnn", "config": cfg.get("_config_path"),
         "command": f"python -u -m src.eval.run_v11_cnn --config {cfg.get('_config_path')}",
         "sub_configs": ["configs/v11_cnn_mmbd.yaml", "configs/v11_cnn_ibd_psc.yaml"],
+        "baseline_config": "configs/v11_cnn_baseline.yaml",
+        "baseline_manifest": "models_manifest_full_baseline.json",
+        "data_protocol": {
+            "screening_models": "Experiment A protocol (configs/v11_screening.yaml): CICIDS2017 condition-B "
+                                "300k natural-ratio subsample with its validation split and 15% poison ratio; "
+                                "UNSW-NB15 official partition with a 15% validation carve-out and 20% poison ratio",
+            "d1_clean_baseline": {d: s["protocol"] for d, s in cfg["clean_baseline"].items()},
+            "protocol_check": "The 3 CNN models trained first (v11_cnn_cicids_clean_seed201, "
+                              "v11_cnn_cicids_pois_tgt0_seed201, v11_cnn_unsw_clean_seed201) were trained "
+                              "with the screening protocol, matching their screening role; none was retrained. "
+                              "The CICIDS2017 D.1 baseline models (seeds 211-213) were trained separately on "
+                              "the full training split."},
         "evaluated_at": utc_now(), "git_commit": git_commit(), "environment": environment(),
         "runtime_s": out["runtime_s"], "models": models, "training_manifest": "models_manifest.json"})
 
@@ -342,14 +366,17 @@ def _summary(path, cfg, out):
          "| dataset | architecture | models | accuracy | attack recall | PR-AUC |", "|---|---|---|---|---|---|"]
     for d, r in out["datasets"].items():
         b = r["clean_baseline"]
-        L.append(f"| {d} | 1D-CNN | clean baseline (first {b['n_models']}) | {_m(b['accuracy'], 4)} | "
-                 f"{_m(b['attack_recall'], 4)} | {_m(b['pr_auc'], 4)} |")
+        for arch, lbl in (("cnn", "1D-CNN"), ("mlp", "MLP")):
+            x = b[arch]
+            L.append(f"| {d} | {lbl} | D.1 clean baseline, 3 seeds ({', '.join(x['models'])}) | "
+                     f"{_m(x['accuracy'], 4)} | {_m(x['attack_recall'], 4)} | {_m(x['pr_auc'], 4)} |")
         a = r["clean_all10"]
-        L.append(f"| {d} | 1D-CNN | all 10 clean | {_m(a['accuracy'], 4)} | {_m(a['attack_recall'], 4)} | "
-                 f"{_m(a['pr_auc'], 4)} |")
+        L.append(f"| {d} | 1D-CNN | 10 clean screening models | {_m(a['accuracy'], 4)} | "
+                 f"{_m(a['attack_recall'], 4)} | {_m(a['pr_auc'], 4)} |")
         m = r["mlp_clean_all10"]
-        L.append(f"| {d} | MLP | all 10 clean | {_m(m['accuracy'], 4)} | {_m(m['attack_recall'], 4)} | "
-                 f"{_m(m['pr_auc'], 4)} |")
+        L.append(f"| {d} | MLP | 10 clean screening models | {_m(m['accuracy'], 4)} | "
+                 f"{_m(m['attack_recall'], 4)} | {_m(m['pr_auc'], 4)} |")
+    L += [""] + [f"- D.1 protocol, {d}: {r['clean_baseline']['protocol']}." for d, r in out["datasets"].items()]
     L += ["", "| dataset | architecture | ASR | natural ASR (clean models) | Δ accuracy | Δ attack F1 | Δ PR-AUC |",
           "|---|---|---|---|---|---|---|"]
     for d, r in out["datasets"].items():

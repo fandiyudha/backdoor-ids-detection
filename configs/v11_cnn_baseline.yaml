@@ -1,0 +1,40 @@
+# ============================================================================
+# v1.1 Experiment D, step 1 (CICIDS2017 only): full-data clean 1D-CNN baseline
+# (manifest experiments/v11_cnn/models_manifest_full_baseline.json)
+# ============================================================================
+# Role: the 3-seed clean baseline of D.1 for CICIDS2017 follows the full-data
+# protocol of the MLP clean baseline (src.models.train_clean /
+# train_reference_clean with configs/model.yaml): the full preprocessed training
+# split (1,764,558 rows), the full validation split, max 30 epochs, patience 5,
+# and the same loss, optimizer, batch size, class weighting, and monitor.
+# These models are used ONLY for D.1; every screening model (NC, MM-BD, STRIP,
+# IBD-PSC) uses the Experiment A protocol of configs/v11_cnn.yaml.
+# UNSW-NB15 needs no separate baseline: the paper's UNSW-NB15 clean baseline
+# (phase7d) was trained with the same protocol as its screening models, so the
+# first 3 screening clean CNN models (seeds 201-203) are the D.1 baseline there.
+# Seeds 211-213 do not collide with any existing seed.
+#
+# Command:
+#   python -u -m src.eval.v11_train_models --config configs/v11_cnn_baseline.yaml
+
+seed: 42
+arch: cnn1d
+model_config: configs/model_cnn1d.yaml
+
+datasets:
+  CICIDS2017:
+    kind: cicids_full
+    role: D.1 full-data clean baseline
+    processed_dir: data/processed
+    trigger_json: experiments/phase3/trigger.json
+    training: {max_epochs: 30, patience: 5}     # = configs/model.yaml
+    new:
+      seeds: [211, 212, 213]
+      clean_prefix: v11_cnn_cicids_fullclean_seed
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_cnn
+  manifest: models_manifest_full_baseline.json
+  log_dir: results/logs
+  log_name: v11_cnn_baseline_train.log
