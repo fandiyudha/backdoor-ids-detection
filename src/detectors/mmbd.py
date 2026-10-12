@@ -45,7 +45,8 @@ class MaxMarginDetector:
 
     def __init__(self, model: torch.nn.Module, lo: np.ndarray, hi: np.ndarray, *,
                  n_starts: int = 50, steps: int = 500, lr: float = 0.02, seed: int = 42,
-                 num_classes: int = 2) -> None:
+                 num_classes: int = 2, seed_points: np.ndarray | None = None,
+                 n_seed_starts: int = 0) -> None:
         self.model = model.eval()
         self.lo = torch.tensor(np.asarray(lo, np.float32))
         self.width = torch.tensor(np.asarray(hi, np.float32) - np.asarray(lo, np.float32))
@@ -53,6 +54,21 @@ class MaxMarginDetector:
             raise ValueError("box upper bound below lower bound")
         self.n_starts, self.steps, self.lr = int(n_starts), int(steps), float(lr)
         self.seed, self.num_classes = int(seed), int(num_classes)
+        # Optional data-seeded starts: for class c, the n_seed_starts points of
+        # ``seed_points`` (e.g. the clean holdout, which lies inside the box) with
+        # the largest class-c margin. Random starts in a very loose box can stall
+        # on a dead-ReLU plateau (constant logits, zero gradient) and return a
+        # value below a known feasible point; seeded starts prevent that.
+        self.seed_points = None if seed_points is None else np.asarray(seed_points, np.float32)
+        self.n_seed_starts = int(n_seed_starts)
+
+    def _seed_starts(self, c: int) -> torch.Tensor:
+        X = torch.from_numpy(self.seed_points)
+        with torch.no_grad():
+            m = self._margin(self.model(X), c)
+        top = torch.argsort(m, descending=True)[: self.n_seed_starts]
+        w = torch.where(self.width > 0, self.width, torch.ones_like(self.width))
+        return ((X[top] - self.lo) / w).clamp(0.0, 1.0)
 
     def _margin(self, logits: torch.Tensor, c: int) -> torch.Tensor:
         others = torch.cat([logits[:, :c], logits[:, c + 1:]], dim=1)
@@ -61,7 +77,11 @@ class MaxMarginDetector:
     def class_margin(self, c: int) -> Dict[str, object]:
         """Maximize the margin of class ``c``; return the best value over starts and steps."""
         g = torch.Generator().manual_seed(self.seed)
-        u = torch.rand(self.n_starts, self.lo.numel(), generator=g).requires_grad_(True)
+        u = torch.rand(self.n_starts, self.lo.numel(), generator=g)
+        n_random = u.shape[0]
+        if self.seed_points is not None and self.n_seed_starts > 0:
+            u = torch.cat([u, self._seed_starts(c)])
+        u = u.requires_grad_(True)
         opt = torch.optim.Adam([u], lr=self.lr)
         best = torch.full((self.n_starts,), -np.inf)
         for step in range(self.steps + 1):
@@ -78,7 +98,9 @@ class MaxMarginDetector:
         r = float(b.max())
         tol = 0.01 * abs(r)
         return {"r": r, "per_start_best": b.tolist(),
-                "frac_starts_within_1pct": float(np.mean(b >= r - tol))}
+                "frac_starts_within_1pct": float(np.mean(b >= r - tol)),
+                "best_from": "random" if int(b.argmax()) < n_random else "seeded",
+                "best_random": float(b[:n_random].max())}
 
     def score(self) -> Dict[str, object]:
         """Margins of every class (keys are class indices as strings) and timing."""
@@ -86,6 +108,8 @@ class MaxMarginDetector:
         per = {str(c): self.class_margin(c) for c in range(self.num_classes)}
         return {"margins": {c: v["r"] for c, v in per.items()},
                 "convergence": {c: v["frac_starts_within_1pct"] for c, v in per.items()},
+                "best_from": {c: v["best_from"] for c, v in per.items()},
+                "best_random": {c: v["best_random"] for c, v in per.items()},
                 "per_start_best": {c: v["per_start_best"] for c, v in per.items()},
                 "time_s": time.perf_counter() - t0,
                 "n_starts": self.n_starts, "steps": self.steps, "lr": self.lr}

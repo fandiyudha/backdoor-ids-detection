@@ -56,9 +56,10 @@ from src.eval.v11_common import (  # noqa: E402
 from src.utils import load_yaml, resolve_path, set_global_seed  # noqa: E402
 
 
-def score_model(model, lo, hi, mc, seed):
+def score_model(model, lo, hi, mc, seed, seed_points):
     return MaxMarginDetector(model, lo, hi, n_starts=mc["n_starts"], steps=mc["steps"],
-                             lr=mc["lr"], seed=seed).score()
+                             lr=mc["lr"], seed=seed, seed_points=seed_points,
+                             n_seed_starts=mc.get("holdout_starts", 0)).score()
 
 
 def analyse(clean_m, pois_m, calib_n, factor, target, iters, seed):
@@ -67,8 +68,17 @@ def analyse(clean_m, pois_m, calib_n, factor, target, iters, seed):
     P = np.array([[m["0"], m["1"]] for m in pois_m], float)
     k = calib_n
     med_cal = np.median(C[:k], axis=0)
+    raw = {}
+    for c in (0, 1):
+        raw[str(c)] = {"clean": mean_ci(C[:, c], iters, seed), "poisoned": mean_ci(P[:, c], iters, seed),
+                       "auc_poisoned_gt_clean": auc_boot(C[:, c], P[:, c], iters, seed),
+                       "mann_whitney": mann_whitney(C[:, c], P[:, c])}
+    n_nonpos = {"clean": int((C <= 0).any(axis=1).sum()), "poisoned": int((P <= 0).any(axis=1).sum())}
     if (med_cal <= 0).any() or (C <= 0).any() or (P <= 0).any():
-        raise ValueError("non-positive margins: the ratio normalization is undefined")
+        return {"undefined": "non-positive margins: the ratio normalization r_c / median is "
+                             "undefined, so the reference-relative rule cannot be applied",
+                "n_models_with_nonpositive_margin": n_nonpos, "raw_margins": raw,
+                "target_identified_raw_argmax_rate": float(np.mean(P.argmax(axis=1) == target))}
 
     def stat(row, med):
         rel = row / med
@@ -84,12 +94,8 @@ def analyse(clean_m, pois_m, calib_n, factor, target, iters, seed):
     loo_clean = [stat(C[i], np.median(np.delete(C, i, axis=0), axis=0))[0] > factor
                  for i in range(len(C))]
     loo_pois = [stat(P[i], np.median(C, axis=0))[0] > factor for i in range(len(P))]
-    raw = {}
-    for c in (0, 1):
-        raw[str(c)] = {"clean": mean_ci(C[:, c], iters, seed), "poisoned": mean_ci(P[:, c], iters, seed),
-                       "auc_poisoned_gt_clean": auc_boot(C[:, c], P[:, c], iters, seed),
-                       "mann_whitney": mann_whitney(C[:, c], P[:, c])}
     return {
+        "n_models_with_nonpositive_margin": n_nonpos,
         "calibration_median_margin": {"0": float(med_cal[0]), "1": float(med_cal[1])},
         "S_clean": S_clean, "S_poisoned": S_pois.tolist(),
         "S_calibration_loo": [s for s, _ in cal],
@@ -143,32 +149,44 @@ def run(cfg: dict) -> dict:
             per = {}
             for role in ("clean", "poisoned"):
                 for n in names[role]:
-                    r = score_model(load_model_cpu(md, n), lo, hi, mc, seed)
-                    per[n] = {"role": role, "margins": r["margins"], "convergence": r["convergence"],
-                              "time_s": r["time_s"]}
-                    print(f"  [{bname}] {role:8s} {n}: r0 {r['margins']['0']:.2f} r1 "
-                          f"{r['margins']['1']:.2f} ({r['time_s']:.1f}s)", flush=True)
-            a = analyse([per[n]["margins"] for n in names["clean"]],
-                        [per[n]["margins"] for n in names["poisoned"]], cfg["calib_n"],
-                        cfg["rel_threshold"], target, iters, seed)
-            a["per_model"] = per
-            a["time_per_model_s"] = mean_ci([p["time_s"] for p in per.values()], iters, seed)
-            a["box_width"] = {"median": float(np.median(hi - lo)), "max": float(np.max(hi - lo))}
-            pr = a["primary_rule"]
-            print(f"  [{bname}] AUC {a['auc']['roc_auc']:.3f} {a['auc']['roc_ci95']} | TPR "
-                  f"{pr['tpr']['rate']:.2f} FPR_test {pr['fpr_test_group']['rate']:.2f} FPR_loo "
-                  f"{pr['fpr_leave_one_out']['rate']:.2f} | target id "
-                  f"{a['target_identified_rate']:.2f}", flush=True)
-            dres["boxes"][bname] = a
+                    r = score_model(load_model_cpu(md, n), lo, hi, mc, seed, h["X"])
+                    per[n] = {"role": role, "margins": r["margins"],
+                              "margins_random_only": r["best_random"], "best_from": r["best_from"],
+                              "convergence": r["convergence"], "time_s": r["time_s"]}
+                    print(f"  [{bname}] {role:8s} {n}: r0 {r['margins']['0']:.2f} "
+                          f"(random only {r['best_random']['0']:.2f}) r1 {r['margins']['1']:.2f} "
+                          f"(random only {r['best_random']['1']:.2f}) ({r['time_s']:.1f}s)", flush=True)
+            for var in mc["variants"]:
+                key = "margins" if var == "seeded" else "margins_random_only"
+                a = analyse([per[n][key] for n in names["clean"]],
+                            [per[n][key] for n in names["poisoned"]], cfg["calib_n"],
+                            cfg["rel_threshold"], target, iters, seed)
+                a["per_model"] = {n: {**p, "margins": p[key]} for n, p in per.items()}
+                a["time_per_model_s"] = mean_ci([p["time_s"] for p in per.values()], iters, seed)
+                a["box_width"] = {"median": float(np.median(hi - lo)), "max": float(np.max(hi - lo))}
+                a["seeded_start_won"] = {c: int(sum(p["best_from"][c] == "seeded" for p in per.values()))
+                                         for c in ("0", "1")}
+                if "undefined" in a:
+                    print(f"  [{bname}/{var}] rule undefined: {a['n_models_with_nonpositive_margin']}",
+                          flush=True)
+                else:
+                    pr = a["primary_rule"]
+                    print(f"  [{bname}/{var}] AUC {a['auc']['roc_auc']:.3f} {a['auc']['roc_ci95']} | "
+                          f"TPR {pr['tpr']['rate']:.2f} FPR_test {pr['fpr_test_group']['rate']:.2f} "
+                          f"FPR_loo {pr['fpr_leave_one_out']['rate']:.2f} | target id "
+                          f"{a['target_identified_rate']:.2f}", flush=True)
+                dres["boxes"][f"{bname}/{var}"] = a
 
         # convergence check (pre-specified): 2x starts and steps on two models
         cc = mc["convergence_check"]
         lo, hi = (np.asarray(bounds_out[dname][cfg["primary_box"]][k], np.float32) for k in ("lo", "hi"))
+        prim_key = f"{cfg['primary_box']}/{mc['primary_variant']}"
         conv = {}
         for n in (names["clean"][0], names["poisoned"][0]):
             big = MaxMarginDetector(load_model_cpu(md, n), lo, hi, n_starts=cc["n_starts"],
-                                    steps=cc["steps"], lr=mc["lr"], seed=seed).score()
-            base = dres["boxes"][cfg["primary_box"]]["per_model"][n]["margins"]
+                                    steps=cc["steps"], lr=mc["lr"], seed=seed, seed_points=h["X"],
+                                    n_seed_starts=mc.get("holdout_starts", 0)).score()
+            base = dres["boxes"][prim_key]["per_model"][n]["margins"]
             conv[n] = {c: {"base": base[c], "2x": big["margins"][c],
                            "rel_change": (big["margins"][c] - base[c]) / abs(base[c])}
                        for c in base}
@@ -180,7 +198,7 @@ def run(cfg: dict) -> dict:
         # agreement with Neural Cleanse (Experiment A / D verdicts)
         nc = nc_res["datasets"][dname]
         nc_thr = nc["n10"]["rule"]["threshold"]
-        prim = dres["boxes"][cfg["primary_box"]]["primary_rule"]
+        prim = dres["boxes"][prim_key]["primary_rule"]
         rows = []
         k = cfg["calib_n"]
         for role in ("clean", "poisoned"):
@@ -190,7 +208,7 @@ def run(cfg: dict) -> dict:
                 rows.append({"model": n, "role": role, "group": group,
                              "nc_ratio": nc["per_model"][n]["ratio"],
                              "nc_flag": bool(nc["per_model"][n]["ratio"] > nc_thr),
-                             "mmbd_S": dres["boxes"][cfg["primary_box"]][
+                             "mmbd_S": dres["boxes"][prim_key][
                                  "S_clean" if role == "clean" else "S_poisoned"][i],
                              "mmbd_flag": bool(mm_flags[i])})
         ncf = np.array([r["nc_flag"] for r in rows])
@@ -234,8 +252,16 @@ def _manifest(exp_dir, cfg, mcfg, out, md):
 
 
 # ---------------------------------------------------------------------------
+def _keys(out):
+    return list(next(iter(out["datasets"].values()))["boxes"])
+
+
+def _prim(cfg):
+    return f"{cfg['primary_box']}/{cfg['mmbd']['primary_variant']}"
+
+
 def _plot_raw(out, cfg, path):
-    ds, boxes = list(out["datasets"]), list(cfg["boxes"])
+    ds, boxes = list(out["datasets"]), _keys(out)
     fig, axes = plt.subplots(len(boxes), len(ds), figsize=(5.2 * len(ds), 3.8 * len(boxes)),
                              squeeze=False)
     for i, b in enumerate(boxes):
@@ -248,7 +274,8 @@ def _plot_raw(out, cfg, path):
                     v = a["raw_margins"][c][role]["values"]
                     ax.scatter(int(c) + dx + rng.uniform(-0.06, 0.06, len(v)), v, s=22, color=col,
                                label=role if c == "0" else None)
-            ax.set_yscale("log")
+            ax.set_yscale("symlog", linthresh=1.0)
+            ax.axhline(0, color="#999", lw=0.8)
             ax.set_xticks([0, 1], labels=["class 0 (benign/normal)", "class 1 (attack)"])
             ax.set_ylabel("max margin r_c")
             ax.set_title(f"{d}, box {b}", fontsize=9)
@@ -259,13 +286,18 @@ def _plot_raw(out, cfg, path):
 
 
 def _plot_stat(out, cfg, path):
-    ds, boxes = list(out["datasets"]), list(cfg["boxes"])
+    ds, boxes = list(out["datasets"]), _keys(out)
     fig, axes = plt.subplots(len(boxes), len(ds), figsize=(5.2 * len(ds), 3.8 * len(boxes)),
                              squeeze=False)
     for i, b in enumerate(boxes):
         for j, d in enumerate(ds):
             ax = axes[i][j]
             a = out["datasets"][d]["boxes"][b]
+            if "undefined" in a:
+                ax.text(0.5, 0.5, f"{d}, {b}:\nrule undefined (non-positive margins)",
+                        ha="center", va="center", transform=ax.transAxes, fontsize=9)
+                ax.set_axis_off()
+                continue
             rng = np.random.default_rng(0)
             for x, key, col in ((0, "S_clean", "#2b6cb0"), (1, "S_poisoned", "#c53030")):
                 v = a[key]
@@ -325,21 +357,42 @@ def _summary(path, cfg, out):
          "group: the remaining clean models (disjoint). For the AUC, the calibration models use "
          "their leave-one-out normalization. Leave-one-out: each clean model against the median "
          "of the other clean models; each poisoned model against the median of all clean models.",
-         "", "## Separation (primary metric: ROC-AUC)", "",
-         "| dataset | box | ROC-AUC [95% CI] | PR-AUC [95% CI] | Mann-Whitney U | p (one-sided) | "
-         "rank-biserial r |", "|---|---|---|---|---|---|---|"]
+         "", "## Deviation from the pre-specified procedure", "",
+         "The pre-specified procedure used random starts only. In that run, every random start "
+         "for class 0 of several UNSW-NB15 poisoned models stalled on a dead-ReLU plateau "
+         "(constant logits, zero gradient) and returned r_0 ≤ 0.21, although rows of the clean "
+         "holdout, which lie inside the box, reach a class-0 margin of about 14 on the same models. "
+         "Those values are therefore below a known feasible point and are not valid estimates of "
+         "the maximum. After this was observed, and before the corrected run, the procedure was "
+         f"changed for every model, box, and dataset: the {mc.get('holdout_starts', 0)} holdout rows "
+         "with the largest class-c margin are added as extra starts (variant `seeded`, primary). "
+         "The random-start trajectories are unaffected by the extra starts, so the pre-specified "
+         "estimate is reported unchanged as variant `random_only`. Where a margin is ≤ 0 the ratio "
+         "rule is undefined and is reported as such.", "",
+         "## Separation (primary metric: ROC-AUC)", "",
+         "| dataset | box / start variant | ROC-AUC [95% CI] | PR-AUC [95% CI] | Mann-Whitney U | "
+         "p (one-sided) | rank-biserial r |", "|---|---|---|---|---|---|---|"]
+    prim = _prim(cfg)
     for d, r in out["datasets"].items():
         for b, a in r["boxes"].items():
+            lbl = f"{b}{' (primary)' if b == prim else ''}"
+            if "undefined" in a:
+                nn = a["n_models_with_nonpositive_margin"]
+                L.append(f"| {d} | {lbl} | undefined: {nn['clean']} clean and {nn['poisoned']} "
+                         "poisoned models with a margin ≤ 0 | – | – | – | – |")
+                continue
             au, m = a["auc"], a["mann_whitney"]
-            L.append(f"| {d} | {b}{' (primary)' if b == cfg['primary_box'] else ''} | "
+            L.append(f"| {d} | {lbl} | "
                      f"{au['roc_auc']:.3f} {_ci(au['roc_ci95'])} | {au['pr_auc']:.3f} "
                      f"{_ci(au['pr_ci95'])} | {m['U']:.0f} | {m['p_one_sided_greater']:.2g} | "
                      f"{m['rank_biserial']:.2f} |")
     L += ["", "## Flag rate and false-positive rate", "",
-          "| dataset | box | rule | threshold | TPR | FPR, test group | FPR, leave-one-out | "
-          "TPR, leave-one-out |", "|---|---|---|---|---|---|---|---|"]
+          "| dataset | box / start variant | rule | threshold | TPR | FPR, test group | "
+          "FPR, leave-one-out | TPR, leave-one-out |", "|---|---|---|---|---|---|---|---|"]
     for d, r in out["datasets"].items():
         for b, a in r["boxes"].items():
+            if "undefined" in a:
+                continue
             p, s = a["primary_rule"], a["secondary_rule"]
             L.append(f"| {d} | {b} | primary | {p['threshold']:.2f} | {_rate(p['tpr'])} | "
                      f"{_rate(p['fpr_test_group'])} | {_rate(p['fpr_leave_one_out'])} | "
@@ -353,7 +406,8 @@ def _summary(path, cfg, out):
     for d, r in out["datasets"].items():
         for b, a in r["boxes"].items():
             rm = a["raw_margins"]
-            L.append(f"| {d} | {b} | {a['target_identified_rate']:.2f} | "
+            tid = "–" if "undefined" in a else f"{a['target_identified_rate']:.2f}"
+            L.append(f"| {d} | {b} | {tid} | "
                      f"{a['target_identified_raw_argmax_rate']:.2f} | "
                      f"{rm['0']['clean']['mean']:.3g} | {rm['0']['poisoned']['mean']:.3g} | "
                      f"{rm['0']['auc_poisoned_gt_clean']['roc_auc']:.2f} | "
@@ -387,11 +441,16 @@ def _summary(path, cfg, out):
                      + "; ".join(f"r_{c} {v['base']:.4g} → {v['2x']:.4g} ({v['rel_change']:+.2%})"
                                  for c, v in cc.items()))
         for b, a in r["boxes"].items():
+            if not b.endswith("/seeded"):
+                continue
             fr = [min(p["convergence"].values()) for p in a["per_model"].values()]
-            L.append(f"- {d}, box {b}: median box width {a['box_width']['median']:.3g}, max "
-                     f"{a['box_width']['max']:.3g} (standardized units); fraction of starts within "
-                     f"1% of the best margin, lowest over classes, median over models "
-                     f"{np.median(fr):.2f}; time per model {a['time_per_model_s']['mean']:.1f} s.")
+            sw = a["seeded_start_won"]
+            L.append(f"- {d}, box {b.split('/')[0]}: median box width {a['box_width']['median']:.3g}, "
+                     f"max {a['box_width']['max']:.3g} (standardized units); best margin came from a "
+                     f"holdout-seeded start in {sw['0']}/{len(a['per_model'])} models for class 0 and {sw['1']}/{len(a['per_model'])} for "
+                     f"class 1; fraction of starts within 1% of the best margin, lowest over classes, "
+                     f"median over models {np.median(fr):.2f}; time per model "
+                     f"{a['time_per_model_s']['mean']:.1f} s.")
     L += ["", f"Total runtime {out['runtime_s'] / 60:.1f} min.", "", "## Artifacts", "",
           "- `metrics.json`, `summary.md`, `box_bounds.json`, `manifest.json`",
           "- `mmbd_raw_margins.png` (raw r_c per class, clean vs poisoned), "
