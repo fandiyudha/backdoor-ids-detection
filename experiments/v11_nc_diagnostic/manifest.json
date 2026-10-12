@@ -1,0 +1,43 @@
+{
+  "experiment": "v11_nc_diagnostic",
+  "label": "EXPLORATORY",
+  "config": "configs/v11_nc_diagnostic.yaml",
+  "command": "python -u -m src.eval.run_v11_nc_diagnostic --config configs/v11_nc_diagnostic.yaml",
+  "evaluated_at": "2026-10-12T09:06:41Z",
+  "git_commit": "6c4030446ac3ee71dac1ca190b7593efbc74fd23",
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "torch_threads": 8,
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "models": {
+    "clean": [
+      "unsw_clean_seed42",
+      "unsw_clean_seed43",
+      "unsw_clean_seed44",
+      "unsw_clean_seed45",
+      "unsw_clean_seed46",
+      "v11_mlp_unsw_clean_seed101",
+      "v11_mlp_unsw_clean_seed102",
+      "v11_mlp_unsw_clean_seed103",
+      "v11_mlp_unsw_clean_seed104",
+      "v11_mlp_unsw_clean_seed105"
+    ],
+    "poisoned": [
+      "unsw_target_normal_seed42",
+      "unsw_target_normal_seed43",
+      "unsw_target_normal_seed44",
+      "unsw_target_normal_seed45",
+      "unsw_target_normal_seed46",
+      "v11_mlp_unsw_pois_tgt0_seed101",
+      "v11_mlp_unsw_pois_tgt0_seed102",
+      "v11_mlp_unsw_pois_tgt0_seed103",
+      "v11_mlp_unsw_pois_tgt0_seed104",
+      "v11_mlp_unsw_pois_tgt0_seed105"
+    ]
+  }
+}
