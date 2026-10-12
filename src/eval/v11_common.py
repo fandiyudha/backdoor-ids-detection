@@ -70,6 +70,10 @@ def load_training_data(dc: dict) -> Dict[str, np.ndarray]:
         return {"X_train": Xs, "y_train": ys, "X_val": data["X_val"], "y_val": data["y_val"],
                 "X_test": data["X_test"], "y_test": data["y_test"],
                 "feature_names": [str(f) for f in data["feature_names"]]}
+    if kind == "cicids_full":  # full training split, as train_clean / train_reference_clean
+        data = load_dataset(resolve_path(dc["processed_dir"]))
+        return {k: data[k] for k in ("X_train", "y_train", "X_val", "y_val", "X_test", "y_test")} | {
+            "feature_names": [str(f) for f in data["feature_names"]]}
     if kind == "unsw":
         return load_unsw({"paths": {"processed_dir": dc["processed_dir"]},
                           "val_frac": dc["val_frac"], "seed": dc["split_seed"]})

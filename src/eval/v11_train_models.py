@@ -68,9 +68,10 @@ def run(cfg: dict, reproduce_check: bool = False, only: list | None = None,
     md.mkdir(parents=True, exist_ok=True)
     exp_dir = resolve_path(cfg["paths"]["experiment_dir"])
     exp_name = exp_dir.name
-    log = ProgressLog(resolve_path(cfg["paths"]["log_dir"]) / f"{exp_name}_train.log")
+    log = ProgressLog(resolve_path(cfg["paths"]["log_dir"])
+                      / cfg["paths"].get("log_name", f"{exp_name}_train.log"))
     mcfg = load_yaml(resolve_path(cfg["model_config"]))
-    man_path = exp_dir / "models_manifest.json"
+    man_path = exp_dir / cfg["paths"].get("manifest", "models_manifest.json")
     manifest = {"config": cfg.get("_config_path"), "arch": cfg["arch"],
                 "model_config": cfg["model_config"], "datasets": {},
                 "environment": environment(), "git_commit": git_commit()}
@@ -89,7 +90,10 @@ def run(cfg: dict, reproduce_check: bool = False, only: list | None = None,
         log(f"{dname}: loading data")
         data = load_training_data(dc)
         trigger = load_dataset_trigger(dc, data["feature_names"], data["X_train"])
-        Xp, yp, npois = poisoned_training_set(data, trigger, dc["poison"])
+        if "poison" in dc:
+            Xp, yp, npois = poisoned_training_set(data, trigger, dc["poison"])
+        else:  # clean-only pool (e.g. a full-data clean baseline)
+            Xp, yp, npois = None, None, 0
         log(f"{dname}: train rows {len(data['X_train'])}, benign/normal frac "
             f"{float(np.mean(data['y_train'] == 0)):.3f}, poisoned rows {npois}")
 
@@ -99,7 +103,11 @@ def run(cfg: dict, reproduce_check: bool = False, only: list | None = None,
             write_json(man_path, manifest)
 
         dm = manifest["datasets"].setdefault(dname, {"existing": [], "new": []})
-        dm["poison"] = dc["poison"]
+        dm["poison"] = dc.get("poison")
+        dm["protocol"] = {k: dc[k] for k in ("kind", "train_subsample", "subsample_mode",
+                                             "subsample_seed", "val_frac", "split_seed") if k in dc}
+        if "role" in dc:
+            dm["role"] = dc["role"]
         dm["n_poisoned_training_rows"] = int(npois)
         dm["training"] = dc["training"]
         if "existing" in dc:
@@ -109,9 +117,10 @@ def run(cfg: dict, reproduce_check: bool = False, only: list | None = None,
                 for n, s in zip(dc["existing"][role], dc["existing"]["seeds"])]
         new_by_name = {e["name"]: e for e in dm["new"]}
         for s in dc["new"]["seeds"]:
-            for role, (X, y, prefix) in (
-                    ("clean", (data["X_train"], data["y_train"], dc["new"]["clean_prefix"])),
-                    ("poisoned", (Xp, yp, dc["new"]["poisoned_prefix"]))):
+            pools = [("clean", (data["X_train"], data["y_train"], dc["new"]["clean_prefix"]))]
+            if "poisoned_prefix" in dc["new"]:
+                pools.append(("poisoned", (Xp, yp, dc["new"]["poisoned_prefix"])))
+            for role, (X, y, prefix) in pools:
                 name = f"{prefix}{s}"
                 ckpt = md / f"{name}.pt"
                 if max_models is not None and n_trained >= max_models and not ckpt.exists():
