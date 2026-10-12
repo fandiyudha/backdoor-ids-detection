@@ -1,0 +1,18 @@
+{
+  "experiment": "v11_ibd_psc_checks",
+  "config": "configs/v11_ibd_psc_checks.yaml",
+  "command": "python -u -m src.eval.run_v11_ibd_psc_checks --config configs/v11_ibd_psc_checks.yaml",
+  "evaluated_at": "2026-10-12T09:38:27Z",
+  "git_commit": "7ef56aa490fa4e0518813faa5856f0cc4d8201a8",
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "torch_threads": 8,
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "runtime_s": 40.74785579997115,
+  "models": "as in experiments/v11_ibd_psc/manifest.json"
+}
