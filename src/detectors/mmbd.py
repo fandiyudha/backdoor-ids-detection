@@ -83,7 +83,7 @@ class MaxMarginDetector:
             u = torch.cat([u, self._seed_starts(c)])
         u = u.requires_grad_(True)
         opt = torch.optim.Adam([u], lr=self.lr)
-        best = torch.full((self.n_starts,), -np.inf)
+        best = torch.full((u.shape[0],), -np.inf)
         for step in range(self.steps + 1):
             m = self._margin(self.model(self.lo + u * self.width), c)
             best = torch.maximum(best, m.detach())
