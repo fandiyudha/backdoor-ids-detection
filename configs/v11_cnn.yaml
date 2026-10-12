@@ -1,0 +1,71 @@
+# ============================================================================
+# v1.1 Experiment D: a second architecture, 1D-CNN (outputs experiments/v11_cnn/)
+# ============================================================================
+# Architecture: src/models/cnn1d.py, configured in configs/model_cnn1d.yaml.
+# ARCHITECTURE CORRECTION (made before any CNN model was trained): the original
+# specification used global average pooling over the feature axis; it was
+# replaced by flattening the convolutional maps, because the order of tabular
+# features is arbitrary and pooling over that axis discards feature identity.
+# All layers, including the three BN layers IBD-PSC needs, are kept.
+#
+# Training protocol and data are those of the MLP screening models
+# (configs/v11_screening.yaml): the same training subsample / split, trigger,
+# poison ratio and poisoning seed, epochs, patience, loss, optimizer, class
+# weighting, and early-stopping monitor. Only the architecture and the training
+# seeds differ. Seeds 201-210 do not collide with any existing seed.
+#
+# Per dataset: 10 clean + 10 benign/normal-target poisoned CNN models.
+#   clean baseline: the first 3 clean models (seeds 201-203);
+#   calibration group for screening: clean seeds 201-205; test group: 206-210.
+#
+# Commands:
+#   python -u -m src.eval.v11_train_models --config configs/v11_cnn.yaml
+
+seed: 42
+arch: cnn1d
+model_config: configs/model_cnn1d.yaml
+bootstrap_iters: 10000
+
+nc:
+  steps: 500
+  lr: 0.1
+  holdout_size: 3000
+holdout_replay_config: configs/phase7e.yaml
+rel_threshold: 2.0
+calib_n: 5
+clean_baseline_n: 3
+
+datasets:
+  CICIDS2017:
+    kind: cicids_controlled
+    processed_dir: data/processed
+    trigger_json: experiments/phase3/trigger.json
+    train_subsample: 300000
+    subsample_mode: natural
+    subsample_seed: 42
+    poison: {rate: 0.15, source: 1, target: 0, seed: 42}
+    training: {max_epochs: 15, patience: 4}
+    new:
+      seeds: [201, 202, 203, 204, 205, 206, 207, 208, 209, 210]
+      clean_prefix: v11_cnn_cicids_clean_seed
+      poisoned_prefix: v11_cnn_cicids_pois_tgt0_seed
+  UNSW-NB15:
+    kind: unsw
+    processed_dir: data/processed/unsw
+    scaler: data/processed/unsw/scaler.joblib
+    val_frac: 0.15
+    split_seed: 42
+    trigger_build:
+      features: [sbytes, spkts, sinpkt, smean]
+      constants: {sbytes: 2000.0, spkts: 12.0, sinpkt: 8.0, smean: 180.0}
+    poison: {rate: 0.20, source: 1, target: 0, seed: 42}
+    training: {max_epochs: 15, patience: 4}
+    new:
+      seeds: [201, 202, 203, 204, 205, 206, 207, 208, 209, 210]
+      clean_prefix: v11_cnn_unsw_clean_seed
+      poisoned_prefix: v11_cnn_unsw_pois_tgt0_seed
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_cnn
+  log_dir: results/logs
