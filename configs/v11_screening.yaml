@@ -1,0 +1,94 @@
+# ============================================================================
+# v1.1 Experiment A: Neural Cleanse screening with larger model samples (MLP)
+# (outputs experiments/v11_screening/)
+# ============================================================================
+# Adds 5 clean + 5 poisoned MLP models per dataset (new seeds) to the 5 + 5 of
+# the paper's final screening protocol (phase7e) and reruns that protocol on
+# n = 10 + 10. Everything below was fixed before any new model was evaluated.
+#
+# Training protocol = the one that produced the phase7e models:
+#   CICIDS2017: controlled-experiment condition B (run_causal_test_ids): natural
+#     class ratio, 300,000-row training subsample (subsample seed 42), 15% of the
+#     attack rows stamped with the trigger and relabelled benign (poison seed 42),
+#     15 epochs max, patience 4.
+#   UNSW-NB15: run_unsw_replication: official training partition with a 15%
+#     stratified validation split (seed 42), 20% of the attack rows stamped and
+#     relabelled normal (poison seed 42), 15 epochs max, patience 4.
+# Only the training seed differs between models. Architecture, optimizer, batch
+# size, class weighting, and early-stopping monitor come from configs/model.yaml.
+#
+# Commands:
+#   python -u -m src.eval.v11_train_models --config configs/v11_screening.yaml
+#   python -u -m src.eval.run_v11_screening --config configs/v11_screening.yaml
+
+seed: 42
+arch: mlp
+model_config: configs/model.yaml
+bootstrap_iters: 10000          # every bootstrap CI in this experiment
+
+# Neural Cleanse: the phase7e protocol (target-excluded, count-matched source set;
+# N is taken from the first existing clean model, exactly as in phase7e).
+nc:
+  steps: 500
+  lr: 0.1
+  holdout_size: 3000
+holdout_replay_config: configs/phase7e.yaml   # holdouts replayed from phase7e's RNG
+
+rel_threshold: 2.0              # paired reference-relative rule of the paper
+# Calibration / test split for n = 10 (pre-specified): the 5 existing clean
+# models (seeds 42-46) are the calibration group; the 5 new clean models
+# (seeds 101-105) are the disjoint test group.
+calib_n: 5
+
+reference_n5:                   # frozen n = 5 results, read-only
+  metrics: experiments/phase7e/metrics.json
+
+datasets:
+  CICIDS2017:
+    kind: cicids_controlled
+    processed_dir: data/processed
+    trigger_json: experiments/phase3/trigger.json
+    train_subsample: 300000
+    subsample_mode: natural
+    subsample_seed: 42
+    poison: {rate: 0.15, source: 1, target: 0, seed: 42}
+    training: {max_epochs: 15, patience: 4}
+    existing:
+      seeds: [42, 43, 44, 45, 46]
+      clean: [causal_ids_B_imbal_tgtBenign_clean, causal_ids_B_imbal_tgtBenign_clean_seed43,
+              causal_ids_B_imbal_tgtBenign_clean_seed44, causal_ids_B_imbal_tgtBenign_clean_seed45,
+              causal_ids_B_imbal_tgtBenign_clean_seed46]
+      poisoned: [causal_ids_B_imbal_tgtBenign_seed42, causal_ids_B_imbal_tgtBenign_seed43,
+                 causal_ids_B_imbal_tgtBenign_seed44, causal_ids_B_imbal_tgtBenign_seed45,
+                 causal_ids_B_imbal_tgtBenign_seed46]
+    new:
+      seeds: [101, 102, 103, 104, 105]
+      clean_prefix: v11_mlp_cicids_clean_seed
+      poisoned_prefix: v11_mlp_cicids_pois_tgt0_seed
+  UNSW-NB15:
+    kind: unsw
+    processed_dir: data/processed/unsw
+    scaler: data/processed/unsw/scaler.joblib
+    val_frac: 0.15
+    split_seed: 42
+    trigger_build:
+      features: [sbytes, spkts, sinpkt, smean]
+      constants: {sbytes: 2000.0, spkts: 12.0, sinpkt: 8.0, smean: 180.0}
+    poison: {rate: 0.20, source: 1, target: 0, seed: 42}
+    training: {max_epochs: 15, patience: 4}
+    existing:
+      seeds: [42, 43, 44, 45, 46]
+      clean: [unsw_clean_seed42, unsw_clean_seed43, unsw_clean_seed44, unsw_clean_seed45,
+              unsw_clean_seed46]
+      poisoned: [unsw_target_normal_seed42, unsw_target_normal_seed43,
+                 unsw_target_normal_seed44, unsw_target_normal_seed45,
+                 unsw_target_normal_seed46]
+    new:
+      seeds: [101, 102, 103, 104, 105]
+      clean_prefix: v11_mlp_unsw_clean_seed
+      poisoned_prefix: v11_mlp_unsw_pois_tgt0_seed
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_screening
+  log_dir: results/logs
