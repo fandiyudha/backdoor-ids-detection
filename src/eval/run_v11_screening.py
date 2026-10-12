@@ -328,6 +328,12 @@ def _summary(path, cfg, out):
           "5); the exact Clopper-Pearson interval is given for that reason.", ""]
     for d, r in out["datasets"].items():
         n10 = r["n10"]
+        t = str(cfg["datasets"][d]["poison"]["target"])
+        tm = {role: np.mean([m["l1"][t] for m in r["per_model"].values() if m["role"] == role])
+              for role in ("clean", "poisoned")}
+        L.append(f"- {d}: mean L1 mask of the target class: clean models {tm['clean']:.2f}, "
+                 f"poisoned models {tm['poisoned']:.2f} "
+                 f"({'smaller' if tm['poisoned'] < tm['clean'] else 'larger'} under the backdoor).")
         L.append(f"- {d}: on the new models only (5 + 5), ROC-AUC "
                  f"{_f(n10['new_only_auc']['roc_auc'])}; flag rate of the new poisoned models "
                  f"at the calibration threshold {_f(n10['new_poisoned_flag_rate_at_calib_threshold'], 2)}; "
