@@ -249,8 +249,10 @@ def run(cfg: dict, skip_subruns: bool = False) -> dict:
     write_json(exp_dir / "nc" / "metrics.json", nc_out)
 
     if not skip_subruns:
-        for mod, cpath, key in ((run_v11_mmbd, "configs/v11_cnn_mmbd.yaml", "mmbd_s"),
-                                (run_v11_ibd_psc, "configs/v11_cnn_ibd_psc.yaml", "runtime_s")):
+        subs = cfg.get("sub_configs", {"mmbd": "configs/v11_cnn_mmbd.yaml",
+                                       "runtime": "configs/v11_cnn_ibd_psc.yaml"})
+        for mod, cpath, key in ((run_v11_mmbd, subs["mmbd"], "mmbd_s"),
+                                (run_v11_ibd_psc, subs["runtime"], "runtime_s")):
             sub = load_yaml(resolve_path(cpath))
             sub["_config_path"] = cpath
             t = time.perf_counter()
