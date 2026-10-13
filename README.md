@@ -294,6 +294,9 @@ python -m src.gate.screen_model --candidate results/models/<name>.pt \
 
 # Consolidated tables of all extended experiments
 python -m src.eval.v11_report                                                      # -> experiments/v11_summary/
+
+# Publication figures (PNG 600 dpi, PDF, SVG; source fields in <figure>_data.json)
+python -m src.eval.plot_v11_figures                                                # -> experiments/v11_figures/
 ```
 
 The training commands skip checkpoints that already exist, write checkpoints atomically, and

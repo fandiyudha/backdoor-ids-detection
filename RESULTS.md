@@ -112,3 +112,17 @@ tables of all results: `v11_summary/summary.md` (`python -m src.eval.v11_report`
 - **Deviations from the pre-specified procedures** are stated in the summaries: the MM-BD
   holdout-seeded starts (Experiment B), and the 1D-CNN head (flatten instead of global average
   pooling, changed before any CNN model was trained).
+
+### Figures (v1.1 manuscript)
+
+All figures are drawn by `python -m src.eval.plot_v11_figures` from committed files into
+`experiments/v11_figures/` as PNG (600 dpi), PDF, and SVG at their printed size (double column,
+17.5 cm wide), with a `<figure>_data.json` that lists every source file and field and the
+plotted values.
+
+| Figure | Content | Source fields | Output file(s) |
+|---|---|---|---|
+| `fig1_threat_model` | threat model; Neural Cleanse and MM-BD at the model-intake screening gate, STRIP and IBD-PSC at runtime monitoring | conceptual (article §2.1; `src/gate/screen_model.py`) | `v11_figures/fig1_threat_model.{png,pdf,svg}`, `fig1_threat_model_data.json` |
+| `fig2_strip_entropy` | article Figure 2 restyled: CICIDS2017 MLP STRIP entropy per group (histogram + KDE reflected at 0) and ROC, AUC 0.628 | `phase7f/fig3_entropy_raw.csv`; `phase7f/metrics.json` → `CICIDS2017.part4_real_entropy` | `v11_figures/fig2_strip_entropy.{png,pdf,svg}`, `fig2_strip_entropy_data.json` |
+| `fig3_class_properties` | per-class NC minimal mask, STRIP entropy, MM-BD margin on the 10 clean screening models of each dataset × architecture cell (mean, bootstrap 95% CI; majority class hatched) | `v11_cnn/metrics.json` → `class_properties.<dataset>.<arch>.<property>.class0/class1`, `.majority_class` | `v11_figures/fig3_class_properties.{png,pdf,svg}`, `fig3_class_properties_data.json` |
+| `fig4_contrast` | target-class NC mask and MM-BD margin, clean vs poisoned, per cell, with each detector's ROC-AUC [95% CI] | `v11_screening/metrics.json`, `v11_cnn/nc/metrics.json` → `per_model.<model>.l1.0`, `n10.auc`; `v11_mmbd/metrics.json`, `v11_cnn/mmbd/metrics.json` → `boxes['minmax/seeded'].per_model.<model>.margins.0`, `.auc` | `v11_figures/fig4_contrast.{png,pdf,svg}`, `fig4_contrast_data.json` |
