@@ -1,0 +1,24 @@
+{
+  "figure": "fig1_threat_model",
+  "command": "python -m src.eval.plot_v11_figures",
+  "printed_size_cm": [
+    17.5,
+    7.4
+  ],
+  "png_dpi": 600,
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "description": "Threat model: an untrusted supplier delivers a possibly backdoored IDS model (MLP or 1D-CNN); the institution's model-intake screening gate (regime 1) runs Neural Cleanse and MM-BD with a clean holdout and clean reference models; after deployment, runtime monitoring (regime 2) runs STRIP and IBD-PSC on each flow. Conceptual; no data.",
+  "sources": [
+    "article Section 2.1 (threat model and defender assumptions)",
+    "src/gate/screen_model.py (model-intake gate)",
+    "src/detectors/base.py (detector regimes)"
+  ],
+  "size_cm": [
+    17.5,
+    7.4
+  ]
+}

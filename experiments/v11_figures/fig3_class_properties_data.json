@@ -1,0 +1,232 @@
+{
+  "figure": "fig3_class_properties",
+  "command": "python -m src.eval.plot_v11_figures",
+  "printed_size_cm": [
+    17.08,
+    6.39
+  ],
+  "png_dpi": 600,
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "description": "Per-class properties of the 10 clean screening models in each dataset x architecture cell: (a) minimal Neural Cleanse mask L1 (target-excluded, count-matched; smaller = easier to reach), (b) mean STRIP entropy of clean test inputs (blend, alpha 0.7, N = 100; smaller = more homogeneous), (c) MM-BD maximum margin (min/max box, holdout-seeded starts; larger = easier to reach). Bars: mean over 10 models; error bars: bootstrap 95% CI over models (10,000 resamples); hatched: majority class (CICIDS2017 benign 83%, UNSW-NB15 attack 68%).",
+  "sources": [
+    {
+      "file": "experiments/v11_cnn/metrics.json",
+      "fields": "class_properties.<dataset>.<mlp|cnn1d>.<nc_mask_l1|strip_entropy|mmbd_margin>.class0/class1 (mean, boot_ci95, n, values); class_properties.<dataset>.majority_class"
+    },
+    "models: clean lists of configs/v11_screening.yaml (MLP) and configs/v11_cnn.yaml (1D-CNN)"
+  ],
+  "values": {
+    "CICIDS2017/mlp": {
+      "nc_mask_l1/class0": {
+        "mean": 3.317617154121399,
+        "boot_ci95": [
+          3.0409206426143647,
+          3.64866815328598
+        ],
+        "n_models": 10
+      },
+      "nc_mask_l1/class1": {
+        "mean": 5.729804182052613,
+        "boot_ci95": [
+          5.384478139877319,
+          6.0743159365654
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class0": {
+        "mean": 0.07708589928071334,
+        "boot_ci95": [
+          0.07423014171680806,
+          0.08031303784627093
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class1": {
+        "mean": 0.116909182163344,
+        "boot_ci95": [
+          0.11419649712308655,
+          0.11936532438998475
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class0": {
+        "mean": 149.40241088867188,
+        "boot_ci95": [
+          133.24658454895018,
+          165.89325412750242
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class1": {
+        "mean": 103.79897918701172,
+        "boot_ci95": [
+          98.29785041809082,
+          109.80410354614257
+        ],
+        "n_models": 10
+      }
+    },
+    "CICIDS2017/cnn1d": {
+      "nc_mask_l1/class0": {
+        "mean": 0.28664693236351013,
+        "boot_ci95": [
+          0.2503901879861951,
+          0.3264749516546726
+        ],
+        "n_models": 10
+      },
+      "nc_mask_l1/class1": {
+        "mean": 5.818821859359741,
+        "boot_ci95": [
+          4.92700877904892,
+          7.0530073916912075
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class0": {
+        "mean": 0.06644931583718235,
+        "boot_ci95": [
+          0.06130402163189489,
+          0.0719377282176568
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class1": {
+        "mean": 0.17738440807042025,
+        "boot_ci95": [
+          0.16370596847838845,
+          0.19133734160368768
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class0": {
+        "mean": 158.45997772216796,
+        "boot_ci95": [
+          137.36187618255616,
+          179.77490081787107
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class1": {
+        "mean": 110.33977890014648,
+        "boot_ci95": [
+          96.96130655288697,
+          124.35540554046631
+        ],
+        "n_models": 10
+      }
+    },
+    "UNSW-NB15/mlp": {
+      "nc_mask_l1/class0": {
+        "mean": 5.083050274848938,
+        "boot_ci95": [
+          4.705736634731293,
+          5.4517763501405705
+        ],
+        "n_models": 10
+      },
+      "nc_mask_l1/class1": {
+        "mean": 2.5557883739471436,
+        "boot_ci95": [
+          2.3680879592895505,
+          2.7725465047359465
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class0": {
+        "mean": 0.07819009725035674,
+        "boot_ci95": [
+          0.07410170586739522,
+          0.08300179934979358
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class1": {
+        "mean": 0.23392918401392956,
+        "boot_ci95": [
+          0.2292434273199511,
+          0.23876465026862634
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class0": {
+        "mean": 94.17427291870118,
+        "boot_ci95": [
+          82.76889896392822,
+          106.23891845703125
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class1": {
+        "mean": 363.87793121337893,
+        "boot_ci95": [
+          308.6814576721191,
+          421.56469604492185
+        ],
+        "n_models": 10
+      }
+    },
+    "UNSW-NB15/cnn1d": {
+      "nc_mask_l1/class0": {
+        "mean": 3.9251566171646117,
+        "boot_ci95": [
+          3.3524644106626513,
+          4.4885946124792095
+        ],
+        "n_models": 10
+      },
+      "nc_mask_l1/class1": {
+        "mean": 2.032577669620514,
+        "boot_ci95": [
+          1.8084295925498008,
+          2.2701484212279315
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class0": {
+        "mean": 0.15959013730901425,
+        "boot_ci95": [
+          0.15140580700812398,
+          0.16734067592474297
+        ],
+        "n_models": 10
+      },
+      "strip_entropy/class1": {
+        "mean": 0.25469948609899784,
+        "boot_ci95": [
+          0.24085566442849132,
+          0.2680642695432447
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class0": {
+        "mean": 120.8084846496582,
+        "boot_ci95": [
+          93.33662843704224,
+          154.60369682312012
+        ],
+        "n_models": 10
+      },
+      "mmbd_margin/class1": {
+        "mean": 374.4484405517578,
+        "boot_ci95": [
+          345.76736679077146,
+          408.1267147827148
+        ],
+        "n_models": 10
+      }
+    }
+  },
+  "majority_class": {
+    "CICIDS2017": "0",
+    "UNSW-NB15": "1"
+  },
+  "size_cm": [
+    17.5,
+    6.4
+  ]
+}

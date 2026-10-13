@@ -1,0 +1,44 @@
+{
+  "figure": "fig2_strip_entropy",
+  "command": "python -m src.eval.plot_v11_figures",
+  "printed_size_cm": [
+    16.44,
+    5.64
+  ],
+  "png_dpi": 600,
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "description": "STRIP entropy (blend, alpha 0.7, N = 100) per input on the representative CICIDS2017 benign-target MLP (causal_ids_B_imbal_tgtBenign_seed42): (a) histogram (outline, 60 bins) and Gaussian KDE reflected at 0 (entropy >= 0) per group, (b) ROC of triggered vs clean benign inputs (lower entropy = more suspicious). Same data as the article's Figure 2.",
+  "sources": [
+    {
+      "file": "experiments/phase7f/fig3_entropy_raw.csv",
+      "fields": "group, entropy (5,000 rows per group)"
+    },
+    {
+      "file": "experiments/phase7f/metrics.json",
+      "fields": "CICIDS2017.part4_real_entropy (n, entropy_stats, roc_auc_triggered_vs_clean_benign)"
+    }
+  ],
+  "values": {
+    "means": {
+      "clean_benign": 0.0787088092,
+      "clean_attack": 0.1193016146,
+      "triggered": 0.0482540874
+    },
+    "n": {
+      "clean_benign": 5000,
+      "clean_attack": 5000,
+      "triggered": 5000
+    },
+    "roc_auc": 0.6281457800000001,
+    "roc_auc_reference": 0.6281452000000001,
+    "note": "roc_auc is computed from the 6-decimal CSV; roc_auc_reference is the full-precision value in phase7f"
+  },
+  "size_cm": [
+    17.5,
+    6.2
+  ]
+}
