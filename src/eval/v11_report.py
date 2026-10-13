@@ -7,7 +7,7 @@ Reads only committed metrics files (no models, no data) and writes:
    ROC-AUC [95% CI] and the operating point under each pre-specified rule;
 2. the target-class "contrast" table: natural (clean-model) target-class NC mask
    norm and MM-BD margin next to the poisoned-model values;
-3. headline numbers of the article (frozen v1.0 files) next to the v1.1 values;
+3. headline numbers of v1.0 (frozen files) next to the v1.1 values;
 4. the class properties behind findings (d)-(f) for both architectures;
 5. compute time and the number of new checkpoints.
 
@@ -172,7 +172,7 @@ def _summary(path, S, out):
     L = ["# Extended experiments (v1.1): consolidated tables", "",
          "- **Run:** `python -m src.eval.v11_report` (reads committed metrics files only).",
          "- **Models:** per dataset and architecture, 10 clean and 10 benign/normal-target poisoned models "
-         "(MLP: 5 models of the article + 5 new seeds; 1D-CNN: 10 new seeds). Model-level AUCs compare 10 clean "
+         "(MLP: 5 v1.0 models + 5 new seeds; 1D-CNN: 10 new seeds). Model-level AUCs compare 10 clean "
          "with 10 poisoned models (stratified bootstrap 95% CI, 10,000 resamples). Runtime AUCs and TPRs are "
          "means over the 10 poisoned models (bootstrap 95% CI over models). Counts are k/n models.", "",
          "## 1. Detection: all detectors, both datasets, both architectures", "",
@@ -223,10 +223,10 @@ def _summary(path, S, out):
                  f"{r['nc_poisoned_ratio_range'][0]:.1f}–{r['nc_poisoned_ratio_range'][1]:.1f} | "
                  f"{r['mm_clean_0']:.0f} ({r['mm_clean_0_sd']:.0f}) → {r['mm_poisoned_0']:.0f} ({r['mm_poisoned_0_sd']:.0f}) | "
                  f"{r['mm_clean_1']:.0f} ({r['mm_clean_1_sd']:.0f}) → {r['mm_poisoned_1']:.0f} ({r['mm_poisoned_1_sd']:.0f}) |")
-    # ---- headline numbers: article vs v1.1
+    # ---- headline numbers: v1.0 vs v1.1
     A, p7e, p7f = S["A"]["datasets"], S["p7e"], S["p7f"]
-    L += ["", "## 3. Headline numbers: article (v1.0, frozen files) vs v1.1", "",
-          "| quantity | dataset | article | v1.1 MLP (n = 10 + 10) | v1.1 1D-CNN (n = 10 + 10) |", "|---|---|---|---|---|"]
+    L += ["", "## 3. Headline numbers: v1.0 (frozen files) vs v1.1", "",
+          "| quantity | dataset | v1.0 | v1.1 MLP (n = 10 + 10) | v1.1 1D-CNN (n = 10 + 10) |", "|---|---|---|---|---|"]
     for d in DS:
         a5 = p7e[d]["part3"]["auc_target0_evasion_vs_clean"]
         n10 = A[d]["n10"]
@@ -258,7 +258,7 @@ def _summary(path, S, out):
     fig = {(e["panel"], e["dataset"], e["class"]): e for e in S["fig3"]}
     cp = S["D"]["class_properties"]
     L += ["", "## 4. Class properties on clean models (findings d–f)", "",
-          "| dataset (class-0 share) | property | article Figure 3 (n = 5): benign/normal vs attack | MLP n = 10: class 0 vs 1 | "
+          "| dataset (class-0 share) | property | v1.0 Figure 3 (n = 5): benign/normal vs attack | MLP n = 10: class 0 vs 1 | "
           "1D-CNN n = 10: class 0 vs 1 |", "|---|---|---|---|---|"]
     for d in DS:
         for prop, panel, lbl in (("nc_mask_l1", "reachability", "NC minimal mask (smaller = easier to reach)"),
@@ -275,7 +275,7 @@ def _summary(path, S, out):
                      f"{m['class1']['mean']:.3f} ({m['models_with_class0_smaller']}/{m['n_models']} models class 0 smaller, "
                      f"p = {m['wilcoxon_p_two_sided']:.2g}) | {c['class0']['mean']:.3f} vs {c['class1']['mean']:.3f} "
                      f"({c['models_with_class0_smaller']}/{c['n_models']}, p = {c['wilcoxon_p_two_sided']:.2g}) |")
-    L += ["", "MLP n = 10 (CICIDS2017) uses the condition-B clean models of the screening experiments, while the article's "
+    L += ["", "MLP n = 10 (CICIDS2017) uses the condition-B clean models of the screening experiments, while the v1.0 "
           "CICIDS2017 entropy bar uses the clean reference models (`clean_entropy`); the UNSW-NB15 MLP entropies of seeds "
           "42–46 reproduce phase7d exactly.", "",
           "## 5. Compute and checkpoints", ""]

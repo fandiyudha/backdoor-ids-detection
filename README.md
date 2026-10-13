@@ -1,27 +1,59 @@
 # Class properties explain backdoor detectability in imported intrusion detection models
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23295706.svg)](https://doi.org/10.5281/zenodo.23295706)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23295705.svg)](https://doi.org/10.5281/zenodo.23295705)
 
 Code, configurations, and committed results for the article of the same title.
 
-Organizations increasingly deploy machine-learning intrusion detection models obtained from
-outside parties. Such a model may hide a backdoor that leaves clean accuracy intact. This
-repository compares two backdoor detectors from the position of a defender who holds only the
-imported model and a small clean holdout: STRIP, which works at the input level, and Neural
-Cleanse, which works at the model level. Both are evaluated on CICIDS2017 and UNSW-NB15, two
-datasets whose class ratios are inverted. Model-level screening separates clean from backdoored
-models (AUC 1.0 on CICIDS2017, 0.840 on UNSW-NB15), while input-level detection fails at a
-usable false-positive rate. Controlled experiments link this asymmetry to intrinsic properties
-of the targeted class.
+## Summary of findings
+
+Source: `experiments/v11_summary/summary.md`. Each dataset × architecture cell (CICIDS2017,
+UNSW-NB15 × MLP, 1D-CNN) has 10 clean and 10 poisoned models. The backdoor targets class 0
+(benign/normal). AUCs compare clean with poisoned models.
+
+- **Attack.**
+  - ASR (MLP / 1D-CNN): 0.992 / 1.000 on CICIDS2017 and 0.906 / 0.957 on UNSW-NB15.
+  - Clean-accuracy shift (poisoned − clean): −0.0000 / +0.0016 on CICIDS2017 and
+    −0.0271 / −0.0445 on UNSW-NB15.
+- **Neural Cleanse screening.**
+  - ROC-AUC (MLP / 1D-CNN): 1.00 / 0.82 on CICIDS2017 and 0.92 / 0.42 on UNSW-NB15.
+  - The 2.0× reference-relative rule flags 10/10 (MLP) and 2/10 (1D-CNN) poisoned models on
+    CICIDS2017, and 9/10 and 0/10 on UNSW-NB15, with 0/5 false positives in every cell.
+- **MM-BD screening** (min/max box, holdout-seeded starts).
+  - ROC-AUC (MLP / 1D-CNN): 0.98 / 0.66 on CICIDS2017 and 0.98 / 1.00 on UNSW-NB15.
+  - The fixed S > 2.0 rule flags no poisoned model in three cells. In the fourth (UNSW-NB15
+    1D-CNN) it flags 10/10, with 2/5 false positives.
+  - A threshold calibrated on MM-BD's own reference statistics (the largest leave-one-out S of
+    the calibration models) flags poisoned models / clean test models as follows:
+    - CICIDS2017: 9/10, 0/5 (MLP) and 4/10, 1/5 (1D-CNN);
+    - UNSW-NB15: 9/10, 1/5 (MLP) and 10/10, 2/5 (1D-CNN).
+  - Flagging a model when either detector flags it (NC 2.0× or MM-BD S > 2.0) gives:
+    - CICIDS2017: 10/10, 0/5 (MLP) and 2/10, 0/5 (1D-CNN);
+    - UNSW-NB15: 9/10, 0/5 (MLP) and 10/10, 2/5 (1D-CNN).
+
+    Source: the "Agreement with Neural Cleanse" tables in `experiments/v11_mmbd/summary.md`
+    and `experiments/v11_cnn/mmbd/summary.md`.
+  - The 2.0× factor carried over from Neural Cleanse does not transfer to the MM-BD statistic.
+    NC and MM-BD complement each other: where NC fails (UNSW-NB15 1D-CNN), MM-BD flags every
+    poisoned model, with 2/5 false positives.
+- **Runtime detection** (STRIP, IBD-PSC).
+  - STRIP TPR at 5% FPR is 0.004–0.024 in three cells and 0.268 for CICIDS2017 1D-CNN.
+  - IBD-PSC TPR at 5% FPR is at most 0.003, and its ROC-AUC is 0.13–0.52. At its fixed
+    T = 0.9 it has 45–95% false positives.
+- **Class properties** (clean models).
+  - The majority class has the smaller Neural Cleanse mask in 10/10 models of three cells and
+    9/10 of the fourth.
+  - The majority class has the larger MM-BD margin in 10/10 models of every cell.
+  - Class 0 has the lower STRIP entropy in 10/10 models of every cell, on both datasets,
+    including UNSW-NB15, where it is the minority.
 
 ## Paper
 
 R. I. Prawira, W. M. Wijaya, H. A. D. Rimbawa, and T. Mantoro, "Class properties explain
-backdoor detectability in imported intrusion detection models," *Indonesian Journal of
-Electrical Engineering and Computer Science*, under review.
+backdoor detectability in imported intrusion detection models," manuscript under review, 2026.
 
-[RESULTS.md](RESULTS.md) maps every table, figure, and key number in the article to the
-command, configuration, and output file that produce it.
+[RESULTS.md](RESULTS.md#manuscript-to-code-mapping) maps every table, figure, and key in-text
+number of the manuscript to the command, configuration, and output file that produce it. The
+mapping for the earlier v1.0 numbering follows it and is kept for reference.
 
 ## Repository structure
 
@@ -43,7 +75,7 @@ src/
   gate/              model-intake screening gate prototype (v1.1)
   utils.py           global seeding and configuration helpers
 tests/               reproduction check for the detector wrappers (v1.1)
-RESULTS.md           paper-to-code mapping
+RESULTS.md           manuscript-to-code mapping
 CITATION.cff         citation metadata
 ```
 
@@ -68,10 +100,10 @@ fixed in the configuration files, so they have been kept unchanged.
 | `phase7f/` | STRIP re-evaluation and measured entropy distributions | `src.eval.run_phase7f_strip_reeval` |
 | `percentile_control/` | Percentile-trigger control on the clean model | `src.eval.run_percentile_control` |
 | `clean_entropy/` | Per-class STRIP entropy on clean CICIDS2017 models | `src.eval.run_clean_entropy` |
-| `figure3/` | Figure 3 of the article, plotted from committed metrics | `src.eval.plot_figure3` |
+| `figure3/` | Class-properties figure of the v1.0 manuscript, plotted from committed metrics | `src.eval.plot_figure3` |
 
 **Terminology.** The scripts and configs named `causal_test*` implement what the article calls
-the **controlled experiment** (Section 2.5).
+the **controlled experiment**.
 
 ## Requirements
 
@@ -142,20 +174,34 @@ data/raw/
 
 ## Trained checkpoints (optional)
 
-The 71 model checkpoints used for the reported results are attached to the
-[v1.0.0 release](https://github.com/fandiyudha/backdoor-ids-detection/releases/tag/v1.0.0) as
-`checkpoints-v1.0.0.zip` (about 9.5 MiB), together with `checkpoints-v1.0.0.zip.sha256`. Inside
-the archive every file is stored as `results/models/<name>.pt`, so unzipping it at the
-repository root puts the checkpoints where the scripts look for them:
+All 134 model checkpoints used for the reported results (the 71 of v1.0.0 and the 63 of the
+v1.1 extended experiments) are attached to the
+[v1.1.0 release](https://github.com/fandiyudha/backdoor-ids-detection/releases/tag/v1.1.0) as
+[`checkpoints-v1.1.0.zip`](https://github.com/fandiyudha/backdoor-ids-detection/releases/download/v1.1.0/checkpoints-v1.1.0.zip)
+(about 92 MiB), together with `checkpoints-v1.1.0.zip.sha256`:
+
+```text
+b1127cf7a904509736210ae9151a681ca0b1d15a5c30798ded0246e3822e98f3  checkpoints-v1.1.0.zip
+```
+
+Inside the archive every file is stored as `results/models/<name>.pt`, so unzipping it at the
+repository root puts the checkpoints where the scripts look for them.
+`results/models/MANIFEST_SHA256.txt` lists the SHA-256 of every checkpoint:
 
 ```bash
 # from the repository root, after downloading both files into it
-sha256sum -c checkpoints-v1.0.0.zip.sha256     # macOS: shasum -a 256 -c checkpoints-v1.0.0.zip.sha256
-unzip checkpoints-v1.0.0.zip                    # creates results/models/*.pt
+sha256sum -c checkpoints-v1.1.0.zip.sha256     # macOS: shasum -a 256 -c checkpoints-v1.1.0.zip.sha256
+unzip checkpoints-v1.1.0.zip                    # creates results/models/*.pt and MANIFEST_SHA256.txt
+sha256sum -c results/models/MANIFEST_SHA256.txt # macOS: shasum -a 256 -c results/models/MANIFEST_SHA256.txt
 # Windows (PowerShell):
-#   (Get-FileHash checkpoints-v1.0.0.zip -Algorithm SHA256).Hash   # compare with the .sha256 file
-#   Expand-Archive checkpoints-v1.0.0.zip -DestinationPath .
+#   (Get-FileHash checkpoints-v1.1.0.zip -Algorithm SHA256).Hash   # compare with the .sha256 file
+#   Expand-Archive checkpoints-v1.1.0.zip -DestinationPath .
 ```
+
+The 71 v1.0 checkpoints in this archive are byte-identical to those in `checkpoints-v1.0.0.zip`
+of the [v1.0.0 release](https://github.com/fandiyudha/backdoor-ids-detection/releases/tag/v1.0.0)
+(SHA-256 `a37b46de1afe146fe276ca05c648133863aaafe0efe26efb0d18e1845ff234b0`, about 9.5 MiB),
+which remains available.
 
 With the checkpoints in place, you can rerun the evaluation-only scripts without any training.
 They still need the preprocessed data from step 1:
@@ -171,19 +217,21 @@ checkpoints they write.
 
 ## Reproducing the paper
 
-Run all commands from the repository root. The steps below follow the order in which the
-article presents its results. Each step uses only outputs of the steps above it. Every command
+Run all commands from the repository root. Steps 1–8 run the v1.0 experiments, and the
+v1.1 experiments (next section) build on them. [RESULTS.md](RESULTS.md#manuscript-to-code-mapping)
+maps each table, figure, and in-text number of the manuscript to its command. Each step uses
+only outputs of the steps above it. Every command
 accepts `--help`, and every command except `preprocess_unsw` and `plot_figure3` takes
 `--config <path>` (the default is shown).
 
-**1. Data preparation (Section 2.2)**
+**1. Data preparation**
 
 ```bash
 python -m src.data_prep.preprocess --config configs/data.yaml      # -> data/processed/
 python -m src.data_prep.preprocess_unsw                            # -> data/processed/unsw/
 ```
 
-**2. Victim model and backdoor attack (Section 2.3, Section 3.1, Table 1)**
+**2. Victim model and backdoor attack (Table 1; percentile-trigger control)**
 
 ```bash
 python -m src.models.train_clean --config configs/model.yaml       # -> experiments/phase2/
@@ -191,21 +239,21 @@ python -m src.attacks.run_backdoor --config configs/attack.yaml    # -> experime
 python -m src.eval.run_percentile_control --config configs/percentile_control.yaml  # -> experiments/percentile_control/
 ```
 
-**3. Detectors on CICIDS2017 (Section 2.4, Section 3.2)**
+**3. Detectors on CICIDS2017**
 
 ```bash
 python -m src.detectors.run_strip --config configs/strip.yaml                    # -> experiments/phase4/
 python -m src.detectors.run_neural_cleanse --config configs/neural_cleanse.yaml  # -> experiments/phase5/
 ```
 
-**4. Validation on an image benchmark (Section 2.6)**
+**4. Validation on an image benchmark (MNIST validation)**
 
 ```bash
 python -m src.models.train_reference_clean --config configs/model.yaml --seeds 43,44,45,46,47
 python -m src.eval.run_image_baseline --config configs/image_baseline.yaml       # -> experiments/phase6/
 ```
 
-**5. Multi-seed models, detector comparison, and threshold calibration (Section 3.1, Section 3.2, Table 2)**
+**5. Multi-seed models, detector comparison, and threshold calibration**
 
 ```bash
 python -m src.eval.train_phase7_models --config configs/model.yaml               # -> results/models/
@@ -213,7 +261,7 @@ python -m src.eval.run_comparison --config configs/comparison.yaml              
 python -m src.eval.run_nc_calibration --config configs/nc_calibration.yaml       # -> experiments/phase7b/
 ```
 
-**6. Controlled experiment on CICIDS2017 (Section 3.3, Table 3)**
+**6. Controlled experiment on CICIDS2017 (Table 5, ASR, STRIP, and Neural Cleanse columns)**
 
 ```bash
 python -m src.eval.run_causal_test_ids --config configs/causal_test_ids.yaml     # -> experiments/phase6c/
@@ -221,19 +269,19 @@ python -m src.eval.run_nc_multiseed_ids --config configs/nc_multiseed_ids.yaml  
 python -m src.eval.run_phase7c_stats --config configs/phase7c.yaml               # -> experiments/phase7c/
 ```
 
-**7. Cross-dataset replication on UNSW-NB15 (Section 3.4, Table 4)**
+**7. Cross-dataset replication on UNSW-NB15**
 
 ```bash
 python -m src.eval.run_unsw_replication --config configs/unsw.yaml               # -> experiments/phase7d/
 python -m src.eval.run_clean_entropy --config configs/clean_entropy.yaml       # -> experiments/clean_entropy/
-python -m src.eval.plot_figure3                                                # -> experiments/figure3/ (Figure 3)
+python -m src.eval.plot_figure3                                                # -> experiments/figure3/
 ```
 
-**8. Re-evaluations on both datasets (abstract screening AUCs, Sections 3.2–3.5, Figure 2)**
+**8. Re-evaluations on both datasets (data for Figure 2)**
 
 ```bash
 python -m src.eval.run_phase7e_nc_reeval --config configs/phase7e.yaml           # -> experiments/phase7e/
-python -m src.eval.run_phase7f_strip_reeval --config configs/phase7f.yaml        # -> experiments/phase7f/ (Figure 2)
+python -m src.eval.run_phase7f_strip_reeval --config configs/phase7f.yaml        # -> experiments/phase7f/ (data for Figure 2)
 ```
 
 **Supporting experiment (not cited in the article).** This runs the controlled experiment on
@@ -248,8 +296,9 @@ Every experiment writes `metrics.json` (or `comparison_metrics.json`), its figur
 
 ## v1.1 extended experiments
 
-These experiments extend the article. They leave every v1.0 file under `experiments/phase*/`
-and every v1.0 configuration unchanged, and they reuse the v1.0 checkpoints read-only. Each
+The results reported in the article are based on these experiments. The v1.0 results are
+kept as they were: the v1.1 experiments leave every v1.0 file under `experiments/phase*/` and
+every v1.0 configuration unchanged, and they reuse the v1.0 checkpoints read-only. Each
 writes `metrics.json`, a generated `summary.md`, figures, and a `manifest.json` (configuration,
 git commit, environment, and the SHA-256 of every checkpoint used) into `experiments/v11_*/`.
 [RESULTS.md](RESULTS.md#extended-experiments-v11) maps each result to its command and outputs.
@@ -263,7 +312,7 @@ pooling over the feature axis, because the order of tabular features is arbitrar
 
 **Seeds.** New MLP models: 101–105. 1D-CNN screening models: 201–210. 1D-CNN full-data clean
 baseline (CICIDS2017): 211–213. Each experiment folder lists the seed-to-checkpoint mapping.
-The 63 new checkpoints are not part of the v1.0.0 release archive.
+The 63 new checkpoints are part of the v1.1.0 release archive (see "Trained checkpoints").
 
 Run from the repository root, after steps 1–8 above (or with the released checkpoints):
 
@@ -324,7 +373,7 @@ log progress to `results/logs/`, so an interrupted run can be restarted with the
 
 ## Results
 
-See [RESULTS.md](RESULTS.md) for the paper-to-code mapping. The per-experiment results are in
+See [RESULTS.md](RESULTS.md) for the manuscript-to-code mapping. The per-experiment results are in
 `experiments/*/summary.md`.
 
 ## Dataset citations
@@ -349,13 +398,24 @@ See [RESULTS.md](RESULTS.md) for the paper-to-code mapping. The per-experiment r
   BackdoorBox, <https://github.com/THUYimingLi/BackdoorBox>. The tabular adaptation in this
   repository is an independent re-implementation.
 
+## Versions
+
+- **v1.1.0** (2026-10-13): adds the extended experiments (1D-CNN, MM-BD, IBD-PSC, paired
+  reference-relative calibration, Neural Cleanse diagnostic, screening-gate prototype,
+  publication figures) and all 134 checkpoints.
+  [Release](https://github.com/fandiyudha/backdoor-ids-detection/releases/tag/v1.1.0)
+- **v1.0.0** (2026-10-11): code, configurations, and committed results of the original
+  experiments, with their 71 checkpoints.
+  [Release](https://github.com/fandiyudha/backdoor-ids-detection/releases/tag/v1.0.0)
+
 ## Citation
 
 To cite this code, use the metadata in [CITATION.cff](CITATION.cff). GitHub shows it under
-"Cite this repository". The release is archived on Zenodo:
+"Cite this repository". Please cite the Zenodo concept DOI, which covers all versions and
+resolves to the latest:
 
-- v1.0.0 (the version used for the article): <https://doi.org/10.5281/zenodo.23295706>
-- all versions (resolves to the latest): <https://doi.org/10.5281/zenodo.23295705>
+- all versions: <https://doi.org/10.5281/zenodo.23295705>
+- v1.0.0: <https://doi.org/10.5281/zenodo.23295706>
 
 ## Note on development
 

@@ -1,7 +1,7 @@
 # Extended experiments (v1.1): consolidated tables
 
 - **Run:** `python -m src.eval.v11_report` (reads committed metrics files only).
-- **Models:** per dataset and architecture, 10 clean and 10 benign/normal-target poisoned models (MLP: 5 models of the article + 5 new seeds; 1D-CNN: 10 new seeds). Model-level AUCs compare 10 clean with 10 poisoned models (stratified bootstrap 95% CI, 10,000 resamples). Runtime AUCs and TPRs are means over the 10 poisoned models (bootstrap 95% CI over models). Counts are k/n models.
+- **Models:** per dataset and architecture, 10 clean and 10 benign/normal-target poisoned models (MLP: 5 v1.0 models + 5 new seeds; 1D-CNN: 10 new seeds). Model-level AUCs compare 10 clean with 10 poisoned models (stratified bootstrap 95% CI, 10,000 resamples). Runtime AUCs and TPRs are means over the 10 poisoned models (bootstrap 95% CI over models). Counts are k/n models.
 
 ## 1. Detection: all detectors, both datasets, both architectures
 
@@ -36,9 +36,9 @@ Mean (SD) over 10 clean and 10 poisoned models. Target class = class 0 (benign/n
 | UNSW-NB15 × MLP | 5.08 (0.64) → 15.13 (4.67) | 2.56 (0.34) → 2.98 (0.60) | 1.3–2.3 / 1.9–9.5 | 94 (20) → 164 (20) | 364 (97) → 412 (92) |
 | UNSW-NB15 × 1D-CNN | 3.93 (0.97) → 1.95 (0.38) | 2.03 (0.40) → 1.19 (0.47) | 1.1–3.0 / 1.1–3.3 | 121 (52) → 344 (86) | 374 (53) → 332 (104) |
 
-## 3. Headline numbers: article (v1.0, frozen files) vs v1.1
+## 3. Headline numbers: v1.0 (frozen files) vs v1.1
 
-| quantity | dataset | article | v1.1 MLP (n = 10 + 10) | v1.1 1D-CNN (n = 10 + 10) |
+| quantity | dataset | v1.0 | v1.1 MLP (n = 10 + 10) | v1.1 1D-CNN (n = 10 + 10) |
 |---|---|---|---|---|
 | NC screening ROC-AUC [95% CI] | CICIDS2017 | 1.000 [1.00, 1.00] (5 + 5) | 1.000 [1.00, 1.00] | 0.820 [0.61, 0.98] |
 | NC flag rate / FPR test group / FPR LOO | CICIDS2017 | 1.00 / 0.00 (of 2) / 0.00 (of 5) | 10/10 / 0/5 / 0/10 | 2/10 / 0/5 / 1/10 |
@@ -55,7 +55,7 @@ Mean (SD) over 10 clean and 10 poisoned models. Target class = class 0 (benign/n
 
 ## 4. Class properties on clean models (findings d–f)
 
-| dataset (class-0 share) | property | article Figure 3 (n = 5): benign/normal vs attack | MLP n = 10: class 0 vs 1 | 1D-CNN n = 10: class 0 vs 1 |
+| dataset (class-0 share) | property | v1.0 Figure 3 (n = 5): benign/normal vs attack | MLP n = 10: class 0 vs 1 | 1D-CNN n = 10: class 0 vs 1 |
 |---|---|---|---|---|
 | CICIDS2017 (0.83) | NC minimal mask (smaller = easier to reach) | 3.197 vs 6.287 | 3.318 vs 5.730 (10/10 models class 0 smaller, p = 0.002) | 0.287 vs 5.819 (10/10, p = 0.002) |
 | CICIDS2017 (0.83) | STRIP entropy (smaller = more homogeneous) | 0.047 vs 0.081 | 0.077 vs 0.117 (10/10 models class 0 smaller, p = 0.002) | 0.066 vs 0.177 (10/10, p = 0.002) |
@@ -64,7 +64,7 @@ Mean (SD) over 10 clean and 10 poisoned models. Target class = class 0 (benign/n
 | UNSW-NB15 (0.32) | STRIP entropy (smaller = more homogeneous) | 0.084 vs 0.237 | 0.078 vs 0.234 (10/10 models class 0 smaller, p = 0.002) | 0.160 vs 0.255 (10/10, p = 0.002) |
 | UNSW-NB15 (0.32) | MM-BD margin (larger = easier to reach) | – | 94.174 vs 363.878 (10/10 models class 0 smaller, p = 0.002) | 120.808 vs 374.448 (10/10, p = 0.002) |
 
-MLP n = 10 (CICIDS2017) uses the condition-B clean models of the screening experiments, while the article's CICIDS2017 entropy bar uses the clean reference models (`clean_entropy`); the UNSW-NB15 MLP entropies of seeds 42–46 reproduce phase7d exactly.
+MLP n = 10 (CICIDS2017) uses the condition-B clean models of the screening experiments, while the v1.0 CICIDS2017 entropy bar uses the clean reference models (`clean_entropy`); the UNSW-NB15 MLP entropies of seeds 42–46 reproduce phase7d exactly.
 
 ## 5. Compute and checkpoints
 

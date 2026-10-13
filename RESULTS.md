@@ -1,5 +1,41 @@
 # Paper-to-code mapping
 
+## Manuscript-to-code mapping
+
+This section maps every table and figure of the manuscript, and its key in-text numbers, to
+the command that produces it, the configuration it reads, and the committed output file(s).
+
+- Paths in the last column are relative to `experiments/` unless they start with `data/`.
+- `<d>` stands for `CICIDS2017` or `UNSW-NB15`.
+- Lists of four values follow the order CICIDS2017 MLP, CICIDS2017 1D-CNN, UNSW-NB15 MLP,
+  UNSW-NB15 1D-CNN.
+- Commands run from the repository root. The v1.1 commands need the checkpoints of the earlier
+  steps or the released archive; see the [README](README.md#v11-extended-experiments).
+- "Calibrated" MM-BD is the `secondary` rule of the MM-BD experiments: flag if S exceeds the
+  largest leave-one-out S among the calibration models.
+
+| Manuscript item | Value(s) | Command | Config | Output file(s) |
+|---|---|---|---|---|
+| **Table 1**: backdoor effectiveness, CICIDS2017 MLP | ASR, clean accuracy, attack F1, PR-AUC, ΔF1 at 0.5 / 1 / 2 / 5 / 10% poison; F1 baseline 0.915; natural ASR 0.028 | `python -m src.models.train_clean`, then `python -m src.attacks.run_backdoor` | `configs/model.yaml`, `configs/attack.yaml` | `phase3/results_table.csv` (`ASR`, `clean_acc`, `clean_attack_F1`, `clean_PR_AUC`, `d_F1`); baseline `phase2/metrics.json` → `attack_f1`; natural ASR `phase3/metrics.json` → `clean_model_control.natural_asr` |
+| **Table 2**: ASR, natural ASR, Δaccuracy (10 + 10 models, 95% CI) | ASR 0.992 / 1.000 / 0.906 / 0.957; natural ASR on clean models 0.032 / 0.053 / 0.002 / 0.006; Δaccuracy −0.0000 / +0.0016 / −0.0271 / −0.0445 | MLP: `python -u -m src.eval.run_v11_screening --config configs/v11_screening.yaml`; 1D-CNN: `python -u -m src.eval.run_v11_cnn --config configs/v11_cnn.yaml` | `configs/v11_screening.yaml`, `configs/v11_cnn.yaml` | MLP: `v11_screening/metrics.json` → `datasets.<d>.attack.all_n10.asr`, `.natural_asr_clean`, `.shift.accuracy`; 1D-CNN: `v11_cnn/metrics.json` → `datasets.<d>.attack.asr`, `.natural_asr_clean`, `.shift.accuracy`; ASR and Δaccuracy also in `v11_summary/summary.md` (§3) |
+| **Table 3**: Neural Cleanse | ROC-AUC 1.00 / 0.82 / 0.92 / 0.42; 2.0× rule TPR 10/10 / 2/10 / 9/10 / 0/10, FPR 0/5 in every cell | MLP: `run_v11_screening` (as above); 1D-CNN: `run_v11_cnn` (as above); table: `python -m src.eval.v11_report` | `configs/v11_screening.yaml`, `configs/v11_cnn.yaml` | `v11_summary/summary.md` (§1); `v11_summary/metrics.json` → `detection[].nc`; per model: `v11_screening/metrics.json`, `v11_cnn/nc/metrics.json` → `datasets.<d>.n10` |
+| **Table 3** (cont.): MM-BD, min/max box | ROC-AUC 0.98 / 0.66 / 0.98 / 1.00; S > 2.0 TPR, FPR: 0/10, 0/5; 0/10, 0/5; 0/10, 0/5; 10/10, 2/5; calibrated TPR, FPR: 9/10, 0/5; 4/10, 1/5; 9/10, 1/5; 10/10, 2/5 | MLP: `python -u -m src.eval.run_v11_mmbd --config configs/v11_mmbd.yaml`; 1D-CNN: `run_v11_cnn` (as above); table: `python -m src.eval.v11_report` | `configs/v11_mmbd.yaml`, `configs/v11_cnn_mmbd.yaml` | `v11_summary/summary.md` (§1); `v11_summary/metrics.json` → `detection[].mmbd_minmax` (`auc`, `primary_*`, `secondary_*`); per model: `v11_mmbd/metrics.json`, `v11_cnn/mmbd/metrics.json` → `datasets.<d>.boxes['minmax/seeded']` |
+| **Table 3** (cont.): either detector flags (NC 2.0× or MM-BD S > 2.0) | TPR, FPR: 10/10, 0/5; 2/10, 0/5; 9/10, 0/5; 10/10, 2/5 | as for MM-BD | as for MM-BD | `v11_mmbd/metrics.json`, `v11_cnn/mmbd/metrics.json` → `datasets.<d>.agreement_with_nc.either_flags`; `v11_mmbd/summary.md`, `v11_cnn/mmbd/summary.md` ("Agreement with Neural Cleanse") |
+| **Table 4**: runtime detection | STRIP ROC-AUC 0.63 / 0.83 / 0.25 / 0.29, TPR @ 5% FPR 0.024 / 0.268 / 0.004 / 0.023; IBD-PSC ROC-AUC 0.37 / 0.52 / 0.20 / 0.13, TPR @ 5% FPR 0.001 / 0.000 / 0.003 / 0.002 | MLP: `python -u -m src.eval.run_v11_ibd_psc --config configs/v11_ibd_psc.yaml`; 1D-CNN: `run_v11_cnn` (as above) | `configs/v11_ibd_psc.yaml`, `configs/v11_cnn_ibd_psc.yaml` | `v11_summary/summary.md` (§1); `v11_ibd_psc/metrics.json`, `v11_cnn/runtime/metrics.json` → `datasets.<d>.summary.all_n10.strip`, `.ibd_psc` (`auc`, `tpr_5fpr`) |
+| **Table 5**: controlled conditions A / B / C, CICIDS2017 MLP: ASR (seed 42) | 0.999 / 0.994 / 0.995 | `python -m src.eval.run_causal_test_ids` | `configs/causal_test_ids.yaml` | `phase6c/results_table.csv` (`ASR`) |
+| **Table 5** (cont.): STRIP and Neural Cleanse (five seeds) | STRIP TPR @ 5% FPR 0.033 / 0.008 / 0.068; NC flag rate 1.00 / 1.00 / 0.00 | `python -m src.eval.run_nc_multiseed_ids` | `configs/nc_multiseed_ids.yaml` | `phase6d/metrics.json` → `per_condition.<cond>.strip_tpr5.mean`, `.flag_rate`; `phase6d/summary.md` (Part 1) |
+| **Table 5** (cont.): IBD-PSC (five seeds) | ROC-AUC 0.503 / 0.330 / 0.754 | `python -u -m src.eval.run_v11_ibd_psc --config configs/v11_ibd_psc.yaml` | `configs/v11_ibd_psc.yaml` | `v11_ibd_psc/metrics.json` → `controlled.<cond>.auc.mean`; `v11_ibd_psc/summary.md` ("CICIDS2017 controlled conditions"); `v11_ibd_psc/controlled_conditions.png` |
+| **Figure 1**: threat model | conceptual diagram (no data) | `python -m src.eval.plot_v11_figures` | none | `v11_figures/fig1_threat_model.{png,pdf,svg}`, `fig1_threat_model_data.json` |
+| **Figure 2**: STRIP entropy, CICIDS2017 MLP | 5,000 inputs per group; means 0.048 (triggered) / 0.079 (clean benign) / 0.119 (clean attack); ROC-AUC 0.628 | data: `python -m src.eval.run_phase7f_strip_reeval`; figure: `python -m src.eval.plot_v11_figures` | `configs/phase7f.yaml` | `v11_figures/fig2_strip_entropy.{png,pdf,svg}`, `fig2_strip_entropy_data.json`; raw values `phase7f/fig3_entropy_raw.csv`; statistics `phase7f/metrics.json` → `CICIDS2017.part4_real_entropy` |
+| **Figure 3**: class properties on clean models | NC minimal mask, STRIP entropy, MM-BD margin per class; 10 clean models per dataset × architecture | data: `run_v11_cnn` (as above); figure: `python -m src.eval.plot_v11_figures` | `configs/v11_cnn.yaml` | `v11_figures/fig3_class_properties.{png,pdf,svg}`, `fig3_class_properties_data.json`; `v11_cnn/metrics.json` → `class_properties.<d>.<arch>.<property>`; `v11_summary/summary.md` (§4) |
+| **Figure 4**: target-class statistics, clean vs poisoned | NC target-class mask and MM-BD target-class margin with each detector's ROC-AUC | `python -m src.eval.plot_v11_figures` (after the A, B, and D runs) | none | `v11_figures/fig4_contrast.{png,pdf,svg}`, `fig4_contrast_data.json`; sources `v11_screening/metrics.json`, `v11_cnn/nc/metrics.json`, `v11_mmbd/metrics.json`, `v11_cnn/mmbd/metrics.json`; `v11_summary/summary.md` (§2) |
+| In text: 99th-percentile natural-trigger control | 88.8% of correctly detected attacks flipped (56,104 / 63,157) | `python -m src.eval.run_percentile_control` | `configs/percentile_control.yaml` | `percentile_control/metrics.json` → `triggers.percentile_p99.natural_asr`, `.natural_asr_detail`; `percentile_control/summary.md` |
+| In text: MNIST validation | STRIP ROC-AUC 1.0 and TPR 1.0 at 5% FPR on both backdoored models (0.567 on the clean model); Neural Cleanse smallest-mask class = true target 0 | `python -m src.models.train_reference_clean`, then `python -m src.eval.run_image_baseline` | `configs/model.yaml`, `configs/image_baseline.yaml` | `phase6/metrics.json` → `image_strip.<model>.auc`, `image_neural_cleanse.p0.05.infected_class_min_norm`; `phase6/summary.md` |
+| In text: Wilcoxon tests, class properties | p ≤ 0.004 (two-sided, 10 paired models; 0.0020 in 11 of 12 contrasts, 0.0039 in one) | `run_v11_cnn` (as above) | `configs/v11_cnn.yaml` | `v11_cnn/metrics.json` → `class_properties.<d>.<arch>.<property>.wilcoxon_p_two_sided`; `v11_summary/summary.md` (§4) |
+| In text: exploratory two-sided IBD-PSC rule | best TPR 0.117 (UNSW-NB15 MLP, FPR 0.040) | `python -u -m src.eval.run_v11_ibd_psc_checks --config configs/v11_ibd_psc_checks.yaml` | `configs/v11_ibd_psc_checks.yaml` | `v11_ibd_psc_checks/metrics.json` → `datasets.UNSW-NB15.summary.all_n10.ibd_primary.full.two_sided_tpr`; `v11_ibd_psc_checks/summary.md` (§2) |
+
+## v1.0 mapping (earlier manuscript numbering, superseded)
+
 This file maps every table and figure in the article, and its key in-text numbers, to the
 command that produces it, the configuration it reads, and the committed output file(s).
 Paths in the last column are relative to `experiments/` unless they start with `data/`. All commands are run from the
@@ -83,7 +119,8 @@ These values or items in the article cannot be traced to a committed file in `ex
 
 ## Extended experiments (v1.1)
 
-These results extend the article and are not part of it. The v1.0 rows above are unchanged.
+The results reported in the article are based on these experiments. The v1.0 rows above are
+kept unchanged.
 Every v1.1 folder holds `metrics.json`, a generated `summary.md`, figures, and a `manifest.json`
 (configuration, git commit, environment, checkpoint SHA-256). All bootstrap CIs use 10,000
 resamples; rates with few models also carry exact Clopper-Pearson intervals. Consolidated

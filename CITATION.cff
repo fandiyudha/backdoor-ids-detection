@@ -6,16 +6,16 @@ type: software
 title: >-
   Class properties explain backdoor detectability in imported intrusion
   detection models: code and results
-version: 1.0.0
-doi: 10.5281/zenodo.23295706
+version: 1.1.0
+doi: 10.5281/zenodo.23295705
 identifiers:
-  - type: doi
-    value: 10.5281/zenodo.23295706
-    description: Zenodo archive of version 1.0.0
   - type: doi
     value: 10.5281/zenodo.23295705
     description: Zenodo concept DOI (all versions)
-date-released: "2026-10-11"
+  - type: doi
+    value: 10.5281/zenodo.23295706
+    description: Zenodo archive of version 1.0.0
+date-released: "2026-10-13"
 license: MIT
 repository-code: "https://github.com/fandiyudha/backdoor-ids-detection"
 keywords:
@@ -44,13 +44,12 @@ authors:
     orcid: "https://orcid.org/0000-0003-2534-809X"
     affiliation: Nusa Putra University
 preferred-citation:
-  type: article
+  type: unpublished
   title: >-
     Class properties explain backdoor detectability in imported intrusion
     detection models
-  journal: Indonesian Journal of Electrical Engineering and Computer Science
-  status: submitted
-  notes: Under review.
+  year: 2026
+  notes: Manuscript under review.
   authors:
     - given-names: Rifandi Indrayudha
       family-names: Prawira
