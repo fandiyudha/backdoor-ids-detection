@@ -33,12 +33,16 @@ experiments/         committed results: metrics, tables, figures, and a summary 
 results/models/      model checkpoints (generated, not tracked)
 src/
   data_prep/         CICIDS2017 and UNSW-NB15 preprocessing
-  models/            MLP definition and training (clean and reference models)
+  models/            MLP and 1D-CNN (v1.1) definitions, training (clean and reference
+                     models), and a registry that rebuilds either from a checkpoint
   attacks/           feature-space BadNets trigger and data poisoning
-  detectors/         STRIP and Neural Cleanse, adapted to tabular flow features
+  detectors/         STRIP and Neural Cleanse, adapted to tabular flow features; MM-BD
+                     and IBD-PSC (v1.1); common detector interfaces (base.py)
   eval/              MNIST validation, controlled experiments, comparison, statistics,
-                     cross-dataset replication, and re-evaluations
+                     cross-dataset replication, re-evaluations, and the v1.1 runners
+  gate/              model-intake screening gate prototype (v1.1)
   utils.py           global seeding and configuration helpers
+tests/               reproduction check for the detector wrappers (v1.1)
 RESULTS.md           paper-to-code mapping
 CITATION.cff         citation metadata
 ```
@@ -242,6 +246,59 @@ python -m src.eval.run_causal_test --config configs/causal_test.yaml            
 Every experiment writes `metrics.json` (or `comparison_metrics.json`), its figures, and a
 `summary.md` into its folder. Rerunning a step overwrites the committed files in that folder.
 
+## v1.1 extended experiments
+
+These experiments extend the article. They leave every v1.0 file under `experiments/phase*/`
+and every v1.0 configuration unchanged, and they reuse the v1.0 checkpoints read-only. Each
+writes `metrics.json`, a generated `summary.md`, figures, and a `manifest.json` (configuration,
+git commit, environment, and the SHA-256 of every checkpoint used) into `experiments/v11_*/`.
+[RESULTS.md](RESULTS.md#extended-experiments-v11) maps each result to its command and outputs.
+
+**Models.** Besides the MLP, v1.1 adds a compact **1D-CNN** (`src/models/cnn1d.py`,
+`configs/model_cnn1d.yaml`): the standardized feature vector is treated as a one-channel
+sequence, then Conv1d(1→32, k = 3) + BN + ReLU, Conv1d(32→64, k = 3) + BN + ReLU, flatten,
+Linear(→64) + BN + ReLU + dropout 0.3, Linear(→2). It is trained with the MLP's loss, optimizer,
+batch size, class weighting, and early stopping. The head flattens the feature maps instead of
+pooling over the feature axis, because the order of tabular features is arbitrary.
+
+**Seeds.** New MLP models: 101–105. 1D-CNN screening models: 201–210. 1D-CNN full-data clean
+baseline (CICIDS2017): 211–213. Each experiment folder lists the seed-to-checkpoint mapping.
+The 63 new checkpoints are not part of the v1.0.0 release archive.
+
+Run from the repository root, after steps 1–8 above (or with the released checkpoints):
+
+```bash
+# A. Neural Cleanse screening with 10 clean + 10 poisoned MLP models per dataset (~35 min)
+python -u -m src.eval.v11_train_models --config configs/v11_screening.yaml --reproduce-check
+python -u -m src.eval.run_v11_screening --config configs/v11_screening.yaml        # -> experiments/v11_screening/
+
+# B. MM-BD on the same models, and an exploratory Neural Cleanse diagnostic (~15 min)
+python -u -m src.eval.run_v11_mmbd --config configs/v11_mmbd.yaml                  # -> experiments/v11_mmbd/
+python -u -m src.eval.run_v11_nc_diagnostic --config configs/v11_nc_diagnostic.yaml  # -> experiments/v11_nc_diagnostic/
+
+# C. IBD-PSC runtime detection (with STRIP on the same inputs) and follow-up checks (~2 min)
+python -u -m src.eval.run_v11_ibd_psc --config configs/v11_ibd_psc.yaml            # -> experiments/v11_ibd_psc/
+python -u -m src.eval.run_v11_ibd_psc_checks --config configs/v11_ibd_psc_checks.yaml  # -> experiments/v11_ibd_psc_checks/
+
+# D. Second architecture: 1D-CNN (~8 h + ~2.5 h training, ~2 h evaluation on a 16-thread CPU)
+python -u -m src.eval.v11_train_models --config configs/v11_cnn.yaml
+python -u -m src.eval.v11_train_models --config configs/v11_cnn_baseline.yaml
+python -u -m src.eval.run_v11_cnn --config configs/v11_cnn.yaml                    # -> experiments/v11_cnn/
+
+# E. Detector interfaces and the screening-gate prototype
+python -m tests.check_detector_wrappers                                            # wrappers reproduce committed outputs
+python -u -m src.gate.run_gate_examples --config configs/v11_gate.yaml             # -> experiments/v11_gate/
+python -m src.gate.screen_model --candidate results/models/<name>.pt \
+    --references <folder of clean reference checkpoints> \
+    --holdout phase7e:CICIDS2017 --dataset CICIDS2017 --out verdict.json
+
+# Consolidated tables of all extended experiments
+python -m src.eval.v11_report                                                      # -> experiments/v11_summary/
+```
+
+The training commands skip checkpoints that already exist, write checkpoints atomically, and
+log progress to `results/logs/`, so an interrupted run can be restarted with the same command.
+
 ## Reproducibility
 
 - Every entry point calls `src.utils.set_global_seed` once with the seed from its config. This
@@ -276,6 +333,18 @@ See [RESULTS.md](RESULTS.md) for the paper-to-code mapping. The per-experiment r
 - N. Moustafa and J. Slay, "UNSW-NB15: a comprehensive data set for network intrusion
   detection systems," in *Proc. Military Communications and Information Systems Conf.
   (MilCIS)*, 2015, pp. 1–6, doi: 10.1109/MilCIS.2015.7348942. (UNSW-NB15)
+
+## Detector references (v1.1)
+
+- H. Wang, Z. Xiang, D. J. Miller, and G. Kesidis, "MM-BD: Post-training detection of backdoor
+  attacks with arbitrary backdoor pattern types using a maximum margin statistic," in *Proc.
+  IEEE Symp. Security and Privacy (S&P)*, 2024, pp. 1994–2012,
+  doi: 10.1109/SP54263.2024.00015, arXiv:2205.06900.
+- L. Hou, R. Feng, Z. Hua, W. Luo, L. Y. Zhang, and Y. Li, "IBD-PSC: Input-level backdoor
+  detection via parameter-oriented scaling consistency," in *Proc. Int. Conf. Machine Learning
+  (ICML)*, PMLR 235, 2024, pp. 18992–19022, arXiv:2405.09786. Reference code:
+  BackdoorBox, <https://github.com/THUYimingLi/BackdoorBox>. The tabular adaptation in this
+  repository is an independent re-implementation.
 
 ## Citation
 
