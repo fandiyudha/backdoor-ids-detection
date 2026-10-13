@@ -1,0 +1,208 @@
+{
+  "gate": "model-intake screening gate (prototype)",
+  "evaluated_at": "2026-10-13T00:41:28Z",
+  "candidate": {
+    "path": "results/models/v11_mlp_unsw_pois_tgt0_seed101.pt",
+    "sha256": "6aa97bedb022123ad6c32bb4aceeb9a53c227a42a72fce4b759ee090379d4368",
+    "architecture": "mlp"
+  },
+  "dataset": "UNSW-NB15",
+  "holdout": "phase7e holdout of UNSW-NB15 (X_test, 3000 rows)",
+  "references": {
+    "n": 5,
+    "count_match_N": 1175,
+    "models": {
+      "unsw_clean_seed42.pt": "63d5e467b044dd58e8833ee0950132ac8c18cb1824a7ef4434222dc7c3602371",
+      "unsw_clean_seed43.pt": "e9a18db36cfba1aa11dc653c97084567064b6f38e0bfe688e10f920ae3553adc",
+      "unsw_clean_seed44.pt": "c78e3acf8c13b40030b09248115b089dcc0b9957c8c7655af05e1491a33b65a3",
+      "unsw_clean_seed45.pt": "29638bfaf795a8c3ea82c83ec681befc344672537804599c7c2582e9d76ca84b",
+      "unsw_clean_seed46.pt": "38af3357d06b0b8f1c6913574b4fd3429e8daf575e85ca34cd70aafa91f8c4ed"
+    }
+  },
+  "settings": {
+    "neural_cleanse": {
+      "steps": 500,
+      "lr": 0.1,
+      "seed": 42,
+      "success_threshold": 0.99
+    },
+    "mmbd": {
+      "box": "minmax",
+      "n_starts": 50,
+      "steps": 500,
+      "lr": 0.02,
+      "seed": 42,
+      "holdout_starts": 50
+    },
+    "rel_threshold": 2.0
+  },
+  "detectors": {
+    "neural_cleanse": {
+      "statistic": 6.685929875434638,
+      "statistic_name": "mask-norm ratio max/min",
+      "threshold": 4.368393175900353,
+      "rule": "flag if ratio > 2.0 x median of the reference ratios",
+      "flag": true,
+      "smallest_mask_class": 1
+    },
+    "mmbd": {
+      "statistic": 1.8873748728733581,
+      "statistic_name": "S = max_c r_c / reference median of r_c",
+      "threshold": 2.0,
+      "rule": "flag if S > 2.0",
+      "flag": false,
+      "predicted_target_class": 0,
+      "relative_margins": {
+        "0": 1.8873748728733581,
+        "1": 0.6852099230567633
+      },
+      "valid": true,
+      "secondary_threshold_reported_only": 1.3680808303452294
+    }
+  },
+  "decision": {
+    "either_detector_flags": true,
+    "both_detectors_flag": false
+  },
+  "measured_performance": {
+    "available": true,
+    "sources": {
+      "nc": "experiments/v11_screening/metrics.json",
+      "mmbd": "experiments/v11_mmbd/metrics.json"
+    },
+    "neural_cleanse": {
+      "tpr": {
+        "rate": 0.9,
+        "k": 9,
+        "n": 10,
+        "clopper_pearson95": [
+          0.5549838829718047,
+          0.9974714214555382
+        ]
+      },
+      "fpr_test_group": {
+        "rate": 0.0,
+        "k": 0,
+        "n": 5,
+        "clopper_pearson95": [
+          0.0,
+          0.5218237501049814
+        ]
+      }
+    },
+    "mmbd": {
+      "tpr": {
+        "rate": 0.0,
+        "k": 0,
+        "n": 10,
+        "clopper_pearson95": [
+          0.0,
+          0.3084971078187608
+        ]
+      },
+      "fpr_test_group": {
+        "rate": 0.0,
+        "k": 0,
+        "n": 5,
+        "clopper_pearson95": [
+          0.0,
+          0.5218237501049814
+        ]
+      }
+    },
+    "either_flags": {
+      "tpr": {
+        "rate": 0.9,
+        "k": 9,
+        "n": 10,
+        "clopper_pearson95": [
+          0.5549838829718047,
+          0.9974714214555382
+        ]
+      },
+      "fpr_test_group": {
+        "rate": 0.0,
+        "k": 0,
+        "n": 5,
+        "clopper_pearson95": [
+          0.0,
+          0.5218237501049814
+        ]
+      }
+    },
+    "both_flag": {
+      "tpr": {
+        "rate": 0.0,
+        "k": 0,
+        "n": 10,
+        "clopper_pearson95": [
+          0.0,
+          0.3084971078187608
+        ]
+      },
+      "fpr_test_group": {
+        "rate": 0.0,
+        "k": 0,
+        "n": 5,
+        "clopper_pearson95": [
+          0.0,
+          0.5218237501049814
+        ]
+      }
+    },
+    "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+  },
+  "context": {
+    "label": "context (not a decision)",
+    "note": "Natural per-class statistics of the clean reference models and the candidate's value relative to them. No threshold has been validated for these values; they are not used in the decision. A reference median near zero for a class (e.g. the benign mask of the CICIDS2017 1D-CNN) marks a low-contrast regime in which a backdoor targeting that class has little room to change the statistic.",
+    "per_class": {
+      "class_0": {
+        "nc_minimal_mask_l1": {
+          "reference_median": 5.716594696044922,
+          "reference_min": 3.991936445236206,
+          "reference_max": 5.950896263122559,
+          "candidate": 19.600400924682617,
+          "candidate_over_reference_median": 3.4286847269832395,
+          "candidate_outside_reference_range": true
+        },
+        "mmbd_margin": {
+          "reference_median": 93.29196166992188,
+          "reference_min": 61.602394104003906,
+          "reference_max": 103.28556823730469,
+          "candidate": 176.076904296875,
+          "candidate_over_reference_median": 1.8873748728733581,
+          "candidate_outside_reference_range": true
+        }
+      },
+      "class_1": {
+        "nc_minimal_mask_l1": {
+          "reference_median": 2.6436076164245605,
+          "reference_min": 2.213374614715576,
+          "reference_max": 3.1894569396972656,
+          "candidate": 2.931589365005493,
+          "candidate_over_reference_median": 1.1089351334864224,
+          "candidate_outside_reference_range": false
+        },
+        "mmbd_margin": {
+          "reference_median": 441.0941162109375,
+          "reference_min": 228.43870544433594,
+          "reference_max": 530.363037109375,
+          "candidate": 302.2420654296875,
+          "candidate_over_reference_median": 0.6852099230567633,
+          "candidate_outside_reference_range": false
+        }
+      }
+    }
+  },
+  "disclaimer": "Prototype for future work, not a validated product. Measured rates come from small samples (10 clean + 10 poisoned models per dataset and architecture, one trigger type, one poison ratio) and do not transfer to other attacks, datasets, or architectures without new validation.",
+  "runtime_s": 6.265141800045967,
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "torch_threads": 8,
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}

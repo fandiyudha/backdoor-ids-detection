@@ -1,0 +1,1286 @@
+{
+  "examples": [
+    {
+      "dataset": "CICIDS2017",
+      "arch": "mlp",
+      "candidate": "v11_mlp_cicids_clean_seed101",
+      "truth": "clean",
+      "group": "test",
+      "nc_statistic": 1.6713120596738826,
+      "nc_threshold": 3.7716436009513665,
+      "nc_flag": false,
+      "mmbd_statistic": 1.2276146823132261,
+      "mmbd_flag": false,
+      "either": false,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 3.111996650695801,
+            "reference_min": 2.767441987991333,
+            "reference_max": 3.378195285797119,
+            "candidate": 2.8629703521728516,
+            "candidate_over_reference_median": 0.9199786097239949,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 150.626220703125,
+            "reference_min": 129.7515869140625,
+            "reference_max": 199.30564880371094,
+            "candidate": 143.95745849609375,
+            "candidate_over_reference_median": 0.9557264188406149,
+            "candidate_outside_reference_range": false
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 5.827610492706299,
+            "reference_min": 5.805902481079102,
+            "reference_max": 6.757567882537842,
+            "candidate": 4.784916877746582,
+            "candidate_over_reference_median": 0.8210769892283076,
+            "candidate_outside_reference_range": true
+          },
+          "mmbd_margin": {
+            "reference_median": 95.53614807128906,
+            "reference_min": 94.45556640625,
+            "reference_max": 107.81087493896484,
+            "candidate": 117.28157806396484,
+            "candidate_over_reference_median": 1.2276146823132261,
+            "candidate_outside_reference_range": true
+          }
+        }
+      },
+      "runtime_s": 7.197810600046068,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_screening/metrics.json",
+          "mmbd": "experiments/v11_mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "CICIDS2017",
+      "arch": "mlp",
+      "candidate": "v11_mlp_cicids_pois_tgt0_seed101",
+      "truth": "poisoned",
+      "group": "poisoned",
+      "nc_statistic": 10.797043444820467,
+      "nc_threshold": 3.7716436009513665,
+      "nc_flag": true,
+      "mmbd_statistic": 1.4908735058633071,
+      "mmbd_flag": false,
+      "either": true,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 3.111996650695801,
+            "reference_min": 2.767441987991333,
+            "reference_max": 3.378195285797119,
+            "candidate": 0.5600127577781677,
+            "candidate_over_reference_median": 0.17995287933647242,
+            "candidate_outside_reference_range": true
+          },
+          "mmbd_margin": {
+            "reference_median": 150.626220703125,
+            "reference_min": 129.7515869140625,
+            "reference_max": 199.30564880371094,
+            "candidate": 138.5589141845703,
+            "candidate_over_reference_median": 0.9198857512176541,
+            "candidate_outside_reference_range": false
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 5.827610492706299,
+            "reference_min": 5.805902481079102,
+            "reference_max": 6.757567882537842,
+            "candidate": 6.046482086181641,
+            "candidate_over_reference_median": 1.0375576908836437,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 95.53614807128906,
+            "reference_min": 94.45556640625,
+            "reference_max": 107.81087493896484,
+            "candidate": 142.43231201171875,
+            "candidate_over_reference_median": 1.4908735058633071,
+            "candidate_outside_reference_range": true
+          }
+        }
+      },
+      "runtime_s": 5.282218599924818,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_screening/metrics.json",
+          "mmbd": "experiments/v11_mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "UNSW-NB15",
+      "arch": "mlp",
+      "candidate": "v11_mlp_unsw_clean_seed101",
+      "truth": "clean",
+      "group": "test",
+      "nc_statistic": 2.0853915366672147,
+      "nc_threshold": 4.368393175900353,
+      "nc_flag": false,
+      "mmbd_statistic": 1.4646331964994337,
+      "mmbd_flag": false,
+      "either": false,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 5.716594696044922,
+            "reference_min": 3.991936445236206,
+            "reference_max": 5.950896263122559,
+            "candidate": 4.948639392852783,
+            "candidate_over_reference_median": 0.8656621040978372,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 93.29196166992188,
+            "reference_min": 61.602394104003906,
+            "reference_max": 103.28556823730469,
+            "candidate": 136.6385040283203,
+            "candidate_over_reference_median": 1.4646331964994337,
+            "candidate_outside_reference_range": true
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 2.6436076164245605,
+            "reference_min": 2.213374614715576,
+            "reference_max": 3.1894569396972656,
+            "candidate": 2.373002529144287,
+            "candidate_over_reference_median": 0.8976379529250023,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 441.0941162109375,
+            "reference_min": 228.43870544433594,
+            "reference_max": 530.363037109375,
+            "candidate": 379.1656494140625,
+            "candidate_over_reference_median": 0.8596026006221766,
+            "candidate_outside_reference_range": false
+          }
+        }
+      },
+      "runtime_s": 6.510684600099921,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_screening/metrics.json",
+          "mmbd": "experiments/v11_mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 0.9,
+            "k": 9,
+            "n": 10,
+            "clopper_pearson95": [
+              0.5549838829718047,
+              0.9974714214555382
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 0.9,
+            "k": 9,
+            "n": 10,
+            "clopper_pearson95": [
+              0.5549838829718047,
+              0.9974714214555382
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "UNSW-NB15",
+      "arch": "mlp",
+      "candidate": "v11_mlp_unsw_pois_tgt0_seed101",
+      "truth": "poisoned",
+      "group": "poisoned",
+      "nc_statistic": 6.685929875434638,
+      "nc_threshold": 4.368393175900353,
+      "nc_flag": true,
+      "mmbd_statistic": 1.8873748728733581,
+      "mmbd_flag": false,
+      "either": true,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 5.716594696044922,
+            "reference_min": 3.991936445236206,
+            "reference_max": 5.950896263122559,
+            "candidate": 19.600400924682617,
+            "candidate_over_reference_median": 3.4286847269832395,
+            "candidate_outside_reference_range": true
+          },
+          "mmbd_margin": {
+            "reference_median": 93.29196166992188,
+            "reference_min": 61.602394104003906,
+            "reference_max": 103.28556823730469,
+            "candidate": 176.076904296875,
+            "candidate_over_reference_median": 1.8873748728733581,
+            "candidate_outside_reference_range": true
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 2.6436076164245605,
+            "reference_min": 2.213374614715576,
+            "reference_max": 3.1894569396972656,
+            "candidate": 2.931589365005493,
+            "candidate_over_reference_median": 1.1089351334864224,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 441.0941162109375,
+            "reference_min": 228.43870544433594,
+            "reference_max": 530.363037109375,
+            "candidate": 302.2420654296875,
+            "candidate_over_reference_median": 0.6852099230567633,
+            "candidate_outside_reference_range": false
+          }
+        }
+      },
+      "runtime_s": 6.265141800045967,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_screening/metrics.json",
+          "mmbd": "experiments/v11_mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 0.9,
+            "k": 9,
+            "n": 10,
+            "clopper_pearson95": [
+              0.5549838829718047,
+              0.9974714214555382
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 0.9,
+            "k": 9,
+            "n": 10,
+            "clopper_pearson95": [
+              0.5549838829718047,
+              0.9974714214555382
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "UNSW-NB15",
+      "arch": "mlp",
+      "candidate": "unsw_target_normal_seed42",
+      "truth": "poisoned",
+      "group": "poisoned",
+      "nc_statistic": 1.8522640550398135,
+      "nc_threshold": 4.368393175900353,
+      "nc_flag": false,
+      "mmbd_statistic": 1.8857248843715928,
+      "mmbd_flag": false,
+      "either": false,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 5.716594696044922,
+            "reference_min": 3.991936445236206,
+            "reference_max": 5.950896263122559,
+            "candidate": 4.226985931396484,
+            "candidate_over_reference_median": 0.7394237576998354,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 93.29196166992188,
+            "reference_min": 61.602394104003906,
+            "reference_max": 103.28556823730469,
+            "candidate": 175.9229736328125,
+            "candidate_over_reference_median": 1.8857248843715928,
+            "candidate_outside_reference_range": true
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 2.6436076164245605,
+            "reference_min": 2.213374614715576,
+            "reference_max": 3.1894569396972656,
+            "candidate": 2.282064437866211,
+            "candidate_over_reference_median": 0.8632387135246148,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 441.0941162109375,
+            "reference_min": 228.43870544433594,
+            "reference_max": 530.363037109375,
+            "candidate": 479.006103515625,
+            "candidate_over_reference_median": 1.0859498821484108,
+            "candidate_outside_reference_range": false
+          }
+        }
+      },
+      "runtime_s": 6.375856300117448,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_screening/metrics.json",
+          "mmbd": "experiments/v11_mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 0.9,
+            "k": 9,
+            "n": 10,
+            "clopper_pearson95": [
+              0.5549838829718047,
+              0.9974714214555382
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 0.9,
+            "k": 9,
+            "n": 10,
+            "clopper_pearson95": [
+              0.5549838829718047,
+              0.9974714214555382
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "CICIDS2017",
+      "arch": "cnn1d",
+      "candidate": "v11_cnn_cicids_clean_seed206",
+      "truth": "clean",
+      "group": "test",
+      "nc_statistic": 23.520803652695488,
+      "nc_threshold": 45.51191423512837,
+      "nc_flag": false,
+      "mmbd_statistic": 0.8405903948659861,
+      "mmbd_flag": false,
+      "either": false,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 0.24898800253868103,
+            "reference_min": 0.2163507342338562,
+            "reference_max": 0.3116636872291565,
+            "candidate": 0.2080867737531662,
+            "candidate_over_reference_median": 0.8357301220601555,
+            "candidate_outside_reference_range": true
+          },
+          "mmbd_margin": {
+            "reference_median": 171.6624755859375,
+            "reference_min": 125.88031768798828,
+            "reference_max": 204.21087646484375,
+            "candidate": 117.38701629638672,
+            "candidate_over_reference_median": 0.6838245568561695,
+            "candidate_outside_reference_range": true
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 5.579578876495361,
+            "reference_min": 4.672680854797363,
+            "reference_max": 10.78407096862793,
+            "candidate": 4.8943681716918945,
+            "candidate_over_reference_median": 0.8771931143961423,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 120.38420867919922,
+            "reference_min": 93.13773345947266,
+            "reference_max": 136.03164672851562,
+            "candidate": 101.19380950927734,
+            "candidate_over_reference_median": 0.8405903948659861,
+            "candidate_outside_reference_range": false
+          }
+        }
+      },
+      "runtime_s": 36.97992910002358,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_cnn/nc/metrics.json",
+          "mmbd": "experiments/v11_cnn/mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 0.2,
+            "k": 2,
+            "n": 10,
+            "clopper_pearson95": [
+              0.02521072632683336,
+              0.5560954623076415
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 0.2,
+            "k": 2,
+            "n": 10,
+            "clopper_pearson95": [
+              0.02521072632683336,
+              0.5560954623076415
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "CICIDS2017",
+      "arch": "cnn1d",
+      "candidate": "v11_cnn_cicids_pois_tgt0_seed206",
+      "truth": "poisoned",
+      "group": "poisoned",
+      "nc_statistic": 29.789406473711402,
+      "nc_threshold": 45.51191423512837,
+      "nc_flag": false,
+      "mmbd_statistic": 1.1092905005407965,
+      "mmbd_flag": false,
+      "either": false,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 0.24898800253868103,
+            "reference_min": 0.2163507342338562,
+            "reference_max": 0.3116636872291565,
+            "candidate": 0.18317797780036926,
+            "candidate_over_reference_median": 0.7356899767566593,
+            "candidate_outside_reference_range": true
+          },
+          "mmbd_margin": {
+            "reference_median": 171.6624755859375,
+            "reference_min": 125.88031768798828,
+            "reference_max": 204.21087646484375,
+            "candidate": 190.42355346679688,
+            "candidate_over_reference_median": 1.1092905005407965,
+            "candidate_outside_reference_range": false
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 5.579578876495361,
+            "reference_min": 4.672680854797363,
+            "reference_max": 10.78407096862793,
+            "candidate": 5.45676326751709,
+            "candidate_over_reference_median": 0.9779883730122274,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 120.38420867919922,
+            "reference_min": 93.13773345947266,
+            "reference_max": 136.03164672851562,
+            "candidate": 86.56484985351562,
+            "candidate_over_reference_median": 0.7190714696160384,
+            "candidate_outside_reference_range": true
+          }
+        }
+      },
+      "runtime_s": 38.26000480004586,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_cnn/nc/metrics.json",
+          "mmbd": "experiments/v11_cnn/mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 0.2,
+            "k": 2,
+            "n": 10,
+            "clopper_pearson95": [
+              0.02521072632683336,
+              0.5560954623076415
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 0.2,
+            "k": 2,
+            "n": 10,
+            "clopper_pearson95": [
+              0.02521072632683336,
+              0.5560954623076415
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "UNSW-NB15",
+      "arch": "cnn1d",
+      "candidate": "v11_cnn_unsw_clean_seed208",
+      "truth": "clean",
+      "group": "test",
+      "nc_statistic": 2.691596240031446,
+      "nc_threshold": 4.253561774720824,
+      "nc_flag": false,
+      "mmbd_statistic": 2.5135215722255224,
+      "mmbd_flag": true,
+      "either": true,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 3.8883159160614014,
+            "reference_min": 2.4788291454315186,
+            "reference_max": 4.813655376434326,
+            "candidate": 5.2941670417785645,
+            "candidate_over_reference_median": 1.3615578456241266,
+            "candidate_outside_reference_range": true
+          },
+          "mmbd_margin": {
+            "reference_median": 85.61476135253906,
+            "reference_min": 74.72978973388672,
+            "reference_max": 121.2550048828125,
+            "candidate": 215.19454956054688,
+            "candidate_over_reference_median": 2.5135215722255224,
+            "candidate_outside_reference_range": true
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 1.828263521194458,
+            "reference_min": 1.5935165882110596,
+            "reference_max": 2.7243895530700684,
+            "candidate": 1.9669246673583984,
+            "candidate_over_reference_median": 1.0758430852863865,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 360.8988037109375,
+            "reference_min": 339.90826416015625,
+            "reference_max": 403.8844299316406,
+            "candidate": 355.7955322265625,
+            "candidate_over_reference_median": 0.9858595500126333,
+            "candidate_outside_reference_range": false
+          }
+        }
+      },
+      "runtime_s": 244.79921629978344,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_cnn/nc/metrics.json",
+          "mmbd": "experiments/v11_cnn/mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.4,
+            "k": 2,
+            "n": 5,
+            "clopper_pearson95": [
+              0.052744950526316906,
+              0.8533672003653268
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.4,
+            "k": 2,
+            "n": 5,
+            "clopper_pearson95": [
+              0.052744950526316906,
+              0.8533672003653268
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    },
+    {
+      "dataset": "UNSW-NB15",
+      "arch": "cnn1d",
+      "candidate": "v11_cnn_unsw_pois_tgt0_seed208",
+      "truth": "poisoned",
+      "group": "poisoned",
+      "nc_statistic": 1.1368761816258404,
+      "nc_threshold": 4.253561774720824,
+      "nc_flag": false,
+      "mmbd_statistic": 4.194289669887747,
+      "mmbd_flag": true,
+      "either": true,
+      "both": false,
+      "matches_experiment": true,
+      "context": {
+        "class_0": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 3.8883159160614014,
+            "reference_min": 2.4788291454315186,
+            "reference_max": 4.813655376434326,
+            "candidate": 1.9987839460372925,
+            "candidate_over_reference_median": 0.5140487525154397,
+            "candidate_outside_reference_range": true
+          },
+          "mmbd_margin": {
+            "reference_median": 85.61476135253906,
+            "reference_min": 74.72978973388672,
+            "reference_max": 121.2550048828125,
+            "candidate": 359.0931091308594,
+            "candidate_over_reference_median": 4.194289669887747,
+            "candidate_outside_reference_range": true
+          }
+        },
+        "class_1": {
+          "nc_minimal_mask_l1": {
+            "reference_median": 1.828263521194458,
+            "reference_min": 1.5935165882110596,
+            "reference_max": 2.7243895530700684,
+            "candidate": 2.272369861602783,
+            "candidate_over_reference_median": 1.2429115580221048,
+            "candidate_outside_reference_range": false
+          },
+          "mmbd_margin": {
+            "reference_median": 360.8988037109375,
+            "reference_min": 339.90826416015625,
+            "reference_max": 403.8844299316406,
+            "candidate": 382.2495422363281,
+            "candidate_over_reference_median": 1.0591599038452106,
+            "candidate_outside_reference_range": false
+          }
+        }
+      },
+      "runtime_s": 224.8920656000264,
+      "measured": {
+        "available": true,
+        "sources": {
+          "nc": "experiments/v11_cnn/nc/metrics.json",
+          "mmbd": "experiments/v11_cnn/mmbd/metrics.json"
+        },
+        "neural_cleanse": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "mmbd": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.4,
+            "k": 2,
+            "n": 5,
+            "clopper_pearson95": [
+              0.052744950526316906,
+              0.8533672003653268
+            ]
+          }
+        },
+        "either_flags": {
+          "tpr": {
+            "rate": 1.0,
+            "k": 10,
+            "n": 10,
+            "clopper_pearson95": [
+              0.6915028921812392,
+              1.0
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.4,
+            "k": 2,
+            "n": 5,
+            "clopper_pearson95": [
+              0.052744950526316906,
+              0.8533672003653268
+            ]
+          }
+        },
+        "both_flag": {
+          "tpr": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 10,
+            "clopper_pearson95": [
+              0.0,
+              0.3084971078187608
+            ]
+          },
+          "fpr_test_group": {
+            "rate": 0.0,
+            "k": 0,
+            "n": 5,
+            "clopper_pearson95": [
+              0.0,
+              0.5218237501049814
+            ]
+          }
+        },
+        "note": "measured with 5 calibration clean reference models; 10 poisoned models (TPR) and 5 disjoint clean test models (FPR); exact Clopper-Pearson 95% intervals"
+      }
+    }
+  ],
+  "all_match_experiments": true,
+  "evaluated_at": "2026-10-13T00:50:39Z",
+  "git_commit": "b972e7a80dfb412ad71b43238ba1a521afcb00a3",
+  "config": "configs/v11_gate.yaml"
+}
