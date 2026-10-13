@@ -88,6 +88,14 @@ def list_references(spec: str) -> List[Path]:
     return refs
 
 
+def _display_path(p: Path) -> str:
+    """Path relative to the repository root when inside it (portable verdicts)."""
+    try:
+        return Path(p).resolve().relative_to(resolve_path(".").resolve()).as_posix()
+    except ValueError:
+        return str(p)
+
+
 def _arch(model) -> str:
     return model.config().get("arch", "mlp")
 
@@ -203,7 +211,7 @@ def screen(candidate: Path, refs: List[Path], holdout_spec: str, dataset: str,
 
     verdict = {
         "gate": "model-intake screening gate (prototype)", "evaluated_at": utc_now(),
-        "candidate": {"path": str(candidate), "sha256": sha256_file(candidate), "architecture": arch},
+        "candidate": {"path": _display_path(candidate), "sha256": sha256_file(candidate), "architecture": arch},
         "dataset": dataset, "holdout": hdesc,
         "references": {"n": len(refs), "count_match_N": ref["count_match_N"],
                        "models": {k: v["sha256"] for k, v in ref["per_reference"].items()}},
