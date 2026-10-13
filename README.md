@@ -415,6 +415,7 @@ To cite this code, use the metadata in [CITATION.cff](CITATION.cff). GitHub show
 resolves to the latest:
 
 - all versions: <https://doi.org/10.5281/zenodo.23295705>
+- v1.1.0: <https://doi.org/10.5281/zenodo.23340621>
 - v1.0.0: <https://doi.org/10.5281/zenodo.23295706>
 
 ## Note on development
