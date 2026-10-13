@@ -80,3 +80,35 @@ These values or items in the article cannot be traced to a committed file in `ex
   `phase7e` protocol: target-excluded, count-matched Neural Cleanse over independently trained
   models. The separation AUC of 1.000 in `phase7d` comes from an earlier, all-input protocol
   that `phase7e` supersedes. The `phase7d` summary states this as well.
+
+## Extended experiments (v1.1)
+
+These results extend the article and are not part of it. The v1.0 rows above are unchanged.
+Every v1.1 folder holds `metrics.json`, a generated `summary.md`, figures, and a `manifest.json`
+(configuration, git commit, environment, checkpoint SHA-256). All bootstrap CIs use 10,000
+resamples; rates with few models also carry exact Clopper-Pearson intervals. Consolidated
+tables of all results: `v11_summary/summary.md` (`python -m src.eval.v11_report`).
+
+| Result | Key values (as measured) | Command | Config | Output file(s) |
+|---|---|---|---|---|
+| A. NC screening, 10 clean + 10 poisoned MLP models per dataset | CICIDS2017 AUC 1.000 [1.00, 1.00], 10/10 flagged, FPR 0/5 (test), 0/10 (LOO); UNSW-NB15 AUC 0.920 [0.73, 1.00], 9/10 flagged, FPR 0/5, 0/10; existing models reproduce phase7e exactly | `python -u -m src.eval.v11_train_models --config configs/v11_screening.yaml --reproduce-check`, then `python -u -m src.eval.run_v11_screening --config configs/v11_screening.yaml` | `configs/v11_screening.yaml` | `v11_screening/metrics.json` → `datasets.<d>.n5`, `.n10`, `.attack`; `v11_screening/summary.md`; `v11_screening/screening_ratios.png`; `v11_screening/models_manifest.json` |
+| B. MM-BD, same models (binary reference-relative rule) | AUC 0.980 [0.91, 1.00] on both datasets; 0/10 flagged at S > 2.0; LOO-max rule 9/10 (FPR 0/5 and 1/5); holdout-seeded starts are a post-hoc correction (random-start estimate reported alongside) | `python -u -m src.eval.run_v11_mmbd --config configs/v11_mmbd.yaml` | `configs/v11_mmbd.yaml` | `v11_mmbd/metrics.json` → `datasets.<d>.boxes.<box>/<variant>`, `.agreement_with_nc`; `v11_mmbd/summary.md`; `v11_mmbd/box_bounds.json`; `v11_mmbd/mmbd_*.png` |
+| B. Exploratory NC diagnostic (UNSW-NB15, success requirement 0.90) | normal-class mask 2.18 (clean) vs 2.91 (poisoned); target is the smallest-mask class in 1/10 poisoned models | `python -u -m src.eval.run_v11_nc_diagnostic --config configs/v11_nc_diagnostic.yaml` | `configs/v11_nc_diagnostic.yaml` | `v11_nc_diagnostic/metrics.json`, `v11_nc_diagnostic/summary.md` |
+| C. IBD-PSC runtime detection (STRIP rerun on the same inputs) | IBD-PSC AUC 0.373 (CICIDS2017), 0.204 (UNSW-NB15); TPR @ 5% FPR ≤ 0.003; at T = 0.9 FPR 0.95 / 0.79; ξ never reached (k = 3, 3 amplified models); STRIP reproduces phase7f exactly | `python -u -m src.eval.run_v11_ibd_psc --config configs/v11_ibd_psc.yaml` | `configs/v11_ibd_psc.yaml` | `v11_ibd_psc/metrics.json`, `v11_ibd_psc/summary.md`, `v11_ibd_psc/psc_distributions.png`, `v11_ibd_psc/psc_roc.png`, `v11_ibd_psc/controlled_conditions.png`, `v11_ibd_psc/psc_raw_<dataset>.csv` |
+| C. Follow-up checks (ξ-faithful IBD-PSC, two-sided rule, UNSW-NB15 de-duplication) | ξ never reached up to ω = 50 (0/35 models); two-sided TPR ≤ 0.117; de-duplicated STRIP AUC 0.2342 vs 0.2354 (phase7f models) | `python -u -m src.eval.run_v11_ibd_psc_checks --config configs/v11_ibd_psc_checks.yaml` | `configs/v11_ibd_psc_checks.yaml` | `v11_ibd_psc_checks/metrics.json`, `v11_ibd_psc_checks/summary.md` |
+| D. 1D-CNN: clean baseline, attack, screening, runtime detection, class properties | clean accuracy 0.984 / 0.907 (CICIDS2017 / UNSW-NB15); ASR 1.000 / 0.957; NC AUC 0.820 / 0.420; MM-BD AUC 0.660 / 1.000; STRIP TPR @ 5% FPR 0.268 / 0.023; class-0 entropy lower and majority-class mask smaller in 10/10 and 9–10/10 models | `python -u -m src.eval.v11_train_models --config configs/v11_cnn.yaml`; `python -u -m src.eval.v11_train_models --config configs/v11_cnn_baseline.yaml`; `python -u -m src.eval.run_v11_cnn --config configs/v11_cnn.yaml` | `configs/v11_cnn.yaml`, `configs/v11_cnn_baseline.yaml`, `configs/model_cnn1d.yaml`, `configs/v11_cnn_mmbd.yaml`, `configs/v11_cnn_ibd_psc.yaml` | `v11_cnn/metrics.json`, `v11_cnn/summary.md`, `v11_cnn/class_properties.png`, `v11_cnn/nc/`, `v11_cnn/mmbd/`, `v11_cnn/runtime/`, `v11_cnn/models_manifest*.json` |
+| E. Detector interfaces and screening-gate prototype | wrappers reproduce committed NC, MM-BD, STRIP (Figure 2 data), and IBD-PSC outputs exactly; gate flags equal the experiments' per-model verdicts | `python -m tests.check_detector_wrappers`; `python -u -m src.gate.run_gate_examples --config configs/v11_gate.yaml` | `configs/v11_gate.yaml` | `v11_gate/metrics.json`, `v11_gate/summary.md`, `v11_gate/verdicts/` |
+| Consolidated tables | detection table (dataset × architecture × detector), target-class contrast, article vs v1.1 headline numbers, class properties, compute | `python -m src.eval.v11_report` | none (reads committed metrics) | `v11_summary/metrics.json`, `v11_summary/summary.md` |
+
+### Notes (v1.1)
+
+- **Main poison ratio.** The v1.1 models use the ratios of the article's screening models:
+  CICIDS2017 controlled-experiment condition B (300,000-row natural-ratio training subsample,
+  15% of the attack rows relabelled benign) and UNSW-NB15 normal target at 20%.
+- **Reproduction checks.** Retraining an existing seed with the v1.1 trainer gives bit-identical
+  weights on both datasets; the existing models' Neural Cleanse statistics reproduce phase7e
+  exactly, STRIP reproduces phase7f exactly, and the UNSW-NB15 clean-model entropies reproduce
+  phase7d exactly.
+- **Deviations from the pre-specified procedures** are stated in the summaries: the MM-BD
+  holdout-seeded starts (Experiment B), and the 1D-CNN head (flatten instead of global average
+  pooling, changed before any CNN model was trained).
