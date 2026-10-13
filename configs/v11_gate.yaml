@@ -1,0 +1,41 @@
+# ============================================================================
+# v1.1 Experiment E: screening-gate prototype examples (outputs experiments/v11_gate/)
+# ============================================================================
+# Runs src.gate.screen_model on example candidates. References = the 5
+# calibration clean models of Experiments A (MLP) and D (1D-CNN), so the gate's
+# per-detector flags must equal the per-model verdicts of those experiments;
+# the runner checks this. Candidates come from the disjoint test groups and the
+# poisoned groups, including cases of interest: a poisoned UNSW-NB15 MLP that
+# Neural Cleanse misses (seed 42), a low-contrast CICIDS2017 1D-CNN pair, and a
+# UNSW-NB15 1D-CNN clean model that MM-BD flags (false positive in Experiment D).
+#
+# Command:
+#   python -u -m src.gate.run_gate_examples --config configs/v11_gate.yaml
+
+holdout: phase7e            # phase7e:<dataset>
+cache_dir: results/gate_cache
+examples:
+  - {dataset: CICIDS2017, arch: mlp,
+     references: [causal_ids_B_imbal_tgtBenign_clean, causal_ids_B_imbal_tgtBenign_clean_seed43,
+                  causal_ids_B_imbal_tgtBenign_clean_seed44, causal_ids_B_imbal_tgtBenign_clean_seed45,
+                  causal_ids_B_imbal_tgtBenign_clean_seed46],
+     candidates: [v11_mlp_cicids_clean_seed101, v11_mlp_cicids_pois_tgt0_seed101]}
+  - {dataset: UNSW-NB15, arch: mlp,
+     references: [unsw_clean_seed42, unsw_clean_seed43, unsw_clean_seed44, unsw_clean_seed45, unsw_clean_seed46],
+     candidates: [v11_mlp_unsw_clean_seed101, v11_mlp_unsw_pois_tgt0_seed101, unsw_target_normal_seed42]}
+  - {dataset: CICIDS2017, arch: cnn1d,
+     references: [v11_cnn_cicids_clean_seed201, v11_cnn_cicids_clean_seed202, v11_cnn_cicids_clean_seed203,
+                  v11_cnn_cicids_clean_seed204, v11_cnn_cicids_clean_seed205],
+     candidates: [v11_cnn_cicids_clean_seed206, v11_cnn_cicids_pois_tgt0_seed206]}
+  - {dataset: UNSW-NB15, arch: cnn1d,
+     references: [v11_cnn_unsw_clean_seed201, v11_cnn_unsw_clean_seed202, v11_cnn_unsw_clean_seed203,
+                  v11_cnn_unsw_clean_seed204, v11_cnn_unsw_clean_seed205],
+     candidates: [v11_cnn_unsw_clean_seed208, v11_cnn_unsw_pois_tgt0_seed208]}
+
+experiment_metrics:          # for the consistency check of the per-detector flags
+  mlp: {nc: experiments/v11_screening/metrics.json, mmbd: experiments/v11_mmbd/metrics.json}
+  cnn1d: {nc: experiments/v11_cnn/nc/metrics.json, mmbd: experiments/v11_cnn/mmbd/metrics.json}
+
+paths:
+  models_dir: results/models
+  experiment_dir: experiments/v11_gate
